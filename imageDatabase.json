@@ -1,0 +1,31 @@
+{
+  "rbc_inclusions": {
+  },
+  "rbc_morphology": {
+  },
+  "rbc_stages": {
+    "Rubriblast": 4,
+    "Prorubricyte": 4,
+    "Rubricyte": 4,
+    "Metarubricyte": 4
+
+  },
+  "wbc_inclusions": {
+    "Dohle_Body": 4,
+    "Dysplastic_Nucleus": 18,
+    "Giant_Band": 8,
+    "Green_Granules": 18,
+    "Hypersegmented": 18,
+    "Hypogranulation": 15,
+    "Infected_Cell": 4,
+    "Pelger_Huet": 18,
+    "Toxic_Granulation": 4,
+    "Toxic_Vacuolation": 5
+  },
+  "wbc_normal": {
+
+  },
+  "wbc_stages": {
+
+  }
+}

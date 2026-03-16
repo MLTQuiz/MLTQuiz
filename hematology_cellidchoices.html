@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cell Identification</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f7fa;
+    margin:40px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+.category{
+    background:white;
+    padding:15px 20px;
+    margin-bottom:15px;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+label{
+    display:block;
+    margin:6px 0;
+    cursor:pointer;
+}
+
+.category-title{
+    font-weight:bold;
+    font-size:20px;
+}
+
+.main-title{
+    font-size:24px;
+    font-weight:bold;
+}
+
+button{
+    font-size:22px;
+    padding:10px 18px;
+    border-radius:6px;
+    border:none;
+    background:#2f6fed;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1f55c4;
+}
+
+backbutton{
+    font-size:15px;
+    padding:8px 12px;
+    border-radius:6px;
+    border:none;
+    background:#2f6fed;
+    color:white;
+    cursor:pointer;
+    text-decoration: none;
+}
+
+backbutton:hover{
+    background:#1f55c4;
+}
+
+.tab1{
+    margin-left:25px;
+}
+
+.tab2{
+    margin-left:50px;
+}
+
+</style>
+</head>
+<body>
+    <h1>Hematology Cell Identification</h1>
+    <h2>Which cells would you like to be quizzed on?</h2>
+    
+    <div class="category">
+        <label>
+            <input type="checkbox" class="allCells">
+            <span class="main-title">All Cell Types</span>
+        </label>
+        <label class="tab1">
+            <input type="checkbox" class="group-parent" data-group="rbc">
+            <span class="category-title">All RBCs</span>
+        </label>
+
+        <label class="tab2">
+            <input type="checkbox" class="child rbc" value="rbc_inclusions">
+            RBC Inclusions
+        </label>
+
+        <label class="tab2">
+            <input type="checkbox" class="child rbc" value="rbc_morphology">
+            RBC Morphology
+        </label>
+
+        <label class="tab2">
+            <input type="checkbox" class="child rbc" value="rbc_stages">
+            RBC Stages
+        </label>
+
+        <label class="tab1">
+            <input type="checkbox" class="group-parent" data-group="wbc">
+            <span class="category-title">All WBCs</span>
+        </label>
+
+        <label class="tab2">
+            <input type="checkbox" class="child wbc" value="wbc_normal">
+            Normal WBCs
+        </label>
+
+        <label class="tab2">
+            <input type="checkbox" class="child wbc" value="wbc_inclusions">
+            WBC Inclusions
+        </label>
+
+        <label class="tab2">
+            <input type="checkbox" class="child wbc" value="wbc_stages">
+            WBC Stages
+        </label>
+
+    </div>
+    
+    <button onclick="startQuiz()">Begin Quiz</button><hr><br>
+    <backbutton onclick="Back()">Back</backbutton><br><br>
+    <backbutton onclick="Home()">Home</backbutton></a>
+    
+    <script>
+
+        const allCells = document.querySelector(".allCells");
+        const groupParents = document.querySelectorAll(".group-parent");
+        const children = document.querySelectorAll(".child");
+
+        allCells.addEventListener("change", () => {
+
+            groupParents.forEach(p => p.checked = allCells.checked);
+            children.forEach(c => c.checked = allCells.checked);
+        
+        });
+
+        groupParents.forEach(parent => {
+            parent.addEventListener("change", () => {
+                
+                const group = parent.dataset.group;
+                const groupChildren = document.querySelectorAll("." + group);
+                groupChildren.forEach(child => child.checked = parent.checked);
+                
+                updateAllCells();
+
+            });
+
+        });
+
+        children.forEach(child => {
+
+            child.addEventListener("change", () => {
+
+                const group = [...child.classList].find(c => c !== "child");
+                const groupChildren = document.querySelectorAll("." + group);
+                const parent = document.querySelector(`[data-group="${group}"]`);
+
+                parent.checked = [...groupChildren].every(c => c.checked);
+
+                updateAllCells();
+
+            });
+
+        });
+
+        function updateAllCells(){
+            allCells.checked = [...groupParents].every(p => p.checked);
+        }
+                                            
+        function startQuiz(){
+
+            const selected = [...document.querySelectorAll('.child:checked')]
+            .map(cb => cb.value)
+
+            if(selected.length === 0){
+                alert("Please select at least one cell category.");
+                return;
+            }
+
+            localStorage.setItem("quizCells", JSON.stringify(selected));
+
+            window.location.href = "hematology_cellidquiz.html";
+
+        }
+        
+        function Back(){
+
+            window.location.href = "hematology_choice.html";
+
+        }
+
+        function Home(){
+
+            window.location.href = "index.html";
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hematology Cell Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .category {
+            display: inline-block;
+            text-align: left;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+
+        .category-title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        button {
+            font-size: 22px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f55c4;
+        }
+
+        .button-back {
+            font-size: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        .button-back:hover {
+            background: #1f55c4;
+        }
+
+        #quizImage {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+        }
+
+        #answerOptions label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        #answerOptions br {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h1>Hematology Cell Identification Quiz</h1>
+
+        <div class="category">
+            <span class="question">What cell is this?</span><br />
+            <img id="quizImage" src="" alt="Good luck!" /><br />
+
+            <div id="answerOptions" style="margin-top: 15px"></div>
+            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div>
+
+            <br /><br />
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <hr />
+        <br />
+
+        <button class="button-back" onclick="Back()">Change Cells</button>
+        <button class="button-back" onclick="Home()">Home</button>
+    </div>
+    <script>
+        let selectedCategories = JSON.parse(
+            localStorage.getItem("quizCells") || "[]",
+        );
+        if (selectedCategories.length === 0) {
+            alert("No categories selected! Please go back and choose cells.");
+            window.location.href = "hematology_cellidchoices.html";
+        }
+
+        let quizPool = [];
+        let currentQuestion = 0;
+        let imageDatabase = {};
+
+        fetch("imageDatabase.json")
+            .then((res) => res.json())
+            .then((db) => {
+                imageDatabase = db;
+                buildQuizPool();
+                showNextImage();
+            })
+            .catch((err) => console.error("Error loading image database:", err));
+
+        function buildQuizPool() {
+            quizPool = [];
+            selectedCategories.forEach((cat) => {
+                const catData = imageDatabase[cat];
+                if (!catData) return;
+                Object.keys(catData).forEach((subtype) => {
+                    const max = catData[subtype];
+                    for (let i = 1; i <= max; i++) {
+                        const num = String(i).padStart(2, "0");
+                        const path = `images/${cat}/${subtype}${num}.png`;
+                        quizPool.push(path);
+                    }
+                });
+            });
+            shuffleArray(quizPool);
+        }
+
+        function nextQuestion() {
+            showNextImage();
+        }
+
+        function showNextImage() {
+            const imgEl = document.getElementById("quizImage");
+            const feedbackEl = document.getElementById("feedback");
+            const optionsEl = document.getElementById("answerOptions");
+
+            feedbackEl.textContent = "";
+            optionsEl.innerHTML = "";
+
+            if (currentQuestion >= quizPool.length) {
+                alert("Quiz complete!");
+                currentQuestion = 0;
+                shuffleArray(quizPool);
+                return;
+            }
+
+            const currentImagePath = quizPool[currentQuestion];
+            imgEl.src = currentImagePath;
+
+            const pathParts = currentImagePath.split("/");
+            const correctCategory = pathParts[1];
+            const fileName = pathParts[2];
+            const correctAnswer = fileName.replace(/\d+\.png$/, "");
+
+            const subtypes = Object.keys(imageDatabase[correctCategory]);
+            subtypes.forEach((subtype) => {
+                const label = document.createElement("label");
+                label.style.display = "block";
+                label.style.marginBottom = "8px";
+                label.style.cursor = "pointer";
+
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "answer";
+                radio.value = subtype;
+
+                radio.addEventListener("change", () => {
+                    if (radio.value === correctAnswer) {
+                        feedbackEl.textContent = "Correct! 🎉";
+                        feedbackEl.style.color = "green";
+                    } else {
+                        feedbackEl.textContent = "Try again!";
+                        feedbackEl.style.color = "red";
+                    }
+                });
+
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(" " + subtype.replace(/_/g, " ")));
+
+                optionsEl.appendChild(label);
+            });
+
+            currentQuestion++;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function Back() {
+            window.location.href = "hematology_cellidchoices.html";
+        }
+        function Home() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+
+</html>

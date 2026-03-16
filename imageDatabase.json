@@ -1,14 +1,21 @@
 {
   "rbc_inclusions": {
+    "Malaria": 4
   },
   "rbc_morphology": {
+    "Acanthocyte": 4,
+    "Burr_Cell": 4,
+    "Ovalocyte": 4,
+    "Schistocyte": 5,
+    "Sickle_Cell": 4,
+    "Spherocyte": 4,
+    "Target_Cell": 4
   },
   "rbc_stages": {
-    "Rubriblast": 4,
+    "Metarubricyte": 4,
     "Prorubricyte": 4,
-    "Rubricyte": 4,
-    "Metarubricyte": 4
-
+    "Rubriblast": 4,
+    "Rubricyte": 4
   },
   "wbc_inclusions": {
     "Dohle_Body": 4,
@@ -16,16 +23,41 @@
     "Giant_Band": 8,
     "Green_Granules": 18,
     "Hypersegmented": 18,
-    "Hypogranulation": 15,
     "Infected_Cell": 4,
+    "Mott_Cell": 1,
     "Pelger_Huet": 18,
+    "Pyknotic_Cell": 18,
+    "Reactive_Lymphocyte": 12,
+    "Smudge_Cell": 18,
     "Toxic_Granulation": 4,
     "Toxic_Vacuolation": 5
   },
   "wbc_normal": {
-
+    "Eosinophil": 18,
+    "Lymphocyte": 36,
+    "Monocyte": 18,
+    "Plasma_Cell": 2,
+    "Segmented_Neutrophil": 18
   },
   "wbc_stages": {
-
+    "Band_Neutrophil": 18,
+    "Blast": 15,
+    "Eosinophil_Metamyelocyte": 1,
+    "Metamyelocyte": 18,
+    "Myelocyte": 18,
+    "Promyelocyte": 18
+  },
+  "hard_mode": {
+    "Blast": 15,
+    "Blast_(Auer_Rods)": 18,
+    "CLL_(Soccer_Ball)": 9,
+    "Hairy_Lymphocyte": 18,
+    "Lymphocyte": 36,
+    "Lymphoma": 18,
+    "Monocyte": 18,
+    "Plasma_Cell": 2,
+    "Prolymphocyte": 18,
+    "Promonocyte": 18,
+    "Reactive_Lymphocyte": 12
   }
 }

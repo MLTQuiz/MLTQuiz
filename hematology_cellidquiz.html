@@ -116,9 +116,12 @@
         <hr />
         <br />
 
-        <button class="button-back" onclick="Back()">Change Cells</button>
-        <button class="button-back" onclick="Home()">Home</button>
+        <button class="button-back" onclick="Back()">Change Cells</button><br><br>
+        <button class="button-back" onclick="Home()">Home</button><br><br>
+        <button class="button-back" id="muteBtn">🔊 Mute</button>
     </div>
+
+
     <script>
         let selectedCategories = JSON.parse(
             localStorage.getItem("quizCells") || "[]",
@@ -201,6 +204,9 @@
                     if (radio.value === correctAnswer) {
                         feedbackEl.textContent = "Correct! 🎉";
                         feedbackEl.style.color = "green";
+                        correctSound.currentTime = 0;
+                        correctSound.play();
+
                     } else {
                         feedbackEl.textContent = "Try again!";
                         feedbackEl.style.color = "red";
@@ -222,6 +228,28 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
+
+        let muted = true;
+
+        const correctSound = new Audio("correct.mp3");
+        correctSound.muted = muted;
+
+        // initialize button correctly
+        const muteBtn = document.getElementById("muteBtn");
+        muteBtn.textContent = "🔇 Unmute";
+
+        function toggleMute() {
+            muted = !muted;
+
+            correctSound.muted = muted;
+
+            muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+        }
+
+        muteBtn.addEventListener("click", toggleMute);
+
+        document.getElementById("muteBtn").addEventListener("click", toggleMute);
+        document.getElementById("muteBtn").addEventListener("click", toggleMute);
 
         function Back() {
             window.location.href = "hematology_cellidchoices.html";

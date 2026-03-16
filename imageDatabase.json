@@ -12,10 +12,10 @@
     "Target_Cell": 4
   },
   "rbc_stages": {
-    "Metarubricyte": 4,
-    "Prorubricyte": 4,
     "Rubriblast": 4,
-    "Rubricyte": 4
+    "Prorubricyte": 4,
+    "Rubricyte": 4,
+    "Metarubricyte": 4
   },
   "wbc_inclusions": {
     "Dohle_Body": 4,
@@ -33,19 +33,19 @@
     "Toxic_Vacuolation": 5
   },
   "wbc_normal": {
-    "Eosinophil": 18,
+    "Segmented_Neutrophil": 18,
     "Lymphocyte": 36,
     "Monocyte": 18,
-    "Plasma_Cell": 2,
-    "Segmented_Neutrophil": 18
+    "Eosinophil": 18,
+    "Plasma_Cell": 2
   },
   "wbc_stages": {
-    "Band_Neutrophil": 18,
     "Blast": 15,
-    "Eosinophil_Metamyelocyte": 1,
-    "Metamyelocyte": 18,
+    "Promyelocyte": 18,
     "Myelocyte": 18,
-    "Promyelocyte": 18
+    "Metamyelocyte": 18,
+    "Band_Neutrophil": 18,
+    "Eosinophil_Metamyelocyte": 1
   },
   "hard_mode": {
     "Blast": 15,
@@ -53,11 +53,11 @@
     "CLL_(Soccer_Ball)": 9,
     "Hairy_Lymphocyte": 18,
     "Lymphocyte": 36,
+    "Reactive_Lymphocyte": 12,
     "Lymphoma": 18,
     "Monocyte": 18,
     "Plasma_Cell": 2,
     "Prolymphocyte": 18,
-    "Promonocyte": 18,
-    "Reactive_Lymphocyte": 12
+    "Promonocyte": 18
   }
 }

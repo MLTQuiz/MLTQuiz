@@ -1,63 +1,73 @@
 {
   "rbc_inclusions": {
-    "Malaria": 4
+    "Malaria": { "count": 4, "code": "ma" }
   },
+
   "rbc_morphology": {
-    "Acanthocyte": 4,
-    "Burr_Cell": 4,
-    "Ovalocyte": 4,
-    "Schistocyte": 5,
-    "Sickle_Cell": 4,
-    "Spherocyte": 4,
-    "Target_Cell": 4
+    "Acanthocyte": { "count": 4, "code": "ac" },
+    "Burr_Cell": { "count": 4, "code": "bc" },
+    "Ovalocyte": { "count": 4, "code": "ov" },
+    "Schistocyte": { "count": 5, "code": "sc" },
+    "Sickle_Cell": { "count": 4, "code": "si" },
+    "Spherocyte": { "count": 4, "code": "sp" },
+    "Target_Cell": { "count": 4, "code": "tc" }
   },
+
   "rbc_stages": {
-    "Rubriblast": 4,
-    "Prorubricyte": 4,
-    "Rubricyte": 4,
-    "Metarubricyte": 4
+    "Rubriblast": { "count": 4, "code": "rb" },
+    "Prorubricyte": { "count": 4, "code": "pr" },
+    "Rubricyte": { "count": 4, "code": "rc" },
+    "Metarubricyte": { "count": 4, "code": "mr" }
   },
-  "wbc_inclusions": {
-    "Dohle_Body": 4,
-    "Dysplastic_Nucleus": 18,
-    "Giant_Band": 8,
-    "Green_Granules": 18,
-    "Hypersegmented": 18,
-    "Infected_Cell": 4,
-    "Mott_Cell": 1,
-    "Pelger_Huet": 18,
-    "Pyknotic_Cell": 18,
-    "Reactive_Lymphocyte": 12,
-    "Smudge_Cell": 18,
-    "Toxic_Granulation": 4,
-    "Toxic_Vacuolation": 5
-  },
+
   "wbc_normal": {
-    "Segmented_Neutrophil": 18,
-    "Lymphocyte": 36,
-    "Monocyte": 18,
-    "Eosinophil": 18,
-    "Plasma_Cell": 2
+    "Segmented_Neutrophil": { "count": 18, "code": "sn" },
+    "Lymphocyte": { "count": 36, "code": "ly" },
+    "Monocyte": { "count": 18, "code": "mo" },
+    "Eosinophil": { "count": 18, "code": "eo" },
+    "Plasma_Cell": { "count": 2, "code": "pc" }
   },
+
+  "wbc_inclusions": {
+    "Dohle_Body": { "count": 4, "code": "db" },
+    "Dysplastic_Nucleus": { "count": 18, "code": "dn" },
+    "Giant_Band": { "count": 8, "code": "gb" },
+    "Green_Granules": { "count": 18, "code": "gg" },
+    "Hypersegmented_Neutrophil": { "count": 18, "code": "hs" },
+    "Infected_Cell": { "count": 4, "code": "ic" },
+    "Mott_Cell": { "count": 1, "code": "mc" },
+    "Pelger_Huet": { "count": 18, "code": "ph" },
+    "Pyknotic_Cell": { "count": 18, "code": "py" },
+    "Reactive_Lymphocyte": { "count": 12, "code": "rl" },
+    "Smudge_Cell": { "count": 18, "code": "sm" },
+    "Toxic_Granulation": { "count": 4, "code": "tg" },
+    "Toxic_Vacuolation": { "count": 5, "code": "tv" }
+  },
+
   "wbc_stages": {
-    "Blast": 15,
-    "Promyelocyte": 18,
-    "Myelocyte": 18,
-    "Metamyelocyte": 18,
-    "Band_Neutrophil": 18,
-    "Eosinophil_Metamyelocyte": 1
+    "Blast": { "count": 15, "code": "bl" },
+    "Promyelocyte": { "count": 18, "code": "pm" },
+    "Myelocyte": { "count": 18, "code": "my" },
+    "Metamyelocyte": { "count": 18, "code": "mt" },
+    "Band_Neutrophil": { "count": 18, "code": "bn" },
+    "Eosinophil_Metamyelocyte": { "count": 1, "code": "em" }
   },
+
   "hard_mode": {
-    "Blast": 15,
-    "Blast_(Auer_Rods)": 18,
-    "CLL_(Soccer_Ball)": 9,
-    "Hairy_Lymphocyte": 18,
-    "Lymphocyte": 36,
-    "Reactive_Lymphocyte": 12,
-    "Lymphoma": 18,
-    "Monocyte": 18,
-    "Plasma_Cell": 2,
-    "Prolymphocyte": 18,
-    "Promonocyte": 18
+    "include": [
+      "Blast",
+      "Lymphocyte",
+      "Reactive_Lymphocyte",
+      "Monocyte",
+      "Plasma_Cell"
+    ],
+    "custom": {
+      "Blast_(Auer_Rods)": { "count": 18, "code": "ar", "prefix": "w4" },
+      "CLL_(Soccer_Ball)": { "count": 9, "code": "sb", "prefix": "w4" },
+      "Hairy_Lymphocyte": { "count": 18, "code": "hl", "prefix": "w4" },
+      "Lymphoma": { "count": 18, "code": "lm", "prefix": "w4" },
+      "Prolymphocyte": { "count": 18, "code": "pl", "prefix": "w4" },
+      "Promonocyte": { "count": 18, "code": "pm", "prefix": "w4" }
+    }
   }
 }

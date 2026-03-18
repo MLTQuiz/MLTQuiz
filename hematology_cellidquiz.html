@@ -146,23 +146,117 @@
 
         function buildQuizPool() {
             quizPool = [];
+
+            const categoryPrefix = {
+                rbc_morphology: "r1",
+                rbc_stages: "r2",
+                rbc_inclusions: "r3",
+                wbc_normal: "w1",
+                wbc_stages: "w2",
+                wbc_inclusions: "w3",
+            };
+
             selectedCategories.forEach((cat) => {
+
+                // 🔥 HARD MODE
+                if (cat === "hard_mode") {
+
+                    const included = imageDatabase.hard_mode.include || [];
+                    const customCells = imageDatabase.hard_mode.custom || {};
+
+                    const added = new Set(); // prevents duplicates
+
+                    // 🔹 1. INCLUDE CELLS (from all categories)
+                    Object.keys(imageDatabase).forEach(category => {
+
+                        if (category === "hard_mode") return;
+
+                        const catData = imageDatabase[category];
+                        const prefix = categoryPrefix[category];
+
+                        Object.keys(catData).forEach(subtype => {
+
+                            if (!included.includes(subtype)) return;
+
+                            const key = category + "_" + subtype;
+                            if (added.has(key)) return;
+                            added.add(key);
+
+                            const { count, code } = catData[subtype];
+
+                            for (let i = 1; i <= count; i++) {
+                                const num = String(i).padStart(2, "0");
+
+                                quizPool.push({
+                                    path: `images/${prefix}${code}${num}.webp`,
+                                    category,
+                                    subtype
+                                });
+                            }
+                        });
+                    });
+
+                    // 🔹 2. CUSTOM CELLS (hard mode only)
+                    Object.keys(customCells).forEach(subtype => {
+
+                        const { count, code, prefix } = customCells[subtype];
+
+                        for (let i = 1; i <= count; i++) {
+                            const num = String(i).padStart(2, "0");
+
+                            quizPool.push({
+                                path: `images/${prefix}${code}${num}.webp`,
+                                category: "hard_mode",
+                                subtype
+                            });
+                        }
+                    });
+
+                    return; // 🚨 IMPORTANT: skip normal logic
+                }
+
+                // ✅ NORMAL MODE
                 const catData = imageDatabase[cat];
                 if (!catData) return;
-                Object.keys(catData).forEach((subtype) => {
-                    const max = catData[subtype];
-                    for (let i = 1; i <= max; i++) {
+
+                const prefix = categoryPrefix[cat];
+
+                Object.keys(catData).forEach(subtype => {
+                    const { count, code } = catData[subtype];
+
+                    for (let i = 1; i <= count; i++) {
                         const num = String(i).padStart(2, "0");
-                        const path = `images/${cat}/${subtype}${num}.png`;
-                        quizPool.push(path);
+
+                        quizPool.push({
+                            path: `images/${prefix}${code}${num}.webp`,
+                            category: cat,
+                            subtype: subtype
+                        });
                     }
                 });
             });
+
             shuffleArray(quizPool);
         }
 
         function nextQuestion() {
             showNextImage();
+        }
+
+        function getHardModeAnswers() {
+            const include = imageDatabase.hard_mode.include || [];
+            const custom = Object.keys(imageDatabase.hard_mode.custom || {});
+
+            // Combine
+            const combined = [...include, ...custom];
+
+            // Remove duplicates
+            const unique = [...new Set(combined)];
+
+            // Sort alphabetically (ignore underscores for nicer sorting)
+            return unique.sort((a, b) =>
+                a.replace(/_/g, " ").localeCompare(b.replace(/_/g, " "))
+            );
         }
 
         function showNextImage() {
@@ -180,15 +274,20 @@
                 return;
             }
 
-            const currentImagePath = quizPool[currentQuestion];
+            const currentItem = quizPool[currentQuestion];
+            const currentImagePath = currentItem.path;
             imgEl.src = currentImagePath;
 
-            const pathParts = currentImagePath.split("/");
-            const correctCategory = pathParts[1];
-            const fileName = pathParts[2];
-            const correctAnswer = fileName.replace(/\d+\.png$/, "");
+            const correctCategory = currentItem.category;
+            const correctAnswer = currentItem.subtype;
 
-            const subtypes = Object.keys(imageDatabase[correctCategory]);
+            let subtypes;
+
+            if (selectedCategories.includes("hard_mode")) {
+                subtypes = getHardModeAnswers(); // 🔥 ALWAYS use hard mode answers
+            } else {
+                subtypes = Object.keys(imageDatabase[correctCategory]);
+            }
             subtypes.forEach((subtype) => {
                 const label = document.createElement("label");
                 label.style.display = "block";

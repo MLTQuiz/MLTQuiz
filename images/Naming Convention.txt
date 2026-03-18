@@ -1,0 +1,60 @@
+RBC Morphology:
+	Acanthocyte		        r1ac	04
+	Burr cell       		r1bc	04
+	Ovalocyte		        r1ov	04
+	Schistocyte     		r1sc	05
+	Sickle Cell		        r1si	04
+	Spherocyte		        r1sp	04
+	Target Cell     		r1tc	04
+
+RBC Maturation:
+	Rubriblast		        r2rb	04
+	Prorubricyte	    	r2pr	04
+	Rubricyte		        r2rc	04
+	Metarubricyte		    r2mr	04
+
+RBC Inclusions:
+	Malaria			        r3ma	04
+
+WBC Normal:
+	Eosinophils	        	w1eo	18
+	Lymphocytes     		w1ly	36
+	Plasma cells	    	w1pc	02
+	Monocytes		        w1mo	18
+	Segmented neutrophils	w1sn	18
+
+WBC Maturation:
+	Band neutrophils	    w2bn	18
+	Metamyelocytes		    w2mt	18
+	Myelocytes		        w2my	18
+	Promyelocytes		    w2pm	18
+	Blasts			        w2bl	15
+	Eosinophil myelocyte	w2em	01
+
+WBC Inclusions:
+	Dohle body		        w3db	04
+	Dysplastic Nucleus	    w3dn	18
+	Giant Band		        w3gb	08
+	Green Granules		    w3gg	18
+	Hypersegmented		    w3hs	18
+	Infected Cell		    w3ic	04
+	Mott Cell		        w3mc	01
+	Pelger Huet		        w3ph	18
+	Pyknotic Cell		    w3py	18
+	Reactive Lymph		    w3rl	12
+	Smudge Cell		        w3sm	18
+	Toxic Granulation	    w3tg	04
+	Toxic Vacuolation	    w3tv	05
+
+Hard Mode:
+	Blasts			        w2bl	15
+	Blasts (auer rods)	    w4ar	18
+	CLL (soccer ball)	    w4sb	09
+	Hairy Lymph		        w4hl	18
+	Lymphocytes		        w1ly	36
+	Lymphoma		        w4lm	18
+	Monocyte		        w1mo	18
+	Plasma Cell		        w1pc	02
+	Prolymphocyte		    w4pl	18
+	Promonocyte     		w4pm	18
+	Reactive Lymph	    	w3rl	12

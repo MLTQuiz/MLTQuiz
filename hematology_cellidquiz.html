@@ -121,6 +121,12 @@
         <button class="button-back" id="muteBtn">🔊 Mute</button>
     </div>
 
+    <div style="height:2000px;"></div>
+
+    <label class="tab2">
+        <input type="checkbox" id="june_feedback">
+        Junea Noises
+    </label>
 
     <script>
         let selectedCategories = JSON.parse(
@@ -158,15 +164,13 @@
 
             selectedCategories.forEach((cat) => {
 
-                // 🔥 HARD MODE
                 if (cat === "hard_mode") {
 
                     const included = imageDatabase.hard_mode.include || [];
                     const customCells = imageDatabase.hard_mode.custom || {};
 
-                    const added = new Set(); // prevents duplicates
+                    const added = new Set();
 
-                    // 🔹 1. INCLUDE CELLS (from all categories)
                     Object.keys(imageDatabase).forEach(category => {
 
                         if (category === "hard_mode") return;
@@ -196,7 +200,6 @@
                         });
                     });
 
-                    // 🔹 2. CUSTOM CELLS (hard mode only)
                     Object.keys(customCells).forEach(subtype => {
 
                         const { count, code, prefix } = customCells[subtype];
@@ -212,10 +215,9 @@
                         }
                     });
 
-                    return; // 🚨 IMPORTANT: skip normal logic
+                    return;
                 }
 
-                // ✅ NORMAL MODE
                 const catData = imageDatabase[cat];
                 if (!catData) return;
 
@@ -247,13 +249,10 @@
             const include = imageDatabase.hard_mode.include || [];
             const custom = Object.keys(imageDatabase.hard_mode.custom || {});
 
-            // Combine
             const combined = [...include, ...custom];
 
-            // Remove duplicates
             const unique = [...new Set(combined)];
 
-            // Sort alphabetically (ignore underscores for nicer sorting)
             return unique.sort((a, b) =>
                 a.replace(/_/g, " ").localeCompare(b.replace(/_/g, " "))
             );
@@ -284,7 +283,7 @@
             let subtypes;
 
             if (selectedCategories.includes("hard_mode")) {
-                subtypes = getHardModeAnswers(); // 🔥 ALWAYS use hard mode answers
+                subtypes = getHardModeAnswers();
             } else {
                 subtypes = Object.keys(imageDatabase[correctCategory]);
             }
@@ -330,34 +329,65 @@
 
         let muted = true;
 
-        const correctSound = new Audio("June - One more.wav");
-        const wrongSound = new Audio("June - Yell 2 (Short).wav");
-        correctSound.muted = muted;
-        wrongSound.muted = muted;
+        const correctSound = new Audio();
+        const wrongSound = new Audio();
 
-        // initialize button correctly
         const muteBtn = document.getElementById("muteBtn");
+        const juneCheckbox = document.getElementById("june_feedback");
+
         muteBtn.textContent = "🔇 Unmute";
+
+        function updateSounds() {
+            const juneEnabled = juneCheckbox.checked;
+
+            if (juneEnabled) {
+                correctSound.src = "June - One more.wav";
+                wrongSound.src = "June - Yell 2 (Short).wav";
+            } else {
+                correctSound.src = "correct.mp3";
+                wrongSound.src = "";
+            }
+
+            correctSound.muted = muted;
+            wrongSound.muted = muted;
+        }
+
+        function playCorrect() {
+            if (!muted && correctSound.src) {
+                correctSound.currentTime = 0;
+                correctSound.play().catch(() => { });
+            }
+        }
+
+        function playWrong() {
+            if (!muted && wrongSound.src) {
+                wrongSound.currentTime = 0;
+                wrongSound.play().catch(() => { });
+            }
+        }
 
         function toggleMute() {
             muted = !muted;
 
             correctSound.muted = muted;
             wrongSound.muted = muted;
+
             muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
         }
 
         muteBtn.addEventListener("click", toggleMute);
+        juneCheckbox.addEventListener("change", updateSounds);
 
-        document.getElementById("muteBtn").addEventListener("click", toggleMute);
-        document.getElementById("muteBtn").addEventListener("click", toggleMute);
+        updateSounds();
 
         function Back() {
             window.location.href = "hematology_cellidchoices.html";
         }
+
         function Home() {
             window.location.href = "index.html";
         }
+
     </script>
 </body>
 

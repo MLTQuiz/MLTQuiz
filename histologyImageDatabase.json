@@ -2,7 +2,7 @@
   {
     "image": "/histo_images/stain1.png",
     "stain_id": "Periodic Acid Schiff",
-    "demonstrating": "Glycogen",
+    "demonstrating": "Basement Membrane",
     "color": "Magenta",
     "principle": "Histochemical Reaction",
     "control": "Liver"

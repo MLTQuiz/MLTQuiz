@@ -226,7 +226,6 @@
             return 1 - distance / Math.max(lenA, lenB);
         }
 
-
         // -------------------- CHECK SINGLE FIELD --------------------
         function checkField(field, correctValue) {
             const inputEl = document.getElementById(field);
@@ -240,43 +239,35 @@
 
             let isCorrect = false;
             let isClose = false;
+            let bestMatch = correctAnswers[0];
 
             for (let answer of correctAnswers) {
+                const score = similarity(userAnswer, answer);
                 if (userAnswer === answer) {
                     isCorrect = true;
+                    bestMatch = answer;
                     break;
-                }
-
-                const score = similarity(userAnswer, answer);
-
-                if (score > 0.8) {
+                } else if (score > 0.8) {
                     isCorrect = true;
                     isClose = true;
+                    bestMatch = answer;
                     break;
                 }
             }
 
             if (isCorrect) {
-                fbEl.textContent = isClose ? " ✔ (close enough)" : " ✔";
+                fbEl.textContent = isClose
+                    ? `✔ Close enough! Correct: ${bestMatch}`
+                    : `✔ Correct: ${bestMatch}`;
                 fbEl.style.color = "green";
                 return true;
             } else {
-                let almost = false;
-
-                for (let answer of correctAnswers) {
-                    const score = similarity(userAnswer, answer);
-                    if (score > 0.6) {
-                        almost = true;
-                        break;
-                    }
-                }
-
-                fbEl.textContent = almost ? " ✖ (almost)" : " ✖";
+                // If not correct, show correct answer
+                fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
                 fbEl.style.color = "red";
                 return false;
             }
         }
-
 
         // -------------------- CHECK ALL ANSWERS --------------------
         function checkAnswer() {
@@ -302,7 +293,6 @@
                 playWrong();
             }
         }
-
 
         // -------------------- SOUND SYSTEM --------------------
         let muted = true;

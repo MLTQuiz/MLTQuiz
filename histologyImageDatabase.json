@@ -1,10 +1,195 @@
 [
   {
-    "image": "/histo_images/stain1.png",
-    "stain_id": "Periodic Acid Schiff",
-    "demonstrating": "Basement Membrane",
-    "color": "Magenta",
+    "image": "H&E",
+    "stain_id": "Hematoxylin and Eosin",
+    "demonstrating": "General relationships of cells and tissues",
+    "color": "Nuclei in blue, at least 3 shades of Eosin",
     "principle": "Histochemical Reaction",
-    "control": "Liver"
+    "control": "Any tissue"
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
+  },
+  {
+    "image": "",
+    "stain_id": "",
+    "demonstrating": "",
+    "color": "",
+    "principle": "",
+    "control": ""
   }
+
 ]

@@ -105,22 +105,27 @@
         <div class="category">
             <span class="question">Answer the following questions. Spelling counts!</span><br />
             <img id="quizImage" src="" alt="Good luck!" /><br />
-
             <label>What stain is this?</label><br />
-            <input type="text" id="stain_id"></input><br />
+            <input type="text" id="stain_id"></input>
+            <span id="fb_stain_id"></span><br />
             <label>What is being demonstrated?</label><br />
-            <input type="text" id="demonstrating"></input><br />
+            <input type="text" id="demonstrating"></input>
+            <span id="fb_demonstrating"></span><br />
             <label>In what color?</label><br />
-            <input type="text" id="color"></input><br />
+            <input type="text" id="color"></input>
+            <span id="fb_color"></span><br />
             <label>What is the principle?</label><br />
-            <input type="text" id="principle"></inoput><br />
+            <input type="text" id="principle"></input>
+            <span id="fb_principle"></span><br />
             <label>What is used as a control?</label><br />
-            <input type="text" id="control"></input>
+            <input type="text" id="control">
+            <span id="fb_control"></span></input>
             <div id="answerOptions" style="margin-top: 15px"></div>
-            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div>
+            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div><br />
+            <button onclick="checkAnswer()">Check Answer</button>
 
             <br /><br />
-            <button onclick="nextQuestion()">Next Question</button>
+            <button onclick="nextStain()">Next Stain</button>
         </div>
 
         <hr />
@@ -138,70 +143,161 @@
     </label>
 
     <script>
-        
+        let imageDatabase = [];
+let currentItem = null;
+
+// -------------------- LOAD JSON --------------------
+fetch("hematologyImageDatabase.json")
+    .then(res => res.json())
+    .then(data => {
+        imageDatabase = data;
+        nextStain();
+    })
+    .catch(err => console.error("Error loading JSON:", err));
 
 
-        let muted = true;
+// -------------------- LOAD NEW QUESTION --------------------
+function nextStain() {
+    clearInputs();
 
-        const correctSound = new Audio();
-        const wrongSound = new Audio();
+    if (imageDatabase.length === 0) return;
 
-        const muteBtn = document.getElementById("muteBtn");
-        const juneCheckbox = document.getElementById("june_feedback");
+    const randomIndex = Math.floor(Math.random() * imageDatabase.length);
+    currentItem = imageDatabase[randomIndex];
 
-        muteBtn.textContent = "🔇 Unmute";
+    document.getElementById("quizImage").src = currentItem.image;
+}
 
-        function updateSounds() {
-            const juneEnabled = juneCheckbox.checked;
 
-            if (juneEnabled) {
-                correctSound.src = "/sounds/June - One more.wav";
-                wrongSound.src = "/sounds/June - Yell 2 (Short).wav";
-            } else {
-                correctSound.src = "/sounds/correct.mp3";
-                wrongSound.src = "";
-            }
+// -------------------- CLEAR INPUTS --------------------
+function clearInputs() {
+    const fields = ["stain_id", "demonstrating", "color", "principle", "control"];
 
-            correctSound.muted = muted;
-            wrongSound.muted = muted;
-        }
+    fields.forEach(id => {
+        document.getElementById(id).value = "";
+        document.getElementById("fb_" + id).textContent = "";
+    });
 
-        function playCorrect() {
-            if (!muted && correctSound.src) {
-                correctSound.currentTime = 0;
-                correctSound.play().catch(() => { });
-            }
-        }
+    document.getElementById("feedback").textContent = "";
+}
 
-        function playWrong() {
-            if (!muted && wrongSound.src) {
-                wrongSound.currentTime = 0;
-                wrongSound.play().catch(() => { });
-            }
-        }
 
-        function toggleMute() {
-            muted = !muted;
+// -------------------- NORMALIZE TEXT --------------------
+function normalize(str) {
+    return str.trim().toLowerCase();
+}
 
-            correctSound.muted = muted;
-            wrongSound.muted = muted;
 
-            muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
-        }
+// -------------------- CHECK SINGLE FIELD --------------------
+function checkField(field, correctValue) {
+    const inputEl = document.getElementById(field);
+    const fbEl = document.getElementById("fb_" + field);
 
-        muteBtn.addEventListener("click", toggleMute);
-        juneCheckbox.addEventListener("change", updateSounds);
+    const userAnswer = normalize(inputEl.value);
 
-        updateSounds();
+    // Allow multiple correct answers (array or string)
+    const correctAnswers = Array.isArray(correctValue)
+        ? correctValue.map(a => normalize(a))
+        : [normalize(correctValue)];
 
-        function Back() {
-            window.location.href = "hematology_cellidchoices.html";
-        }
+    if (correctAnswers.includes(userAnswer)) {
+        fbEl.textContent = " ✔";
+        fbEl.style.color = "green";
+        return true;
+    } else {
+        fbEl.textContent = ` ✖ (Correct: ${Array.isArray(correctValue) ? correctValue.join(", ") : correctValue})`;
+        fbEl.style.color = "red";
+        return false;
+    }
+}
 
-        function Home() {
-            window.location.href = "index.html";
-        }
 
+// -------------------- CHECK ALL ANSWERS --------------------
+function checkAnswer() {
+    if (!currentItem) return;
+
+    let correctCount = 0;
+
+    if (checkField("stain_id", currentItem.stain_id)) correctCount++;
+    if (checkField("demonstrating", currentItem.demonstrating)) correctCount++;
+    if (checkField("color", currentItem.color)) correctCount++;
+    if (checkField("principle", currentItem.principle)) correctCount++;
+    if (checkField("control", currentItem.control)) correctCount++;
+
+    const feedbackEl = document.getElementById("feedback");
+
+    if (correctCount === 5) {
+        feedbackEl.textContent = "Perfect! 🎉";
+        feedbackEl.style.color = "green";
+        playCorrect();
+    } else {
+        feedbackEl.textContent = `${correctCount}/5 correct`;
+        feedbackEl.style.color = "orange";
+        playWrong();
+    }
+}
+
+
+// -------------------- SOUND SYSTEM --------------------
+let muted = true;
+
+const correctSound = new Audio();
+const wrongSound = new Audio();
+
+const muteBtn = document.getElementById("muteBtn");
+const juneCheckbox = document.getElementById("june_feedback");
+
+// Default button state
+muteBtn.textContent = "🔇 Unmute";
+
+function updateSounds() {
+    const juneEnabled = juneCheckbox.checked;
+
+    if (juneEnabled) {
+        correctSound.src = "/sounds/June - One more.wav";
+        wrongSound.src = "/sounds/June - Yell 2 (Short).wav";
+    } else {
+        correctSound.src = "/sounds/correct.mp3";
+        wrongSound.src = "";
+    }
+
+    correctSound.muted = muted;
+    wrongSound.muted = muted;
+}
+
+function playCorrect() {
+    if (!muted && correctSound.src) {
+        correctSound.currentTime = 0;
+        correctSound.play().catch(() => {});
+    }
+}
+
+function playWrong() {
+    if (!muted && wrongSound.src) {
+        wrongSound.currentTime = 0;
+        wrongSound.play().catch(() => {});
+    }
+}
+
+function toggleMute() {
+    muted = !muted;
+
+    correctSound.muted = muted;
+    wrongSound.muted = muted;
+
+    muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+}
+
+muteBtn.addEventListener("click", toggleMute);
+juneCheckbox.addEventListener("change", updateSounds);
+
+updateSounds();
+
+
+// -------------------- NAVIGATION --------------------
+function Home() {
+    window.location.href = "index.html";
+}
     </script>
 </body>
 

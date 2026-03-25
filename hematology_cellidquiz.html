@@ -141,7 +141,7 @@
         let currentQuestion = 0;
         let imageDatabase = {};
 
-        fetch("imageDatabase.json")
+        fetch("hematologyImageDatabase.json")
             .then((res) => res.json())
             .then((db) => {
                 imageDatabase = db;
@@ -269,7 +269,6 @@
             if (currentQuestion >= quizPool.length) {
                 currentQuestion = 0;
                 shuffleArray(quizPool);
-                // return; Remove if worked!
             }
 
             const currentItem = quizPool[currentQuestion];

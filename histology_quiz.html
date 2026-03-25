@@ -144,160 +144,226 @@
 
     <script>
         let imageDatabase = [];
-let currentItem = null;
+        let currentItem = null;
 
-// -------------------- LOAD JSON --------------------
-fetch("histologyImageDatabase.json")
-    .then(res => res.json())
-    .then(data => {
-        imageDatabase = data;
-        nextStain();
-    })
-    .catch(err => console.error("Error loading JSON:", err));
-
-
-// -------------------- LOAD NEW QUESTION --------------------
-function nextStain() {
-    clearInputs();
-
-    if (imageDatabase.length === 0) return;
-
-    const randomIndex = Math.floor(Math.random() * imageDatabase.length);
-    currentItem = imageDatabase[randomIndex];
-
-    document.getElementById("quizImage").src = currentItem.image;
-}
+        // -------------------- LOAD JSON --------------------
+        fetch("histologyImageDatabase.json")
+            .then(res => res.json())
+            .then(data => {
+                imageDatabase = data;
+                nextStain();
+            })
+            .catch(err => console.error("Error loading JSON:", err));
 
 
-// -------------------- CLEAR INPUTS --------------------
-function clearInputs() {
-    const fields = ["stain_id", "demonstrating", "color", "principle", "control"];
+        // -------------------- LOAD NEW QUESTION --------------------
+        function nextStain() {
+            clearInputs();
 
-    fields.forEach(id => {
-        document.getElementById(id).value = "";
-        document.getElementById("fb_" + id).textContent = "";
-    });
+            if (imageDatabase.length === 0) return;
 
-    document.getElementById("feedback").textContent = "";
-}
+            const randomIndex = Math.floor(Math.random() * imageDatabase.length);
+            currentItem = imageDatabase[randomIndex];
 
-
-// -------------------- NORMALIZE TEXT --------------------
-function normalize(str) {
-    return str.trim().toLowerCase();
-}
+            document.getElementById("quizImage").src = currentItem.image;
+        }
 
 
-// -------------------- CHECK SINGLE FIELD --------------------
-function checkField(field, correctValue) {
-    const inputEl = document.getElementById(field);
-    const fbEl = document.getElementById("fb_" + field);
+        // -------------------- CLEAR INPUTS --------------------
+        function clearInputs() {
+            const fields = ["stain_id", "demonstrating", "color", "principle", "control"];
 
-    const userAnswer = normalize(inputEl.value);
+            fields.forEach(id => {
+                document.getElementById(id).value = "";
+                document.getElementById("fb_" + id).textContent = "";
+            });
 
-    // Allow multiple correct answers (array or string)
-    const correctAnswers = Array.isArray(correctValue)
-        ? correctValue.map(a => normalize(a))
-        : [normalize(correctValue)];
-
-    if (correctAnswers.includes(userAnswer)) {
-        fbEl.textContent = " ✔";
-        fbEl.style.color = "green";
-        return true;
-    } else {
-        fbEl.textContent = ` ✖ (Correct: ${Array.isArray(correctValue) ? correctValue.join(", ") : correctValue})`;
-        fbEl.style.color = "red";
-        return false;
-    }
-}
+            document.getElementById("feedback").textContent = "";
+        }
 
 
-// -------------------- CHECK ALL ANSWERS --------------------
-function checkAnswer() {
-    if (!currentItem) return;
-
-    let correctCount = 0;
-
-    if (checkField("stain_id", currentItem.stain_id)) correctCount++;
-    if (checkField("demonstrating", currentItem.demonstrating)) correctCount++;
-    if (checkField("color", currentItem.color)) correctCount++;
-    if (checkField("principle", currentItem.principle)) correctCount++;
-    if (checkField("control", currentItem.control)) correctCount++;
-
-    const feedbackEl = document.getElementById("feedback");
-
-    if (correctCount === 5) {
-        feedbackEl.textContent = "Perfect! 🎉";
-        feedbackEl.style.color = "green";
-        playCorrect();
-    } else {
-        feedbackEl.textContent = `${correctCount}/5 correct`;
-        feedbackEl.style.color = "orange";
-        playWrong();
-    }
-}
+        // -------------------- NORMALIZE TEXT --------------------
+        function normalize(str) {
+            return str
+                .toLowerCase()
+                .trim()
+                .replace(/-/g, " ")
+                .replace(/[^a-z0-9\s]/g, "")
+                .replace(/\s+/g, " ");
+        }
 
 
-// -------------------- SOUND SYSTEM --------------------
-let muted = true;
+        // -------------------- SIMILARITY FUNCTION --------------------
+        function similarity(a, b) {
+            const matrix = [];
 
-const correctSound = new Audio();
-const wrongSound = new Audio();
+            const lenA = a.length;
+            const lenB = b.length;
 
-const muteBtn = document.getElementById("muteBtn");
-const juneCheckbox = document.getElementById("june_feedback");
+            for (let i = 0; i <= lenB; i++) {
+                matrix[i] = [i];
+            }
 
-// Default button state
-muteBtn.textContent = "🔇 Unmute";
+            for (let j = 0; j <= lenA; j++) {
+                matrix[0][j] = j;
+            }
 
-function updateSounds() {
-    const juneEnabled = juneCheckbox.checked;
+            for (let i = 1; i <= lenB; i++) {
+                for (let j = 1; j <= lenA; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
 
-    if (juneEnabled) {
-        correctSound.src = "/sounds/June - One more.wav";
-        wrongSound.src = "/sounds/June - Yell 2 (Short).wav";
-    } else {
-        correctSound.src = "/sounds/correct.mp3";
-        wrongSound.src = "";
-    }
-
-    correctSound.muted = muted;
-    wrongSound.muted = muted;
-}
-
-function playCorrect() {
-    if (!muted && correctSound.src) {
-        correctSound.currentTime = 0;
-        correctSound.play().catch(() => {});
-    }
-}
-
-function playWrong() {
-    if (!muted && wrongSound.src) {
-        wrongSound.currentTime = 0;
-        wrongSound.play().catch(() => {});
-    }
-}
-
-function toggleMute() {
-    muted = !muted;
-
-    correctSound.muted = muted;
-    wrongSound.muted = muted;
-
-    muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
-}
-
-muteBtn.addEventListener("click", toggleMute);
-juneCheckbox.addEventListener("change", updateSounds);
-
-updateSounds();
+            const distance = matrix[lenB][lenA];
+            return 1 - distance / Math.max(lenA, lenB);
+        }
 
 
-// -------------------- NAVIGATION --------------------
-function Home() {
-    window.location.href = "index.html";
-}
+        // -------------------- CHECK SINGLE FIELD --------------------
+        function checkField(field, correctValue) {
+            const inputEl = document.getElementById(field);
+            const fbEl = document.getElementById("fb_" + field);
+
+            const userAnswer = normalize(inputEl.value);
+
+            const correctAnswers = Array.isArray(correctValue)
+                ? correctValue.map(a => normalize(a))
+                : [normalize(correctValue)];
+
+            let isCorrect = false;
+            let isClose = false;
+
+            for (let answer of correctAnswers) {
+                if (userAnswer === answer) {
+                    isCorrect = true;
+                    break;
+                }
+
+                const score = similarity(userAnswer, answer);
+
+                if (score > 0.8) {
+                    isCorrect = true;
+                    isClose = true;
+                    break;
+                }
+            }
+
+            if (isCorrect) {
+                fbEl.textContent = isClose ? " ✔ (close enough)" : " ✔";
+                fbEl.style.color = "green";
+                return true;
+            } else {
+                let almost = false;
+
+                for (let answer of correctAnswers) {
+                    const score = similarity(userAnswer, answer);
+                    if (score > 0.6) {
+                        almost = true;
+                        break;
+                    }
+                }
+
+                fbEl.textContent = almost ? " ✖ (almost)" : " ✖";
+                fbEl.style.color = "red";
+                return false;
+            }
+        }
+
+
+        // -------------------- CHECK ALL ANSWERS --------------------
+        function checkAnswer() {
+            if (!currentItem) return;
+
+            let correctCount = 0;
+
+            if (checkField("stain_id", currentItem.stain_id)) correctCount++;
+            if (checkField("demonstrating", currentItem.demonstrating)) correctCount++;
+            if (checkField("color", currentItem.color)) correctCount++;
+            if (checkField("principle", currentItem.principle)) correctCount++;
+            if (checkField("control", currentItem.control)) correctCount++;
+
+            const feedbackEl = document.getElementById("feedback");
+
+            if (correctCount === 5) {
+                feedbackEl.textContent = "Perfect! 🎉";
+                feedbackEl.style.color = "green";
+                playCorrect();
+            } else {
+                feedbackEl.textContent = `${correctCount}/5 correct`;
+                feedbackEl.style.color = "orange";
+                playWrong();
+            }
+        }
+
+
+        // -------------------- SOUND SYSTEM --------------------
+        let muted = true;
+
+        const correctSound = new Audio();
+        const wrongSound = new Audio();
+
+        const muteBtn = document.getElementById("muteBtn");
+        const juneCheckbox = document.getElementById("june_feedback");
+
+        // Default button state
+        muteBtn.textContent = "🔇 Unmute";
+
+        function updateSounds() {
+            const juneEnabled = juneCheckbox.checked;
+
+            if (juneEnabled) {
+                correctSound.src = "/sounds/June - One more.wav";
+                wrongSound.src = "/sounds/June - Yell 2 (Short).wav";
+            } else {
+                correctSound.src = "/sounds/correct.mp3";
+                wrongSound.src = "";
+            }
+
+            correctSound.muted = muted;
+            wrongSound.muted = muted;
+        }
+
+        function playCorrect() {
+            if (!muted && correctSound.src) {
+                correctSound.currentTime = 0;
+                correctSound.play().catch(() => { });
+            }
+        }
+
+        function playWrong() {
+            if (!muted && wrongSound.src) {
+                wrongSound.currentTime = 0;
+                wrongSound.play().catch(() => { });
+            }
+        }
+
+        function toggleMute() {
+            muted = !muted;
+
+            correctSound.muted = muted;
+            wrongSound.muted = muted;
+
+            muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+        }
+
+        muteBtn.addEventListener("click", toggleMute);
+        juneCheckbox.addEventListener("change", updateSounds);
+
+        updateSounds();
+
+
+        // -------------------- NAVIGATION --------------------
+        function Home() {
+            window.location.href = "index.html";
+        }
     </script>
 </body>
 

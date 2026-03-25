@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hematology Cell Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .category {
+            display: inline-block;
+            text-align: left;
+            width: 100%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+
+        .category-title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        button {
+            font-size: 22px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f55c4;
+        }
+
+        .button-back {
+            font-size: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        .button-back:hover {
+            background: #1f55c4;
+        }
+
+        #quizImage {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+        }
+
+        #answerOptions label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        #answerOptions br {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h1>Histology Stain Identification Quiz</h1>
+
+        <div class="category">
+            <span class="question">What stain is this?</span><br />
+            <img id="quizImage" src="" alt="Good luck!" /><br />
+
+            <div id="answerOptions" style="margin-top: 15px"></div>
+            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div>
+
+            <br /><br />
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <hr />
+        <br />
+
+        <button class="button-back" onclick="Home()">Home</button><br><br>
+        <button class="button-back" id="muteBtn">🔊 Mute</button>
+    </div>
+
+    <div style="height:2000px;"></div>
+
+    <label class="tab2">
+        <input type="checkbox" id="june_feedback">
+        Junea Noises
+    </label>
+
+    <script>
+        
+        
+
+        let muted = true;
+
+        const correctSound = new Audio();
+        const wrongSound = new Audio();
+
+        const muteBtn = document.getElementById("muteBtn");
+        const juneCheckbox = document.getElementById("june_feedback");
+
+        muteBtn.textContent = "🔇 Unmute";
+
+        function updateSounds() {
+            const juneEnabled = juneCheckbox.checked;
+
+            if (juneEnabled) {
+                correctSound.src = "/sounds/June - One more.wav";
+                wrongSound.src = "/sounds/June - Yell 2 (Short).wav";
+            } else {
+                correctSound.src = "/sounds/correct.mp3";
+                wrongSound.src = "";
+            }
+
+            correctSound.muted = muted;
+            wrongSound.muted = muted;
+        }
+
+        function playCorrect() {
+            if (!muted && correctSound.src) {
+                correctSound.currentTime = 0;
+                correctSound.play().catch(() => { });
+            }
+        }
+
+        function playWrong() {
+            if (!muted && wrongSound.src) {
+                wrongSound.currentTime = 0;
+                wrongSound.play().catch(() => { });
+            }
+        }
+
+        function toggleMute() {
+            muted = !muted;
+
+            correctSound.muted = muted;
+            wrongSound.muted = muted;
+
+            muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+        }
+
+        muteBtn.addEventListener("click", toggleMute);
+        juneCheckbox.addEventListener("change", updateSounds);
+
+        updateSounds();
+
+        function Back() {
+            window.location.href = "hematology_cellidchoices.html";
+        }
+
+        function Home() {
+            window.location.href = "index.html";
+        }
+
+    </script>
+</body>
+
+</html>

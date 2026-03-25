@@ -1,6 +1,6 @@
 [
   {
-    "image": "histo_images/stain1.png",
+    "image": "/histo_images/stain1.png",
     "stain_id": "Periodic Acid Schiff",
     "demonstrating": "Glycogen",
     "color": "Magenta",

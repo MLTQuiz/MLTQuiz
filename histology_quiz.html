@@ -100,12 +100,22 @@
 
 <body>
     <div class="quiz-container">
-        <h1>Histology Stain Identification Quiz</h1>
+        <h1>Histology Stain Quiz</h1>
 
         <div class="category">
-            <span class="question">What stain is this?</span><br />
+            <span class="question">Answer the following questions. Spelling counts!</span><br />
             <img id="quizImage" src="" alt="Good luck!" /><br />
 
+            <label>What stain is this?</label><br />
+            <form id="stain_id"></form><br />
+            <label>What is being demonstrated?</label><br />
+            <form id="demonstrating"></form><br />
+            <label>In what color?</label><br />
+            <form id="color"></form><br />
+            <label>What is the principle?</label><br />
+            <form id="principle"></form><br />
+            <label>What is used as a control?</label><br />
+            <form id="control"></form>
             <div id="answerOptions" style="margin-top: 15px"></div>
             <div id="feedback" style="margin-top: 10px; font-weight: bold"></div>
 
@@ -129,7 +139,7 @@
 
     <script>
         
-        
+
 
         let muted = true;
 

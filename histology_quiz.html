@@ -110,11 +110,12 @@
         <div class="category">
             <span class="question">Answer the following questions. Spelling counts!</span><br />
             <img id="quizImage" src="" alt="Good luck!" /><br />
-            <br /><label >What stain is this?</label>
+            <br /><label>What stain is this?</label>
             <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="stain_id"></input><br />
             <span id="fb_stain_id"></span><br />
             <br /><label>What is being demonstrated?</label>
-            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="demonstrating"></input><br />
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox"
+                id="demonstrating"></input><br />
             <span id="fb_demonstrating"></span><br />
             <br /><label>In what color?</label>
             <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="color"></input><br />
@@ -228,66 +229,66 @@
         }
 
         function checkField(field, correctValue) {
-    const inputEl = document.getElementById(field);
-    const fbEl = document.getElementById("fb_" + field);
+            const inputEl = document.getElementById(field);
+            const fbEl = document.getElementById("fb_" + field);
 
-    const userAnswer = normalize(inputEl.value);
+            const userAnswer = normalize(inputEl.value);
 
-    const correctAnswers = Array.isArray(correctValue)
-        ? correctValue.map(a => normalize(a))
-        : [normalize(correctValue)];
+            const correctAnswers = Array.isArray(correctValue)
+                ? correctValue.map(a => normalize(a))
+                : [normalize(correctValue)];
 
-    let isCorrect = false;
-    let isClose = false;
-    let bestMatch = correctAnswers[0];
+            let isCorrect = false;
+            let isClose = false;
+            let bestMatch = correctAnswers[0];
 
-    if (field === "stain_id") {
-        for (let answer of correctAnswers) {
-            if (userAnswer === answer) {
-                isCorrect = true;
-                bestMatch = answer;
-                break;
+            if (field === "stain_id") {
+                for (let answer of correctAnswers) {
+                    if (userAnswer === answer) {
+                        isCorrect = true;
+                        bestMatch = answer;
+                        break;
+                    }
+                }
+
+                if (isCorrect) {
+                    fbEl.textContent = `✔ Correct: ${bestMatch}`;
+                    fbEl.style.color = "green";
+                    return true;
+                } else {
+                    fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
+                    fbEl.style.color = "red";
+                    return false;
+                }
+            }
+
+            for (let answer of correctAnswers) {
+                const score = similarity(userAnswer, answer);
+
+                if (userAnswer === answer) {
+                    isCorrect = true;
+                    bestMatch = answer;
+                    break;
+                } else if (score > 0.8) {
+                    isCorrect = true;
+                    isClose = true;
+                    bestMatch = answer;
+                    break;
+                }
+            }
+
+            if (isCorrect) {
+                fbEl.textContent = isClose
+                    ? `✔ Close enough! Correct: ${bestMatch}`
+                    : `✔ Correct: ${bestMatch}`;
+                fbEl.style.color = "green";
+                return true;
+            } else {
+                fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
+                fbEl.style.color = "red";
+                return false;
             }
         }
-
-        if (isCorrect) {
-            fbEl.textContent = `✔ Correct: ${bestMatch}`;
-            fbEl.style.color = "green";
-            return true;
-        } else {
-            fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
-            fbEl.style.color = "red";
-            return false;
-        }
-    }
-
-    for (let answer of correctAnswers) {
-        const score = similarity(userAnswer, answer);
-
-        if (userAnswer === answer) {
-            isCorrect = true;
-            bestMatch = answer;
-            break;
-        } else if (score > 0.8) {
-            isCorrect = true;
-            isClose = true;
-            bestMatch = answer;
-            break;
-        }
-    }
-
-    if (isCorrect) {
-        fbEl.textContent = isClose
-            ? `✔ Close enough! Correct: ${bestMatch}`
-            : `✔ Correct: ${bestMatch}`;
-        fbEl.style.color = "green";
-        return true;
-    } else {
-        fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
-        fbEl.style.color = "red";
-        return false;
-    }
-}
 
         function checkAnswer() {
             if (!currentItem) return;
@@ -331,6 +332,9 @@
                 wrongSound.src = "sounds/June - Yell 2 (Short).wav";
 
                 document.body.style.backgroundImage = "url('June.jpg')";
+                document.body.style.backgroundSize = "33.33vw auto"; // 🔥 3 across
+                document.body.style.backgroundRepeat = "repeat";
+                document.body.style.backgroundPosition = "top left";
 
             } else {
                 correctSound.src = "sounds/correct.mp3";

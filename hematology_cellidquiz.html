@@ -301,12 +301,12 @@
                     if (radio.value === correctAnswer) {
                         feedbackEl.textContent = "Correct! 🎉";
                         feedbackEl.style.color = "green";
-                        correctSound.play();
+                        playCorrect();
 
                     } else {
                         feedbackEl.textContent = "Try again!";
                         feedbackEl.style.color = "red";
-                        wrongSound.play();
+                        playWrong();
                     }
                 });
 

@@ -29,7 +29,6 @@
   },
 
   "wbc_inclusions": {
-    "Dohle_Body": { "count": 4, "code": "db" },
     "Dysplastic_Nucleus": { "count": 18, "code": "dn" },
     "Giant_Band": { "count": 8, "code": "gb" },
     "Green_Granules": { "count": 18, "code": "gg" },
@@ -40,8 +39,7 @@
     "Pyknotic_Cell": { "count": 18, "code": "py" },
     "Reactive_Lymphocyte": { "count": 12, "code": "rl" },
     "Smudge_Cell": { "count": 18, "code": "sm" },
-    "Toxic_Granulation": { "count": 4, "code": "tg" },
-    "Toxic_Vacuolation": { "count": 5, "code": "tv" }
+    "Toxic Changes (Toxic Vacuolation, Granulation, and/or Döhle Bodies)": { "count": 13, "code": "tc"}
   },
 
   "wbc_stages": {

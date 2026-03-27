@@ -1,6 +1,6 @@
 [
   {
-    "image": "AB",
+    "image": "histo_images/AB.webp",
     "stain_id": "Alcian Blue",
     "demonstrating": "Acid Mucins",
     "color": "Turquoise",
@@ -8,7 +8,7 @@
     "control": "Intesting"
   },
   {
-    "image": "BielschowskyPAS",
+    "image": "histo_images/BielschowskyPAS.webp",
     "stain_id": "Bielschowsky-Periodic Acid Schiff",
     "demonstrating": "Neurofibrillary plaques and tangles",
     "color": "Black",
@@ -16,7 +16,7 @@
     "control": "CNS Tissue"
   },
   {
-    "image": "CEV",
+    "image": "histo_images/CEV.webp",
     "stain_id": "Cresyl Echt Violet",
     "demonstrating": "Nissl Substance",
     "color": "Purple",
@@ -24,7 +24,7 @@
     "control": "Spinal Cord"
   },
   {
-    "image": "Congo Red",
+    "image": "histo_images/Congo Red.webp",
     "stain_id": "Congo Red",
     "demonstrating": "Amyloid",
     "color": "Red",
@@ -32,7 +32,7 @@
     "control": "Tissue with Amyloid"
   },
   {
-    "image": "Fontana",
+    "image": "histo_images/Fontana.webp",
     "stain_id": "Fontana Masson",
     "demonstrating": "Melanin/Argentaffin Granules",
     "color": "Brown/Black",
@@ -40,7 +40,7 @@
     "control": "Skin with melanin, Intestine with Argentaffin"
   },
   {
-    "image": "Giemsa",
+    "image": "histo_images/Giemsa.webp",
     "stain_id": "Giemsa",
     "demonstrating": "Helicobacter pylori",
     "color": "Dark blue",
@@ -48,7 +48,7 @@
     "control": "Stomach with Helicobacter pylori"
   },
   {
-    "image": "GnS1",
+    "image": "histo_images/GnS1.webp",
     "stain_id": "Gordon and Sweets",
     "demonstrating": "Reticulin",
     "color": "Black",
@@ -56,7 +56,7 @@
     "control": "Liver"
   },
   {
-    "image": "GnS2",
+    "image": "histo_images/GnS2.webp",
     "stain_id": "Gordon and Sweets",
     "demonstrating": "Reticulin",
     "color": "Black",
@@ -64,7 +64,7 @@
     "control": "Liver"
   },
   {
-    "image": "Gram",
+    "image": "histo_images/Gram.webp",
     "stain_id": "Gram",
     "demonstrating": "Gram positive and Gram negative bacteria",
     "color": "Gram positive in blue, Gram negative in red",
@@ -72,7 +72,7 @@
     "control": "Tissue with both gram positive and gram negative bacteria"
   },
   {
-    "image": "Grocott",
+    "image": "histo_images/Grocott.webp",
     "stain_id": "Grocott's Methenamine Silver",
     "demonstrating": "Fungi and Pneumocystsis jirovecii",
     "color": "Black wall, grey interior",
@@ -80,7 +80,7 @@
     "control": "Tissue with Fungi or Pneumocystsis jirovecii"
   },
   {
-    "image": "HnE1",
+    "image": "histo_images/HnE1.webp",
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
     "color": "Nuclei in blue, at least 3 shades of Eosin",
@@ -88,7 +88,7 @@
     "control": "Any tissue"
   },
   {
-    "image": "HnE2",
+    "image": "histo_images/HnE2.webp",
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
     "color": "Nuclei in blue, at least 3 shades of Eosin",
@@ -96,7 +96,7 @@
     "control": "Any tissue"
   },
   {
-    "image": "LFB",
+    "image": "histo_images/LFB.webp",
     "stain_id": "Luxol Fast Blue",
     "demonstrating": "Myelin",
     "color": "Blue",
@@ -104,7 +104,7 @@
     "control": "Spinal Cord"
   },
   {
-    "image": "Masson1",
+    "image": "histo_images/Masson1.webp",
     "stain_id": "Masson's Trichrome",
     "demonstrating": "Collagen",
     "color": "Blue",
@@ -112,7 +112,7 @@
     "control": "Intestine/Any Tissue"
   },
   {
-    "image": "Masson2",
+    "image": "histo_images/Masson2.webp",
     "stain_id": "Masson's Trichrome",
     "demonstrating": "Collagen",
     "color": "Blue",
@@ -120,7 +120,7 @@
     "control": "Intestine/Any Tissue"
   },
   {
-    "image": "Oil Red O",
+    "image": "histo_images/Oil Red O.webp",
     "stain_id": "Oil Red O",
     "demonstrating": "Neutral Fats",
     "color": "Red",
@@ -128,7 +128,7 @@
     "control": "Any Tissue with Fat"
   },
   {
-    "image": "PAMS1",
+    "image": "histo_images/PAMS1.webp",
     "stain_id": "Periodic Acid Methenamine Silver",
     "demonstrating": "Basement Membrane",
     "color": "Black",
@@ -136,7 +136,7 @@
     "control": "Kidney"
   },
   {
-    "image": "PAMS2",
+    "image": "histo_images/PAMS2.webp",
     "stain_id": "Periodic Acid Methenamine Silver",
     "demonstrating": "Basement Membrane",
     "color": "Black",
@@ -144,7 +144,7 @@
     "control": "Kidney"
   },
   {
-    "image": "PAS",
+    "image": "histo_images/PAS.webp",
     "stain_id": "Periodic Acid Schiff",
     "demonstrating": "Basement Membrane",
     "color": "Magenta",
@@ -152,7 +152,7 @@
     "control": "Kidney"
   },
   {
-    "image": "PASAB",
+    "image": "histo_images/PASAB.webp",
     "stain_id": "Periodic Acid Schiff/Alcian Blue",
     "demonstrating": "Acid, Neutral, and Mixed Mucins",
     "color": "Turquoise, Magenta, Purple",
@@ -160,7 +160,7 @@
     "control": "Intestine"
   },
   {
-    "image": "PPB",
+    "image": "histo_images/PPB.webp",
     "stain_id": "Perl's Prussian Blue",
     "demonstrating": "Hemosiderin",
     "color": "Blue",
@@ -168,7 +168,7 @@
     "control": "Spleen"
   },
   {
-    "image": "Toluidine",
+    "image": "histo_images/Toluidine.webp",
     "stain_id": "Toluidine Blue",
     "demonstrating": "Mast Cell Granules",
     "color": "Deep Violet",
@@ -176,7 +176,7 @@
     "control": "Tissue with Mast Cells"
   },
   {
-    "image": "Verhoeff1",
+    "image": "histo_images/Verhoeff1.webp",
     "stain_id": "Verhoeff",
     "demonstrating": "Elastic Fibres",
     "color": "Black",
@@ -184,7 +184,7 @@
     "control": "Artery"
   },
   {
-    "image": "Verhoeff2",
+    "image": "histo_images/Verhoeff2.webp",
     "stain_id": "Verhoeff",
     "demonstrating": "Elastic Fibres",
     "color": "Black",
@@ -192,7 +192,7 @@
     "control": "Artery"
   },
   {
-    "image": "Vonkossa",
+    "image": "histo_images/Vonkossa.webp",
     "stain_id": "Von Kossa",
     "demonstrating": "Calcium",
     "color": "Brown/Black",
@@ -200,7 +200,7 @@
     "control": "Calcified Soft Tissue or Third Trimester Placenta"
   },
   {
-    "image": "WarthinStarry",
+    "image": "histo_images/WarthinStarry.webp",
     "stain_id": "Warthin-Starry",
     "demonstrating": "Spirochetes and Helicobacter pylori",
     "color": "Black",
@@ -208,7 +208,7 @@
     "control": "Tissue with Spirochetes or Stomach containing Helicobacter pylori"
   },
   {
-    "image": "ZNF",
+    "image": "histo_images/ZNF.webp",
     "stain_id": "Ziehl Neelsen/Fite",
     "demonstrating": "Acid Fast Bacilli",
     "color": "Red",

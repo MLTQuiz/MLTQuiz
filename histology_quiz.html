@@ -151,7 +151,6 @@
         let imageDatabase = [];
         let currentItem = null;
 
-        // -------------------- LOAD JSON --------------------
         fetch("histologyImageDatabase.json")
             .then(res => res.json())
             .then(data => {
@@ -160,8 +159,6 @@
             })
             .catch(err => console.error("Error loading JSON:", err));
 
-
-        // -------------------- LOAD NEW QUESTION --------------------
         function nextStain() {
             clearInputs();
 
@@ -178,8 +175,6 @@
             document.getElementById("quizImage").src = currentItem.image;
         }
 
-
-        // -------------------- CLEAR INPUTS --------------------
         function clearInputs() {
             const fields = ["stain_id", "demonstrating", "color", "principle", "control"];
 
@@ -191,8 +186,6 @@
             document.getElementById("feedback").textContent = "";
         }
 
-
-        // -------------------- NORMALIZE TEXT --------------------
         function normalize(str) {
             return str
                 .toLowerCase()
@@ -202,8 +195,6 @@
                 .replace(/\s+/g, " ");
         }
 
-
-        // -------------------- SIMILARITY FUNCTION --------------------
         function similarity(a, b) {
             const matrix = [];
 
@@ -236,50 +227,68 @@
             return 1 - distance / Math.max(lenA, lenB);
         }
 
-        // -------------------- CHECK SINGLE FIELD --------------------
         function checkField(field, correctValue) {
-            const inputEl = document.getElementById(field);
-            const fbEl = document.getElementById("fb_" + field);
+    const inputEl = document.getElementById(field);
+    const fbEl = document.getElementById("fb_" + field);
 
-            const userAnswer = normalize(inputEl.value);
+    const userAnswer = normalize(inputEl.value);
 
-            const correctAnswers = Array.isArray(correctValue)
-                ? correctValue.map(a => normalize(a))
-                : [normalize(correctValue)];
+    const correctAnswers = Array.isArray(correctValue)
+        ? correctValue.map(a => normalize(a))
+        : [normalize(correctValue)];
 
-            let isCorrect = false;
-            let isClose = false;
-            let bestMatch = correctAnswers[0];
+    let isCorrect = false;
+    let isClose = false;
+    let bestMatch = correctAnswers[0];
 
-            for (let answer of correctAnswers) {
-                const score = similarity(userAnswer, answer);
-                if (userAnswer === answer) {
-                    isCorrect = true;
-                    bestMatch = answer;
-                    break;
-                } else if (score > 0.8) {
-                    isCorrect = true;
-                    isClose = true;
-                    bestMatch = answer;
-                    break;
-                }
-            }
-
-            if (isCorrect) {
-                fbEl.textContent = isClose
-                    ? `✔ Close enough! Correct: ${bestMatch}`
-                    : `✔ Correct: ${bestMatch}`;
-                fbEl.style.color = "green";
-                return true;
-            } else {
-                // If not correct, show correct answer
-                fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
-                fbEl.style.color = "red";
-                return false;
+    if (field === "stain_id") {
+        for (let answer of correctAnswers) {
+            if (userAnswer === answer) {
+                isCorrect = true;
+                bestMatch = answer;
+                break;
             }
         }
 
-        // -------------------- CHECK ALL ANSWERS --------------------
+        if (isCorrect) {
+            fbEl.textContent = `✔ Correct: ${bestMatch}`;
+            fbEl.style.color = "green";
+            return true;
+        } else {
+            fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
+            fbEl.style.color = "red";
+            return false;
+        }
+    }
+
+    for (let answer of correctAnswers) {
+        const score = similarity(userAnswer, answer);
+
+        if (userAnswer === answer) {
+            isCorrect = true;
+            bestMatch = answer;
+            break;
+        } else if (score > 0.8) {
+            isCorrect = true;
+            isClose = true;
+            bestMatch = answer;
+            break;
+        }
+    }
+
+    if (isCorrect) {
+        fbEl.textContent = isClose
+            ? `✔ Close enough! Correct: ${bestMatch}`
+            : `✔ Correct: ${bestMatch}`;
+        fbEl.style.color = "green";
+        return true;
+    } else {
+        fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
+        fbEl.style.color = "red";
+        return false;
+    }
+}
+
         function checkAnswer() {
             if (!currentItem) return;
 
@@ -304,7 +313,6 @@
             }
         }
 
-        // -------------------- SOUND SYSTEM --------------------
         let muted = true;
 
         const correctSound = new Audio();
@@ -313,7 +321,6 @@
         const muteBtn = document.getElementById("muteBtn");
         const juneCheckbox = document.getElementById("june_feedback");
 
-        // Default button state
         muteBtn.textContent = "🔇 Unmute";
 
         function updateSounds() {
@@ -359,8 +366,6 @@
 
         updateSounds();
 
-
-        // -------------------- NAVIGATION --------------------
         function Home() {
             window.location.href = "index.html";
         }

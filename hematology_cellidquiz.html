@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f5f7fa;
+            background: #ffffff;
             margin: 40px;
         }
 
@@ -342,9 +342,15 @@
             if (juneEnabled) {
                 correctSound.src = "/sounds/June - One more.wav";
                 wrongSound.src = "/sounds/June - Yell 2 (Short).wav";
+
+                document.body.style.backgroundImage = "url('June.jpg')";
+
             } else {
                 correctSound.src = "/sounds/correct.mp3";
                 wrongSound.src = "";
+
+                document.body.style.backgroundImage = "none";
+                document.body.style.backgroundColor = "#ffffff";
             }
 
             correctSound.muted = muted;

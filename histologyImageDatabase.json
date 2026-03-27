@@ -24,7 +24,7 @@
     "control": "Spinal Cord"
   },
   {
-    "image": "histo_images/Congo Red.webp",
+    "image": "histo_images/CongoRed.webp",
     "stain_id": "Congo Red",
     "demonstrating": "Amyloid",
     "color": "Red",
@@ -120,7 +120,7 @@
     "control": "Intestine/Any Tissue"
   },
   {
-    "image": "histo_images/Oil Red O.webp",
+    "image": "histo_images/OilRedO.webp",
     "stain_id": "Oil Red O",
     "demonstrating": "Neutral Fats",
     "color": "Red",

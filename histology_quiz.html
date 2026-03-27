@@ -31,6 +31,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            font-size: large;
         }
 
         label {
@@ -47,6 +48,10 @@
         .question {
             font-size: 24px;
             font-weight: bold;
+        }
+
+        .large-textbox {
+            font-size: large;
         }
 
         button {
@@ -105,20 +110,20 @@
         <div class="category">
             <span class="question">Answer the following questions. Spelling counts!</span><br />
             <img id="quizImage" src="" alt="Good luck!" /><br />
-            <label>What stain is this?</label><br />
-            <input type="text" id="stain_id"></input>
+            <br /><label >What stain is this?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="stain_id"></input><br />
             <span id="fb_stain_id"></span><br />
-            <label>What is being demonstrated?</label><br />
-            <input type="text" id="demonstrating"></input>
+            <br /><label>What is being demonstrated?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="demonstrating"></input><br />
             <span id="fb_demonstrating"></span><br />
-            <label>In what color?</label><br />
-            <input type="text" id="color"></input>
+            <br /><label>In what color?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="color"></input><br />
             <span id="fb_color"></span><br />
-            <label>What is the principle?</label><br />
-            <input type="text" id="principle"></input>
+            <br /><label>What is the principle?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="principle"></input><br />
             <span id="fb_principle"></span><br />
-            <label>What is used as a control?</label><br />
-            <input type="text" id="control">
+            <br /><label>What is used as a control?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="control"></input><br />
             <span id="fb_control"></span></input>
             <div id="answerOptions" style="margin-top: 15px"></div>
             <div id="feedback" style="margin-top: 10px; font-weight: bold"></div><br />
@@ -263,7 +268,7 @@
             if (isCorrect) {
                 fbEl.textContent = isClose
                     ? `✔ Close enough! Correct: ${bestMatch}`
-                    : `✔ Correct ${bestMatch}`;
+                    : `✔ Correct: ${bestMatch}`;
                 fbEl.style.color = "green";
                 return true;
             } else {

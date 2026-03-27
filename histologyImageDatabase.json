@@ -1,6 +1,86 @@
 [
   {
-    "image": "H&E",
+    "image": "AB",
+    "stain_id": "Alcian Blue",
+    "demonstrating": "Acid Mucins",
+    "color": "Turquoise",
+    "principle": "Ionic Bonding",
+    "control": "Intesting"
+  },
+  {
+    "image": "BielschowskyPAS",
+    "stain_id": "Bielschowsky-Periodic Acid Schiff",
+    "demonstrating": "Neurofibrillary plaques and tangles",
+    "color": "Black",
+    "principle": "Argyrophilic Silver Impregnation",
+    "control": "CNS Tissue"
+  },
+  {
+    "image": "CEV",
+    "stain_id": "Cresyl Echt Violet",
+    "demonstrating": "Nissl Substance",
+    "color": "Purple",
+    "principle": "Ionic Bonding",
+    "control": "Spinal Cord"
+  },
+  {
+    "image": "Congo Red",
+    "stain_id": "Congo Red",
+    "demonstrating": "Amyloid",
+    "color": "Red",
+    "principle": "Hydrogen Bonding",
+    "control": "Tissue with Amyloid"
+  },
+  {
+    "image": "Fontana",
+    "stain_id": "Fontana Masson",
+    "demonstrating": "Melanin/Argentaffin Granules",
+    "color": "Brown/Black",
+    "principle": "Argentaffin Silver Impregnation",
+    "control": "Skin with melanin, Intestine with Argentaffin"
+  },
+  {
+    "image": "Giemsa",
+    "stain_id": "Giemsa",
+    "demonstrating": "Helicobacter pylori",
+    "color": "Dark blue",
+    "principle": "Polychromasia",
+    "control": "Stomach with Helicobacter pylori"
+  },
+  {
+    "image": "GnS1",
+    "stain_id": "Gordon and Sweets",
+    "demonstrating": "Reticulin",
+    "color": "Black",
+    "principle": "Argyrophilic Silver Impregnation",
+    "control": "Liver"
+  },
+  {
+    "image": "GnS2",
+    "stain_id": "Gordon and Sweets",
+    "demonstrating": "Reticulin",
+    "color": "Black",
+    "principle": "Argyrophilic Silver Impregnation",
+    "control": "Liver"
+  },
+  {
+    "image": "Gram",
+    "stain_id": "Gram",
+    "demonstrating": "Gram positive and Gram negative bacteria",
+    "color": "Gram positive in blue, Gram negative in red",
+    "principle": "Nature of the cell wall",
+    "control": "Tissue with both gram positive and gram negative bacteria"
+  },
+  {
+    "image": "Grocott",
+    "stain_id": "Grocott's Methenamine Silver",
+    "demonstrating": "Fungi and Pneumocystsis jirovecii",
+    "color": "Black wall, grey interior",
+    "principle": "Argentaffin Silver Impregnation",
+    "control": "Tissue with Fungi or Pneumocystsis jirovecii"
+  },
+  {
+    "image": "HnE1",
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
     "color": "Nuclei in blue, at least 3 shades of Eosin",
@@ -8,188 +88,132 @@
     "control": "Any tissue"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "HnE2",
+    "stain_id": "Hematoxylin and Eosin",
+    "demonstrating": "General relationships of cells and tissues",
+    "color": "Nuclei in blue, at least 3 shades of Eosin",
+    "principle": "Histochemical Reaction",
+    "control": "Any tissue"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "LFB",
+    "stain_id": "Luxol Fast Blue",
+    "demonstrating": "Myelin",
+    "color": "Blue",
+    "principle": "Base replacement and salt formation",
+    "control": "Spinal Cord"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "Masson1",
+    "stain_id": "Masson's Trichrome",
+    "demonstrating": "Collagen",
+    "color": "Blue",
+    "principle": "Porosity of the tissue and molecular weight of the dye",
+    "control": "Intestine/Any Tissue"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "Masson2",
+    "stain_id": "Masson's Trichrome",
+    "demonstrating": "Collagen",
+    "color": "Blue",
+    "principle": "Porosity of the tissue and molecular weight of the dye",
+    "control": "Intestine/Any Tissue"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "Oil Red O",
+    "stain_id": "Oil Red O",
+    "demonstrating": "Neutral Fats",
+    "color": "Red",
+    "principle": "Selective Solubility",
+    "control": "Any Tissue with Fat"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "PAMS1",
+    "stain_id": "Periodic Acid Methenamine Silver",
+    "demonstrating": "Basement Membrane",
+    "color": "Black",
+    "principle": "Argentaffin Silver Impregnation",
+    "control": "Kidney"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "PAMS2",
+    "stain_id": "Periodic Acid Methenamine Silver",
+    "demonstrating": "Basement Membrane",
+    "color": "Black",
+    "principle": "Argentaffin Silver Impregnation",
+    "control": "Kidney"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "PAS",
+    "stain_id": "Periodic Acid Schiff",
+    "demonstrating": "Basement Membrane",
+    "color": "Magenta",
+    "principle": "Histochemical Reaction",
+    "control": "Kidney"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "PASAB",
+    "stain_id": "Periodic Acid Schiff/Alcian Blue",
+    "demonstrating": "Acid, Neutral, and Mixed Mucins",
+    "color": "Turquoise, Magenta, Purple",
+    "principle": "Ionic Bonding and Histochemical Reaction",
+    "control": "Intestine"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "PPB",
+    "stain_id": "Perl's Prussian Blue",
+    "demonstrating": "Hemosiderin",
+    "color": "Blue",
+    "principle": "Histochemical Reaction",
+    "control": "Spleen"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "Toluidine",
+    "stain_id": "Toluidine Blue",
+    "demonstrating": "Mast Cell Granules",
+    "color": "Deep Violet",
+    "principle": "Metachromasia",
+    "control": "Tissue with Mast Cells"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "Verhoeff1",
+    "stain_id": "Verhoeff",
+    "demonstrating": "Elastic Fibres",
+    "color": "Black",
+    "principle": "Van der Waals forces and Hydrogen Bonding",
+    "control": "Artery"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "Verhoeff2",
+    "stain_id": "Verhoeff",
+    "demonstrating": "Elastic Fibres",
+    "color": "Black",
+    "principle": "Van der Waals forces and Hydrogen Bonding",
+    "control": "Artery"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "Vonkossa",
+    "stain_id": "Von Kossa",
+    "demonstrating": "Calcium",
+    "color": "Brown/Black",
+    "principle": "Silver Substitution and Argyrophilic Reduction",
+    "control": "Calcified Soft Tissue or Third Trimester Placenta"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "WarthinStarry",
+    "stain_id": "Warthin-Starry",
+    "demonstrating": "Spirochetes and Helicobacter pylori",
+    "color": "Black",
+    "principle": "Argyrophilic Silver Impregnation",
+    "control": "Tissue with Spirochetes or Stomach containing Helicobacter pylori"
   },
   {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
-  },
-  {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
-  },
-  {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
-  },
-  {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
-  },
-  {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
-  },
-  {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
-  },
-  {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
-  },
-  {
-    "image": "",
-    "stain_id": "",
-    "demonstrating": "",
-    "color": "",
-    "principle": "",
-    "control": ""
+    "image": "ZNF",
+    "stain_id": "Ziehl Neelsen/Fite",
+    "demonstrating": "Acid Fast Bacilli",
+    "color": "Red",
+    "principle": "Nature of the cell wall",
+    "control": "Tissue with Acid Fast Bacilli"
   }
 
 ]

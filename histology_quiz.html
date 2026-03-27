@@ -160,10 +160,15 @@
         function nextStain() {
             clearInputs();
 
-            if (imageDatabase.length === 0) return;
+            if (imageDatabase.length === 0) {
+                console.error("JSON not loaded or empty");
+                return;
+            }
 
             const randomIndex = Math.floor(Math.random() * imageDatabase.length);
             currentItem = imageDatabase[randomIndex];
+
+            console.log("Loaded item:", currentItem); // 🔥 DEBUG
 
             document.getElementById("quizImage").src = currentItem.image;
         }

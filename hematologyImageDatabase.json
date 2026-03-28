@@ -27,7 +27,7 @@
 
   "wbc_normal": {
     "Segmented_Neutrophil": { "count": 26, "code": "sn" },
-    "Lymphocyte": { "count": 37, "code": "ly" },
+    "Lymphocyte": { "count": 36, "code": "ly" },
     "Monocyte": { "count": 18, "code": "mo" },
     "Eosinophil": { "count": 30, "code": "eo" },
     "Basophil": { "count": 29, "code": "ba" },

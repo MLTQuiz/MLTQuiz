@@ -110,22 +110,27 @@
         <div class="category">
             <span class="question">Answer the following questions. Spelling counts!</span><br />
             <img id="quizImage" src="" alt="Good luck!" /><br />
+            
             <br /><label>What stain is this?</label>
             <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="stain_id"></input><br />
             <span id="fb_stain_id"></span><br />
+            
             <br /><label>What is being demonstrated?</label>
-            <input type="text" style="width: 500px; height: 20px;" class="large-textbox"
-                id="demonstrating"></input><br />
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="demonstrating"></input><br />
             <span id="fb_demonstrating"></span><br />
+            
             <br /><label>In what color?</label>
             <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="color"></input><br />
             <span id="fb_color"></span><br />
+            
             <br /><label>What is the principle?</label>
             <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="principle"></input><br />
             <span id="fb_principle"></span><br />
+            
             <br /><label>What is used as a control?</label>
             <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="control"></input><br />
             <span id="fb_control"></span></input>
+            
             <div id="answerOptions" style="margin-top: 15px"></div>
             <div id="feedback" style="margin-top: 10px; font-weight: bold"></div><br />
             <button onclick="checkAnswer()">Check Answer</button>
@@ -171,7 +176,7 @@
             const randomIndex = Math.floor(Math.random() * imageDatabase.length);
             currentItem = imageDatabase[randomIndex];
 
-            console.log("Loaded item:", currentItem); // 🔥 DEBUG
+            console.log("Loaded item:", currentItem);
 
             document.getElementById("quizImage").src = currentItem.image;
         }

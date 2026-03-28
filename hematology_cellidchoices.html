@@ -79,7 +79,6 @@
             margin-left: 50px;
         }
 
-        /* 🔥 Scroll menu styling */
         #scrollMenu {
             max-height: 300px;
             overflow-y: auto;
@@ -142,7 +141,6 @@
             WBC Maturation Stages
         </label>
 
-        <!-- 🔥 NEW SCROLL MENU -->
         <hr>
         <h3>Or select individual cells:</h3>
         <div id="scrollMenu"></div>
@@ -167,20 +165,16 @@
             const groupParents = document.querySelectorAll(".group-parent");
             const children = document.querySelectorAll(".child");
 
-            /* 🔥 CLEAR SCROLL MENU */
             function clearScrollMenuSelection() {
                 document.querySelectorAll("#scrollMenu input")
                     .forEach(cb => cb.checked = false);
             }
 
-            /* 🔥 CLEAR CATEGORY SYSTEM */
             function clearCategorySelection() {
                 allCells.checked = false;
                 groupParents.forEach(p => p.checked = false);
                 children.forEach(c => c.checked = false);
             }
-
-            /* 🔥 ORIGINAL LOGIC + HOOKS */
 
             allCells.addEventListener("change", () => {
 
@@ -222,7 +216,6 @@
                 allCells.checked = [...groupParents].every(p => p.checked);
             }
 
-            /* 🔥 SCROLL MENU BUILD */
             let imageDatabase = {};
 
             fetch("hematologyImageDatabase.json")
@@ -258,7 +251,6 @@
                         cb.type = "checkbox";
                         cb.value = subtype;
 
-                        /* 🔥 CLEAR CATEGORY SYSTEM */
                         cb.addEventListener("change", () => {
                             clearCategorySelection();
                         });
@@ -270,7 +262,6 @@
                 });
             }
 
-            /* 🔥 UPDATED START QUIZ */
             function startQuiz() {
 
                 const selectedCategories = [...document.querySelectorAll('.child:checked')]

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hematology Cell Quiz</title>
     <style>
-
         body {
             font-family: Arial, sans-serif;
             background: #ffffff;
@@ -91,7 +90,6 @@
         #answerOptions input[type="radio"] {
             margin-right: 8px;
         }
-
     </style>
 </head>
 
@@ -135,7 +133,6 @@
         let selectedSubtypes = JSON.parse(localStorage.getItem("quizSubtypes") || "[]");
         let hardMode = JSON.parse(localStorage.getItem("hardMode") || "false");
 
-        /* 🔥 SAFETY CHECK */
         if (
             (quizMode === "categories" && selectedCategories.length === 0 && !hardMode) ||
             (quizMode === "subtypes" && selectedSubtypes.length === 0 && !hardMode)
@@ -148,7 +145,6 @@
         let currentQuestion = 0;
         let imageDatabase = {};
 
-        /* 🔊 SOUND SETUP */
         let muted = true;
 
         const correctSound = new Audio();
@@ -213,7 +209,6 @@
 
         updateSounds();
 
-        /* 🔽 LOAD DATABASE */
         fetch("hematologyImageDatabase.json")
             .then(res => res.json())
             .then(db => {
@@ -222,7 +217,6 @@
                 showNextImage();
             });
 
-        /* 🔧 BUILD QUIZ POOL */
         function buildQuizPool() {
 
             quizPool = [];
@@ -236,7 +230,6 @@
                 wbc_inclusions: "w2"
             };
 
-            /* 🔥 HARD MODE (same for both modes) */
             if (hardMode) {
 
                 const include = imageDatabase.hard_mode.include || [];
@@ -260,7 +253,8 @@
 
                             quizPool.push({
                                 path: `hema_images/${prefix}${code}${num}.webp`,
-                                subtype
+                                subtype,
+                                category: cat
                             });
                         }
                     });
@@ -275,7 +269,8 @@
 
                         quizPool.push({
                             path: `hema_images/${prefix}${code}${num}.webp`,
-                            subtype
+                            subtype,
+                            category: "hard_mode"
                         });
                     }
                 });
@@ -284,7 +279,6 @@
                 return;
             }
 
-            /* 🔥 MODE SWITCH */
             if (quizMode === "subtypes") {
 
                 Object.keys(imageDatabase).forEach(cat => {
@@ -305,14 +299,14 @@
 
                             quizPool.push({
                                 path: `hema_images/${finalPrefix}${code}${num}.webp`,
-                                subtype
+                                subtype,
+                                category: cat
                             });
                         }
                     });
                 });
 
             } else {
-                /* 🔥 ORIGINAL CATEGORY MODE (RESTORED) */
 
                 selectedCategories.forEach(cat => {
 
@@ -330,7 +324,8 @@
 
                             quizPool.push({
                                 path: `hema_images/${prefix}${code}${num}.webp`,
-                                subtype
+                                subtype,
+                                category: cat
                             });
                         }
                     });
@@ -340,7 +335,6 @@
             shuffleArray(quizPool);
         }
 
-        /* 🧠 QUIZ DISPLAY */
         function showNextImage() {
 
             if (quizPool.length === 0) return;
@@ -367,16 +361,13 @@
                 answers = selectedSubtypes;
             }
             else {
-                /* 🔥 CATEGORY MODE ANSWERS */
-                answers = [];
+                const currentCategory = item.category;
 
-                selectedCategories.forEach(cat => {
-                    if (!imageDatabase[cat]) return;
-
-                    answers.push(...Object.keys(imageDatabase[cat]));
-                });
-
-                answers = [...new Set(answers)];
+                if (imageDatabase[currentCategory]) {
+                    answers = Object.keys(imageDatabase[currentCategory]);
+                } else {
+                    answers = [];
+                }
             }
 
             answers.forEach(subtype => {
@@ -412,7 +403,6 @@
             showNextImage();
         }
 
-        /* 🔀 SHUFFLE */
         function shuffleArray(arr) {
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));

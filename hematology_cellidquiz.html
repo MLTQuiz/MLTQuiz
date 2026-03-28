@@ -5,16 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hematology Cell Quiz</title>
-
     <style>
+
         body {
             font-family: Arial, sans-serif;
             background: #ffffff;
             margin: 40px;
-        }
-
-        h1 {
-            margin-bottom: 10px;
         }
 
         .quiz-container {
@@ -24,30 +20,22 @@
         }
 
         .category {
-            display: inline-block;
-            text-align: left;
-            width: 100%;
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            font-size: large;
-        }
-
-        label {
-            display: block;
-            margin: 6px 0;
-            cursor: pointer;
-        }
-
-        .category-title {
-            font-weight: bold;
-            font-size: 20px;
         }
 
         .question {
             font-size: 24px;
             font-weight: bold;
+        }
+
+        #quizImage {
+            margin-top: 20px;
+            max-width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 6px;
         }
 
         button {
@@ -78,46 +66,54 @@
             background: #1f55c4;
         }
 
-        #quizImage {
+        /* 🔥 Scroll menu */
+        #scrollMenu {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
             margin-top: 20px;
-            max-width: 100%;
-            height: auto;
-            border: 2px solid #ccc;
-            border-radius: 6px;
+            text-align: left;
+        }
+
+        .menu-header {
+            font-weight: bold;
+            margin-top: 10px;
         }
 
         #answerOptions label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+            display: block;
+            margin-bottom: 10px;
             cursor: pointer;
+            font-size: large;
         }
 
-        #answerOptions br {
-            display: none;
+        #answerOptions input[type="radio"] {
+            margin-right: 8px;
         }
+
     </style>
 </head>
 
 <body>
+
     <div class="quiz-container">
         <h1>Hematology Cell Identification Quiz</h1>
 
         <div class="category">
-            <span class="question">What cell is this?</span><br />
-            <img id="quizImage" src="" alt="Good luck!" /><br />
+            <div class="question">What cell is this?</div>
+            <img id="quizImage" src="" />
 
-            <div id="answerOptions" style="margin-top: 15px"></div>
-            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div>
+            <div id="answerOptions"></div>
+            <div id="feedback"></div>
 
-            <br /><br />
-            <button onclick="nextQuestion()">Next Question</button>
+            <button class="button" onclick="nextQuestion()">Next Question</button>
         </div>
 
         <hr />
         <br />
 
-        <button class="button-back" onclick="Back()">Change Cells</button><br><br>
+        <button class="button-back" onclick="changeCells()">Change Cells</button><br><br>
         <button class="button-back" onclick="Home()">Home</button><br><br>
         <button class="button-back" id="muteBtn">🔊 Mute</button>
     </div>
@@ -129,12 +125,22 @@
         Junea Noises
     </label>
 
+    </div>
+
     <script>
-        let selectedCategories = JSON.parse(
-            localStorage.getItem("quizCells") || "[]",
-        );
-        if (selectedCategories.length === 0) {
-            alert("No categories selected! Please go back and choose cells.");
+
+        let quizMode = localStorage.getItem("quizMode");
+
+        let selectedCategories = JSON.parse(localStorage.getItem("quizCells") || "[]");
+        let selectedSubtypes = JSON.parse(localStorage.getItem("quizSubtypes") || "[]");
+        let hardMode = JSON.parse(localStorage.getItem("hardMode") || "false");
+
+        /* 🔥 SAFETY CHECK */
+        if (
+            (quizMode === "categories" && selectedCategories.length === 0 && !hardMode) ||
+            (quizMode === "subtypes" && selectedSubtypes.length === 0 && !hardMode)
+        ) {
+            alert("No cells selected!");
             window.location.href = "hematology_cellidchoices.html";
         }
 
@@ -142,190 +148,7 @@
         let currentQuestion = 0;
         let imageDatabase = {};
 
-        fetch("hematologyImageDatabase.json")
-            .then((res) => res.json())
-            .then((db) => {
-                imageDatabase = db;
-                buildQuizPool();
-                showNextImage();
-            })
-            .catch((err) => console.error("Error loading image database:", err));
-
-        function buildQuizPool() {
-            quizPool = [];
-
-            const categoryPrefix = {
-                rbc_morphology: "r1",
-                rbc_stages: "r2",
-                rbc_inclusions: "r3",
-                wbc_normal: "w1",
-                wbc_stages: "w2",
-                wbc_inclusions: "w3",
-            };
-
-            selectedCategories.forEach((cat) => {
-
-                if (cat === "hard_mode") {
-
-                    const included = imageDatabase.hard_mode.include || [];
-                    const customCells = imageDatabase.hard_mode.custom || {};
-
-                    const added = new Set();
-
-                    Object.keys(imageDatabase).forEach(category => {
-
-                        if (category === "hard_mode") return;
-
-                        const catData = imageDatabase[category];
-                        const prefix = categoryPrefix[category];
-
-                        Object.keys(catData).forEach(subtype => {
-
-                            if (!included.includes(subtype)) return;
-
-                            const key = category + "_" + subtype;
-                            if (added.has(key)) return;
-                            added.add(key);
-
-                            const { count, code } = catData[subtype];
-
-                            for (let i = 1; i <= count; i++) {
-                                const num = String(i).padStart(2, "0");
-
-                                quizPool.push({
-                                    path: `hema_images/${prefix}${code}${num}.webp`,
-                                    category,
-                                    subtype
-                                });
-                            }
-                        });
-                    });
-
-                    Object.keys(customCells).forEach(subtype => {
-
-                        const { count, code, prefix } = customCells[subtype];
-
-                        for (let i = 1; i <= count; i++) {
-                            const num = String(i).padStart(2, "0");
-
-                            quizPool.push({
-                                path: `hema_images/${prefix}${code}${num}.webp`,
-                                category: "hard_mode",
-                                subtype
-                            });
-                        }
-                    });
-
-                    return;
-                }
-
-                const catData = imageDatabase[cat];
-                if (!catData) return;
-
-                const prefix = categoryPrefix[cat];
-
-                Object.keys(catData).forEach(subtype => {
-                    const { count, code } = catData[subtype];
-
-                    for (let i = 1; i <= count; i++) {
-                        const num = String(i).padStart(2, "0");
-
-                        quizPool.push({
-                            path: `hema_images/${prefix}${code}${num}.webp`,
-                            category: cat,
-                            subtype: subtype
-                        });
-                    }
-                });
-            });
-
-            shuffleArray(quizPool);
-        }
-
-        function nextQuestion() {
-            showNextImage();
-        }
-
-        function getHardModeAnswers() {
-            const include = imageDatabase.hard_mode.include || [];
-            const custom = Object.keys(imageDatabase.hard_mode.custom || {});
-
-            const combined = [...include, ...custom];
-
-            const unique = [...new Set(combined)];
-
-            return unique.sort((a, b) =>
-                a.replace(/_/g, " ").localeCompare(b.replace(/_/g, " "))
-            );
-        }
-
-        function showNextImage() {
-            const imgEl = document.getElementById("quizImage");
-            const feedbackEl = document.getElementById("feedback");
-            const optionsEl = document.getElementById("answerOptions");
-
-            feedbackEl.textContent = "";
-            optionsEl.innerHTML = "";
-
-            if (currentQuestion >= quizPool.length) {
-                currentQuestion = 0;
-                shuffleArray(quizPool);
-            }
-
-            const currentItem = quizPool[currentQuestion];
-            const currentImagePath = currentItem.path;
-            imgEl.src = currentImagePath;
-
-            const correctCategory = currentItem.category;
-            const correctAnswer = currentItem.subtype;
-
-            let subtypes;
-
-            if (selectedCategories.includes("hard_mode")) {
-                subtypes = getHardModeAnswers();
-            } else {
-                subtypes = Object.keys(imageDatabase[correctCategory]);
-            }
-            subtypes.forEach((subtype) => {
-                const label = document.createElement("label");
-                label.style.display = "block";
-                label.style.marginBottom = "8px";
-                label.style.cursor = "pointer";
-
-                const radio = document.createElement("input");
-                radio.type = "radio";
-                radio.name = "answer";
-                radio.value = subtype;
-
-                radio.addEventListener("change", () => {
-                    if (radio.value === correctAnswer) {
-                        feedbackEl.textContent = "Correct! 🎉";
-                        feedbackEl.style.color = "green";
-                        playCorrect();
-
-                    } else {
-                        feedbackEl.textContent = "Try again!";
-                        feedbackEl.style.color = "red";
-                        playWrong();
-                    }
-                });
-
-                label.appendChild(radio);
-                label.appendChild(document.createTextNode(" " + subtype.replace(/_/g, " ")));
-
-                optionsEl.appendChild(label);
-            });
-
-            currentQuestion++;
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
+        /* 🔊 SOUND SETUP */
         let muted = true;
 
         const correctSound = new Audio();
@@ -334,10 +157,10 @@
         const muteBtn = document.getElementById("muteBtn");
         const juneCheckbox = document.getElementById("june_feedback");
 
-        muteBtn.textContent = "🔇 Unmute";
+        if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 
         function updateSounds() {
-            const juneEnabled = juneCheckbox.checked;
+            const juneEnabled = juneCheckbox?.checked;
 
             if (juneEnabled) {
                 correctSound.src = "sounds/June - One more.wav";
@@ -380,15 +203,224 @@
             correctSound.muted = muted;
             wrongSound.muted = muted;
 
-            muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+            if (muteBtn) {
+                muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+            }
         }
 
-        muteBtn.addEventListener("click", toggleMute);
-        juneCheckbox.addEventListener("change", updateSounds);
+        muteBtn?.addEventListener("click", toggleMute);
+        juneCheckbox?.addEventListener("change", updateSounds);
 
         updateSounds();
 
-        function Back() {
+        /* 🔽 LOAD DATABASE */
+        fetch("hematologyImageDatabase.json")
+            .then(res => res.json())
+            .then(db => {
+                imageDatabase = db;
+                buildQuizPool();
+                showNextImage();
+            });
+
+        /* 🔧 BUILD QUIZ POOL */
+        function buildQuizPool() {
+
+            quizPool = [];
+
+            const categoryPrefix = {
+                rbc_morphology: "r2",
+                rbc_stages: "r3",
+                rbc_inclusions: "r1",
+                wbc_normal: "w1",
+                wbc_stages: "w3",
+                wbc_inclusions: "w2"
+            };
+
+            /* 🔥 HARD MODE (same for both modes) */
+            if (hardMode) {
+
+                const include = imageDatabase.hard_mode.include || [];
+                const custom = imageDatabase.hard_mode.custom || {};
+
+                Object.keys(imageDatabase).forEach(cat => {
+
+                    if (cat === "hard_mode") return;
+
+                    const catData = imageDatabase[cat];
+
+                    Object.keys(catData).forEach(subtype => {
+
+                        if (!include.includes(subtype)) return;
+
+                        const { count, code } = catData[subtype];
+                        const prefix = categoryPrefix[cat];
+
+                        for (let i = 1; i <= count; i++) {
+                            const num = String(i).padStart(2, "0");
+
+                            quizPool.push({
+                                path: `hema_images/${prefix}${code}${num}.webp`,
+                                subtype
+                            });
+                        }
+                    });
+                });
+
+                Object.keys(custom).forEach(subtype => {
+
+                    const { count, code, prefix } = custom[subtype];
+
+                    for (let i = 1; i <= count; i++) {
+                        const num = String(i).padStart(2, "0");
+
+                        quizPool.push({
+                            path: `hema_images/${prefix}${code}${num}.webp`,
+                            subtype
+                        });
+                    }
+                });
+
+                shuffleArray(quizPool);
+                return;
+            }
+
+            /* 🔥 MODE SWITCH */
+            if (quizMode === "subtypes") {
+
+                Object.keys(imageDatabase).forEach(cat => {
+
+                    if (cat === "hard_mode") return;
+
+                    const catData = imageDatabase[cat];
+
+                    Object.keys(catData).forEach(subtype => {
+
+                        if (!selectedSubtypes.includes(subtype)) return;
+
+                        const { count, code, prefix } = catData[subtype];
+                        const finalPrefix = prefix || categoryPrefix[cat];
+
+                        for (let i = 1; i <= count; i++) {
+                            const num = String(i).padStart(2, "0");
+
+                            quizPool.push({
+                                path: `hema_images/${finalPrefix}${code}${num}.webp`,
+                                subtype
+                            });
+                        }
+                    });
+                });
+
+            } else {
+                /* 🔥 ORIGINAL CATEGORY MODE (RESTORED) */
+
+                selectedCategories.forEach(cat => {
+
+                    const catData = imageDatabase[cat];
+                    if (!catData) return;
+
+                    const prefix = categoryPrefix[cat];
+
+                    Object.keys(catData).forEach(subtype => {
+
+                        const { count, code } = catData[subtype];
+
+                        for (let i = 1; i <= count; i++) {
+                            const num = String(i).padStart(2, "0");
+
+                            quizPool.push({
+                                path: `hema_images/${prefix}${code}${num}.webp`,
+                                subtype
+                            });
+                        }
+                    });
+                });
+            }
+
+            shuffleArray(quizPool);
+        }
+
+        /* 🧠 QUIZ DISPLAY */
+        function showNextImage() {
+
+            if (quizPool.length === 0) return;
+
+            const item = quizPool[currentQuestion % quizPool.length];
+
+            document.getElementById("quizImage").src = item.path;
+
+            const optionsEl = document.getElementById("answerOptions");
+            const feedbackEl = document.getElementById("feedback");
+
+            optionsEl.innerHTML = "";
+            feedbackEl.textContent = "";
+
+            let answers;
+
+            if (hardMode) {
+                answers = [...new Set([
+                    ...imageDatabase.hard_mode.include,
+                    ...Object.keys(imageDatabase.hard_mode.custom || {})
+                ])];
+            }
+            else if (quizMode === "subtypes") {
+                answers = selectedSubtypes;
+            }
+            else {
+                /* 🔥 CATEGORY MODE ANSWERS */
+                answers = [];
+
+                selectedCategories.forEach(cat => {
+                    if (!imageDatabase[cat]) return;
+
+                    answers.push(...Object.keys(imageDatabase[cat]));
+                });
+
+                answers = [...new Set(answers)];
+            }
+
+            answers.forEach(subtype => {
+
+                const label = document.createElement("label");
+
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "answer";
+                radio.value = subtype;
+
+                radio.addEventListener("change", () => {
+                    if (radio.value === item.subtype) {
+                        feedbackEl.textContent = "Correct! 🎉";
+                        feedbackEl.style.color = "green";
+                        playCorrect();
+                    } else {
+                        feedbackEl.textContent = "Try again!";
+                        feedbackEl.style.color = "red";
+                        playWrong();
+                    }
+                });
+
+                label.appendChild(radio);
+                label.append(" " + subtype.replace(/_/g, " "));
+                optionsEl.appendChild(label);
+            });
+
+            currentQuestion++;
+        }
+
+        function nextQuestion() {
+            showNextImage();
+        }
+
+        /* 🔀 SHUFFLE */
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        function changeCells() {
             window.location.href = "hematology_cellidchoices.html";
         }
 
@@ -397,6 +429,7 @@
         }
 
     </script>
+
 </body>
 
 </html>

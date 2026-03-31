@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chemistry Correlations Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: large;
+            background: #ffffff;
+            margin: 40px;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .category {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #quizImage {
+            margin-top: 20px;
+            max-width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            font-size: 22px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f55c4;
+        }
+
+        .button-back {
+            font-size: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        .button-back:hover {
+            background: #1f55c4;
+        }
+
+        .large-textarea {
+            font-size: large;
+            font-family: Arial, sans-serif;
+            width: 500px;
+            height: 100px;
+            resize: none;
+        }
+
+        td:nth-child(2) {
+            white-space: nowrap;
+        }
+
+        td:nth-child(1) {
+            white-space: nowrap;
+        }
+
+        .menu-header {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        #answerOptions label {
+            display: block;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #answerOptions input[type="radio"] {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-container">
+        <h1>Chemistry Correlations Quiz</h1>
+
+        <div class="category">
+            <div class="question">What disease state correlates best with these results?<br>You'll need to calculate the
+                Anion/Osmo Gap.<br>Use the text box below to
+                work through the case study!</div>
+
+            <div id="labTableContainer"></div><br />
+
+            <textarea class="large-textarea" placeholder="Type your thoughts here..."></textarea><br />
+            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div><br />
+            <button class="button" onclick="revealAnswer()">Reveal Answer</button><br /><br />
+            <button class="button" onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <hr />
+        <br />
+
+        <button class="button-back" onclick="Back()">Back</button><br><br>
+        <button class="button-back" onclick="Home()">Home</button><br><br>
+        <button class="button-back" id="muteBtn">🔊 Mute</button>
+    </div>
+
+    <div style="height:2000px;"></div>
+
+    <label class="tab2">
+        <input type="checkbox" id="june_feedback">
+        Junea Noises
+    </label>
+
+    </div>
+
+    <script>
+        let showAnionGap = false;
+        let chemRefs = {};
+        let chemData = {};
+        let currentCase = null;
+
+        function similarity(a, b) {
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+
+            const longer = a.length > b.length ? a : b;
+            const shorter = a.length > b.length ? b : a;
+
+            const longerLength = longer.length;
+            if (longerLength === 0) return 1;
+
+            return (longerLength - editDistance(longer, shorter)) / longerLength;
+        }
+
+        function editDistance(a, b) {
+            const matrix = [];
+
+            for (let i = 0; i <= b.length; i++) {
+                matrix[i] = [i];
+            }
+
+            for (let j = 0; j <= a.length; j++) {
+                matrix[0][j] = j;
+            }
+
+            for (let i = 1; i <= b.length; i++) {
+                for (let j = 1; j <= a.length; j++) {
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                        matrix[i][j] = matrix[i - 1][j - 1];
+                    } else {
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j - 1] + 1,
+                            matrix[i][j - 1] + 1,
+                            matrix[i - 1][j] + 1
+                        );
+                    }
+                }
+            }
+
+            return matrix[b.length][a.length];
+        }
+
+        async function loadData() {
+            const refRes = await fetch("chemRefRanges.json");
+            const corrRes = await fetch("chemCorrelations.json");
+
+            chemRefs = await refRes.json();
+            chemData = await corrRes.json();
+
+            nextQuestion();
+        }
+
+        function getRandom(min, max, decimals) {
+            const value = Math.random() * (max - min) + min;
+            return Number(value.toFixed(decimals));
+        }
+
+        function generateCase() {
+            const diseases = Object.keys(chemData);
+            const disease = diseases[Math.floor(Math.random() * diseases.length)];
+            const analytes = chemData[disease];
+
+            let results = {};
+            const analyteOrder = Object.keys(analytes);
+
+            for (let key of analyteOrder) {
+                if (["Na", "Cl", "TCO2", "Anion Gap"].includes(key)) continue;
+
+                const a = analytes[key];
+
+                if (a.value !== undefined) {
+                    results[key] = {
+                        value: a.value,
+                        units: a.units || ""
+                    };
+                } else {
+                    results[key] = {
+                        value: getRandom(parseFloat(a.lower), parseFloat(a.upper), parseInt(a.decimal)),
+                        units: a.units
+                    };
+                }
+            }
+
+            if (analytes["Anion Gap"]) {
+                const agData = analytes["Anion Gap"];
+
+                const AG = getRandom(parseFloat(agData.lower), parseFloat(agData.upper), parseInt(agData.decimal));
+
+                const clData = analytes["Cl"];
+                const tco2Data = analytes["TCO2"];
+
+                const Cl = getRandom(parseFloat(clData.lower), parseFloat(clData.upper), parseInt(clData.decimal));
+                const TCO2 = getRandom(parseFloat(tco2Data.lower), parseFloat(tco2Data.upper), parseInt(tco2Data.decimal));
+
+                const Na = AG + Cl + TCO2;
+
+                const naData = analytes["Na"];
+
+                results["Na"] = {
+                    value: Number(Na.toFixed(parseInt(naData.decimal))),
+                    units: naData.units
+                };
+
+                results["Cl"] = {
+                    value: Cl,
+                    units: clData.units
+                };
+
+                results["TCO2"] = {
+                    value: TCO2,
+                    units: tco2Data.units
+                };
+
+                results["Anion Gap"] = {
+                    value: AG,
+                    units: agData.units
+                };
+            }
+
+            return { disease, results, analytes, analyteOrder };
+        }
+
+        function getReferenceRange(analyte) {
+            return chemRefs["Reference Ranges"][analyte] || "";
+        }
+
+        function formatReferenceText(text) {
+            if (!text) return "";
+
+            return text
+                .replace(/\n/g, "<br>")
+                .replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;");
+        }
+
+        function renderTable(caseData) {
+            const container = document.getElementById("labTableContainer");
+
+            let html = `
+            <table border="1" style="width:100%; border-collapse: collapse; margin-top:20px;">
+                <tr>
+                    <th>Analyte</th>
+                    <th>Result</th>
+                    <th>Reference Range</th>
+                </tr>
+                `;
+
+            for (let key of caseData.analyteOrder) {
+                const r = caseData.results[key] || { value: "", units: "" };
+                const ref = formatReferenceText(getReferenceRange(key));
+
+                html += `
+        <tr>
+            <td>${key}</td>
+<td style="white-space: nowrap;">
+    ${key === "Anion Gap" && !showAnionGap
+                        ? `__ ${r.units || ""}`
+                        : `${r.value}${r.units ? " " + r.units : ""}`
+                    }
+</td>
+            <td>${ref}</td>
+        </tr>
+    `;
+            }
+
+            html += "</table>";
+
+            container.innerHTML = html;
+        }
+
+        function revealAnswer() {
+            const feedback = document.getElementById("feedback");
+
+            if (!currentCase) return;
+
+            const userInput = document.querySelector(".large-textarea").value.trim().toLowerCase();
+            const correctAnswer = currentCase.disease.toLowerCase();
+
+            const score = similarity(userInput, correctAnswer);
+
+            let color = "orange";
+
+            if (score > 0.6) {
+                color = "green";
+            }
+
+            feedback.innerHTML = `
+        <span style="color:${color};">
+            Answer: ${currentCase.disease}
+        </span>
+    `;
+
+            showAnionGap = true;
+            renderTable(currentCase);
+        }
+
+        function nextQuestion() {
+            currentCase = generateCase();
+
+            showAnionGap = false;
+
+            renderTable(currentCase);
+
+            document.getElementById("feedback").textContent = "";
+        }
+
+        loadData();
+
+        let muted = true;
+
+        const correctSound = new Audio();
+        const wrongSound = new Audio();
+
+        const muteBtn = document.getElementById("muteBtn");
+        const juneCheckbox = document.getElementById("june_feedback");
+
+        if (muteBtn) muteBtn.textContent = "🔇 Unmute";
+
+        function updateSounds() {
+            const juneEnabled = juneCheckbox?.checked;
+
+            if (juneEnabled) {
+                correctSound.src = "sounds/June - One more.wav";
+                wrongSound.src = "sounds/June - Yell 2 (Short).wav";
+
+                document.body.style.backgroundImage = "url('June.jpg')";
+                document.body.style.backgroundSize = "33.33vw auto";
+                document.body.style.backgroundRepeat = "repeat";
+                document.body.style.backgroundPosition = "top left";
+
+            } else {
+                correctSound.src = "sounds/correct.mp3";
+                wrongSound.src = "";
+
+                document.body.style.backgroundImage = "none";
+                document.body.style.backgroundColor = "#ffffff";
+            }
+
+            correctSound.muted = muted;
+            wrongSound.muted = muted;
+        }
+
+        function playCorrect() {
+            if (!muted && correctSound.src) {
+                correctSound.currentTime = 0;
+                correctSound.play().catch(() => { });
+            }
+        }
+
+        function playWrong() {
+            if (!muted && wrongSound.src) {
+                wrongSound.currentTime = 0;
+                wrongSound.play().catch(() => { });
+            }
+        }
+
+        function toggleMute() {
+            muted = !muted;
+
+            correctSound.muted = muted;
+            wrongSound.muted = muted;
+
+            if (muteBtn) {
+                muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
+            }
+        }
+
+        muteBtn?.addEventListener("click", toggleMute);
+        juneCheckbox?.addEventListener("change", updateSounds);
+
+        updateSounds();
+
+        function Back() {
+            window.location.href = "chemistry_choice.html";
+        }
+
+        function Home() {
+            window.location.href = "index.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

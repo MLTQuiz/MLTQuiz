@@ -329,6 +329,15 @@
     "PSA": {
       "units": "μg/L",
       "note": "• 0.0 - 3.5 μg/L for patients 50-59 years of age.\n• 0.0 - 4.5 μg/L for patients 60-69 years of age.\n• 0.0 - 6.5 μg/L for patients 70-150 years of age."
+    },
+    "PT": {
+      "units": "sec",
+      "ref": { "low": 11.5, "high": 14.5 }
+    },
+    "INR": {
+      "units": "",
+      "ref": { "low": 0.8, "high": 1.2 },
+      "critical": { "high": 4.0 }
     }
   }
 }

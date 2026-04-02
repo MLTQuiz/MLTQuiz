@@ -75,7 +75,7 @@
             "ALT": {"lower": "8", "upper": "45", "units": "U/L", "decimal": "0"},
             "ALP": {"lower": "30", "upper": "110", "units": "U/L", "decimal": "0"},
             "GGT": {"lower": "10", "upper": "35", "units": "U/L", "decimal": "0"},
-            "Cock Size": {"value": "Above linearity ;)", "units": "", "decimal": ""}
+            "Age": {"value": "Above linearity ;)", "units": "", "decimal": ""}
         },
         "Nothing clinically significant": {
             "Na": {"lower": "135", "upper": "146", "units": "mmol/L", "decimal": "0"},

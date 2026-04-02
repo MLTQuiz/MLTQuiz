@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chemistry Correlations Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .category {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+
+        .category-title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        button {
+            font-size: 22px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f55c4;
+        }
+
+        backbutton {
+            font-size: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        backbutton:hover {
+            background: #1f55c4;
+        }
+
+        .tab1 {
+            margin-left: 25px;
+        }
+
+        .tab2 {
+            margin-left: 50px;
+        }
+
+        #scrollMenu {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            background: white;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Chemistry Correlations Quiz</h1>
+    <h2>Which topcis would you like to be quizzed on?</h2>
+
+    <div class="category">
+        <div id="scrollMenu"></div>
+
+        <br>
+        <button onclick="startQuiz()">Begin Quiz</button>
+
+        <hr><br>
+        <backbutton onclick="Back()">Back</backbutton><br><br>
+        <backbutton onclick="Home()">Home</backbutton>
+
+        <script>
+
+
+            let chemData = {};
+
+            fetch("chemCorrelations.json")
+                .then(res => res.json())
+                .then(db => {
+                    chemData = db;
+                    buildScrollMenu();
+                });
+
+            function buildScrollMenu() {
+                const menu = document.getElementById("scrollMenu");
+
+                Object.keys(chemData).forEach(topic => {
+
+                    // Topic container
+                    const topicDiv = document.createElement("div");
+                    topicDiv.style.marginTop = "15px";
+
+                    // Topic checkbox (🔥 NEW)
+                    const topicLabel = document.createElement("label");
+
+                    const topicCb = document.createElement("input");
+                    topicCb.type = "checkbox";
+                    topicCb.classList.add("topic-checkbox");
+
+                    topicLabel.appendChild(topicCb);
+                    topicLabel.append(" " + topic.toUpperCase());
+                    topicLabel.style.fontWeight = "bold";
+
+                    topicDiv.appendChild(topicLabel);
+
+                    const diseases = chemData[topic];
+
+                    Object.keys(diseases).forEach(disease => {
+
+                        const label = document.createElement("label");
+                        label.style.display = "block";
+                        label.style.marginLeft = "20px";
+
+                        const cb = document.createElement("input");
+                        cb.type = "checkbox";
+                        cb.value = `${topic}|||${disease}`;
+
+                        // Topic → children
+                        topicCb.addEventListener("change", () => {
+                            cb.checked = topicCb.checked;
+                        });
+
+                        // Child → topic (🔥 THIS goes here)
+                        cb.addEventListener("change", () => {
+                            if (!cb.checked) topicCb.checked = false;
+                        });
+
+                        label.appendChild(cb);
+                        label.append(" " + disease);
+
+                        topicDiv.appendChild(label);
+                    });
+
+                    menu.appendChild(topicDiv);
+                });
+            }
+
+            function startQuiz() {
+
+                const selected = [...document.querySelectorAll('#scrollMenu input:checked')]
+                    .map(cb => cb.value);
+
+                if (selected.length === 0) {
+                    alert("Please select at least one topic or case.");
+                    return;
+                }
+
+                localStorage.setItem("selectedCases", JSON.stringify(selected));
+
+                window.location.href = "chemistry_correlations.html";
+            }
+
+            function Back() {
+                window.location.href = "chemistry_choices.html";
+            }
+
+            function Home() {
+                window.location.href = "index.html";
+            }
+
+        </script>
+</body>
+
+</html>

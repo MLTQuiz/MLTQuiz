@@ -194,95 +194,87 @@
 
         function getRandom(min, max, decimals) {
             const value = Math.random() * (max - min) + min;
-            return Number(value.toFixed(decimals));
+            return value.toFixed(decimals);
         }
 
         function generateCase() {
-            const diseases = Object.keys(chemData);
-            const disease = diseases[Math.floor(Math.random() * diseases.length)];
-            const analytes = chemData[disease];
+            const selectedCases = JSON.parse(localStorage.getItem("selectedCases")) || [];
+
+            let pool = [];
+
+            selectedCases.forEach(item => {
+                const [topic, disease] = item.split("|||");
+
+                if (chemData[topic] && chemData[topic][disease]) {
+                    pool.push({
+                        disease,
+                        analytes: chemData[topic][disease]
+                    });
+                }
+            });
+
+            // fallback
+            if (pool.length === 0) {
+                Object.keys(chemData).forEach(topic => {
+                    Object.keys(chemData[topic]).forEach(disease => {
+                        pool.push({
+                            disease,
+                            analytes: chemData[topic][disease]
+                        });
+                    });
+                });
+            }
+
+            const chosen = pool[Math.floor(Math.random() * pool.length)];
+            const disease = chosen.disease;
+            const analytes = chosen.analytes;
 
             let results = {};
             const analyteOrder = Object.keys(analytes);
 
             for (let key of analyteOrder) {
-                if (["Na", "Cl", "TCO2", "Anion Gap"].includes(key)) continue;
-
                 const a = analytes[key];
 
-                if (a.value !== undefined) {
+                if (a.value !== undefined && a.value !== "Calculate") {
                     results[key] = {
                         value: a.value,
                         units: a.units || ""
                     };
-                } else {
+                } else if (a.lower !== undefined) {
                     results[key] = {
-                        value: getRandom(parseFloat(a.lower), parseFloat(a.upper), parseInt(a.decimal)),
+                        value: getRandom(
+                            parseFloat(a.lower),
+                            parseFloat(a.upper),
+                            parseInt(a.decimal)
+                        ),
                         units: a.units
                     };
                 }
             }
 
+            // ✅ Calculate INR from PT
+            if (results["PT"] && analytes["INR"]) {
+                const pt = parseFloat(results["PT"].value);
 
-            if (analytes["Anion Gap"]) {
-                const agData = analytes["Anion Gap"];
-
-                const AG = getRandom(parseFloat(agData.lower), parseFloat(agData.upper), parseInt(agData.decimal));
-
-                const clData = analytes["Cl"];
-                const tco2Data = analytes["TCO2"];
-
-                const Cl = getRandom(parseFloat(clData.lower), parseFloat(clData.upper), parseInt(clData.decimal));
-                const TCO2 = getRandom(parseFloat(tco2Data.lower), parseFloat(tco2Data.upper), parseInt(tco2Data.decimal));
-
-                const Na = AG + Cl + TCO2;
-
-                const naData = analytes["Na"];
-
-                results["Na"] = {
-                    value: Number(Na.toFixed(parseInt(naData.decimal))),
-                    units: naData.units
-                };
-
-                results["Cl"] = {
-                    value: Cl,
-                    units: clData.units
-                };
-
-                results["TCO2"] = {
-                    value: TCO2,
-                    units: tco2Data.units
-                };
-
-                results["Anion Gap"] = {
-                    value: AG,
-                    units: agData.units
-                };
-            }
-
-            if (analytes["pH"] && analytes["pH"].value === "Calculate") {
-                const hco3 = results["HCO3-"]?.value;
-                const pco2 = results["pCO2"]?.value;
-
-                if (hco3 !== undefined && pco2 !== undefined) {
-                    const pH = 6.1 + Math.log10(hco3 / (0.0308 * pco2));
-
-                    results["pH"] = {
-                        value: Number(pH.toFixed(2)),
-                        units: analytes["pH"].units || ""
+                if (!isNaN(pt)) {
+                    results["INR"] = {
+                        value: (pt / 13.1).toFixed(1), // ✅ always 1 decimal
+                        units: ""
                     };
                 }
             }
 
-            if (analytes["INR"] && analytes["INR"].value === "Calculate") {
-                const pt = results["PT"]?.value;
+            // ✅ Calculate pH from HCO3- and pCO2
+            if (analytes["pH"] && analytes["pH"].value === "Calculate") {
+                const hco3 = parseFloat(results["HCO3-"]?.value);
+                const pco2 = parseFloat(results["pCO2"]?.value);
 
-                if (pt !== undefined) {
-                    const inr = pt / 13.1;
+                if (!isNaN(hco3) && !isNaN(pco2) && pco2 !== 0) {
+                    const pH = 6.1 + Math.log10(hco3 / (0.03 * pco2));
 
-                    results["INR"] = {
-                        value: Number(inr.toFixed(1)),
-                        units: analytes["INR"].units || ""
+                    results["pH"] = {
+                        value: pH.toFixed(2), // typical pH precision
+                        units: ""
                     };
                 }
             }
@@ -296,54 +288,70 @@
 
             const units = data.units ? ` ${data.units}` : "";
 
+            // ✅ Handle notes first (no formatting needed)
             if (data.note) {
                 return data.note.replace(/\n/g, "<br>");
             }
 
             const ref = data.ref;
-
             if (!ref) return "";
 
+            // ✅ Decimal formatter
+            const decimals = data.decimal ?? null;
+
+            const format = (num) => {
+                if (num === undefined) return "";
+                if (decimals !== null && !isNaN(num)) {
+                    return Number(num).toFixed(decimals);
+                }
+                return num;
+            };
+
+            // ✅ Male / Female ranges
             if (ref.male || ref.female) {
                 let text = "";
 
                 if (ref.female) {
-                    text += `Female: ${ref.female.low} - ${ref.female.high}${units}`;
+                    text += `Female: ${format(ref.female.low)} - ${format(ref.female.high)}${units}`;
                 }
 
                 if (ref.male) {
                     if (text) text += "<br>";
-                    text += `Male: ${ref.male.low} - ${ref.male.high}${units}`;
+                    text += `Male: ${format(ref.male.low)} - ${format(ref.male.high)}${units}`;
                 }
 
                 return text;
             }
 
+            // ✅ Peak / Trough ranges
             if (ref.peak || ref.trough) {
                 let text = "";
 
                 if (ref.peak) {
-                    text += `Peak: ${ref.peak.low} - ${ref.peak.high}${units}`;
+                    text += `Peak: ${format(ref.peak.low)} - ${format(ref.peak.high)}${units}`;
                 }
 
                 if (ref.trough) {
                     if (text) text += "<br>";
-                    text += `Trough: ${ref.trough.low} - ${ref.trough.high}${units}`;
+                    text += `Trough: ${format(ref.trough.low)} - ${format(ref.trough.high)}${units}`;
                 }
 
                 return text;
             }
 
+            // ✅ Standard ranges
             if (ref.low !== undefined && ref.high !== undefined) {
-                return `${ref.low} - ${ref.high}${units}`;
+                return `${format(ref.low)} - ${format(ref.high)}${units}`;
             }
 
+            // ✅ Upper only
             if (ref.high !== undefined) {
-                return `< ${ref.high}${units}`;
+                return `< ${format(ref.high)}${units}`;
             }
 
+            // ✅ Lower only
             if (ref.low !== undefined) {
-                return `> ${ref.low}${units}`;
+                return `> ${format(ref.low)}${units}`;
             }
 
             return "";
@@ -436,7 +444,7 @@
             <td style="white-space: nowrap;">
                 ${(key === "Anion Gap") && !showAnionGap
                         ? `__ ${r.units || ""}`
-                        : `${r.value}${r.units ? " " + r.units : ""} ${getFlag(key, r.value)}`
+                        : `${r.value}${r.units ? " " + r.units : ""} ${getFlag(key, parseFloat(r.value))}`
                     }
             </td>
             <td>${ref}</td>
@@ -590,7 +598,7 @@
         updateSounds();
 
         function Back() {
-            window.location.href = "chemistry_choice.html";
+            window.location.href = "chemistry_correlationschoices.html";
         }
 
         function Home() {

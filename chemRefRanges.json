@@ -4,312 +4,356 @@
       "units": "mmol/L",
       "ref": { "low": 135, "high": 146 },
       "critical": { "low": 120, "high": 160 },
-      "life": { "low": 100, "high": 191 }
+      "life": { "low": 100, "high": 191 },
+      "decimal": 0
     },
     "K": {
       "units": "mmol/L",
       "ref": { "low": 3.5, "high": 5.1 },
       "critical": { "low": 3.0, "high": 6.0 },
-      "life": { "low": 1.3, "high": 10.0 }
+      "life": { "low": 1.3, "high": 10.0 },
+      "decimal": 1
     },
     "Cl": {
       "units": "mmol/L",
       "ref": { "low": 100, "high": 110 },
-      "life": { "low": 65, "high": 138 }
+      "life": { "low": 65, "high": 138 },
+      "decimal": 0
     },
     "TCO2": {
       "units": "mmol/L",
       "ref": { "low": 22, "high": 31 },
-      "critical": { "low": 10, "high": 40 }
+      "critical": { "low": 10, "high": 40 },
+      "decimal": 0
     },
     "Urea": {
       "units": "mmol/L",
-      "ref": { "low": 3.7, "high": 7.0 }
+      "ref": { "low": 3.7, "high": 7.0 },
+      "decimal": 1
     },
     "Creatinine": {
       "units": "μmol/L",
       "ref": {
         "female": { "low": 45, "high": 90 },
         "male": { "low": 60, "high": 104 }
-      }
+      },
+      "decimal": 0
     },
     "Anion Gap": {
       "units": "mmol/L",
-      "ref": { "low": 7, "high": 16 }
+      "ref": { "low": 7, "high": 16 },
+      "decimal": 0
     },
     "Random Glucose": {
       "units": "mmol/L",
       "ref": { "low": 3.6, "high": 10.0 },
-      "critical": { "low": 2.0, "high": 30.0 }
+      "critical": { "low": 2.0, "high": 30.0 },
+      "decimal": 1
     },
     "Fasting Glucose": {
       "units": "mmol/L",
       "ref": { "low": 3.6, "high": 6.1 },
-      "critical": { "low": 2.0, "high": 30.0 }
+      "critical": { "low": 2.0, "high": 30.0 },
+      "decimal": 1
     },
     "HbA1C": {
       "units": "%",
-      "ref": { "low": 4.0, "high": 6.0 }
+      "ref": { "low": 4.0, "high": 6.0 },
+      "decimal": 1
     },
     "Cholesterol": {
       "units": "mmol/L",
-      "ref": { "low": 4.20, "high": 6.20 }
+      "ref": { "low": 4.20, "high": 6.20 },
+      "decimal": 2
     },
     "Triglyceride": {
       "units": "mmol/L",
-      "ref": { "low": 0.60, "high": 2.30 }
+      "ref": { "low": 0.60, "high": 2.30 },
+      "decimal": 2
     },
     "HDL": {
       "units": "mmol/L",
-      "ref": { "low": 0.90, "high": 2.20 }
+      "ref": { "low": 0.90, "high": 2.20 },
+      "decimal": 2
     },
     "LDL": {
       "units": "mmol/L",
-      "ref": { "low": 2.00, "high": 3.40 }
+      "ref": { "low": 2.00, "high": 3.40 },
+      "decimal": 2
     },
     "Total Protein": {
       "units": "g/L",
-      "ref": { "low": 60, "high": 80 }
+      "ref": { "low": 60, "high": 80 },
+      "decimal": 0
     },
     "Albumin": {
       "units": "g/L",
-      "ref": { "low": 35, "high": 52 }
+      "ref": { "low": 35, "high": 52 },
+      "decimal": 0
     },
     "Ethanol": {
       "units": "mmol/L",
       "ref": { "high": 2.2 },
       "critical": { "high": 65.0 },
-      "life": { "high": 97.6 }
+      "life": { "high": 97.6 },
+      "decimal": 1
     },
     "Serum Osmolality": {
       "units": "mOsm/kg",
       "ref": { "low": 275, "high": 295 },
-      "critical": { "low": 250, "high": 330 }
+      "critical": { "low": 250, "high": 330 },
+      "decimal": 0
     },
     "Urine Osmolality": {
       "units": "mOsm/kg",
-      "ref": { "low": 250, "high": 1200 }
+      "ref": { "low": 250, "high": 1200 },
+      "decimal": 0
     },
     "AST": {
       "units": "U/L",
-      "ref": { "low": 10, "high": 40 }
+      "ref": { "low": 10, "high": 40 },
+      "decimal": 0
     },
     "ALT": {
       "units": "U/L",
       "ref": {
         "female": { "low": 5, "high": 45 },
         "male": { "low": 8, "high": 60 }
-      }
+      },
+      "decimal": 0
     },
     "ALP": {
       "units": "U/L",
-      "ref": { "low": 30, "high": 110 }
+      "ref": { "low": 30, "high": 110 },
+      "decimal": 0
     },
     "GGT": {
       "units": "U/L",
       "ref": {
         "female": { "low": 10, "high": 35 },
         "male": { "low": 10, "high": 50 }
-      }
+      },
+      "decimal": 0
     },
     "CK": {
       "units": "U/L",
-      "ref": { "low": 30, "high": 200 }
+      "ref": { "low": 30, "high": 200 },
+      "decimal": 0
     },
     "LD": {
       "units": "U/L",
-      "ref": { "low": 60, "high": 200 }
+      "ref": { "low": 60, "high": 200 },
+      "decimal": 0
     },
     "Myoglobin": {
       "units": "μg/L",
-      "ref": { "low": 18.1, "high": 77.7 }
+      "ref": { "low": 18.1, "high": 77.7 },
+      "decimal": 1
     },
     "Amylase": {
       "units": "U/L",
-      "ref": { "low": 35, "high": 130 }
+      "ref": { "low": 35, "high": 130 },
+      "decimal": 0
     },
     "Lipase": {
       "units": "U/L",
-      "ref": { "low": 0, "high": 60 }
+      "ref": { "low": 0, "high": 60 },
+      "decimal": 0
     },
     "Ammonia": {
       "units": "μmol/L",
       "ref": { "low": 10, "high": 40 },
-      "critical": { "high": 100 }
+      "critical": { "high": 100 },
+      "decimal": 0
     },
     "Lactate": {
       "units": "mmol/L",
       "ref": { "low": 0.6, "high": 2.4 },
-      "critical": { "high": 5.1 }
+      "critical": { "high": 5.1 },
+      "decimal": 1
     },
     "Mg": {
       "units": "mmol/L",
       "ref": { "low": 0.70, "high": 1.10 },
-      "critical": { "low": 0.50, "high": 2.00 }
+      "critical": { "low": 0.50, "high": 2.00 },
+      "decimal": 2
     },
     "Phosphate": {
       "units": "mmol/L",
       "ref": { "low": 0.78, "high": 1.53 },
-      "critical": { "low": 0.40, "high": 4.00 }
+      "critical": { "low": 0.40, "high": 4.00 },
+      "decimal": 2
     },
     "Total Calcium": {
       "units": "mmol/L",
       "ref": { "low": 2.10, "high": 2.55 },
-      "critical": { "low": 1.50, "high": 3.00 }
+      "critical": { "low": 1.50, "high": 3.00 },
+      "decimal": 2
     },
     "Ionized Calcium": {
       "units": "mmol/L",
       "ref": { "low": 1.10, "high": 1.36 },
-      "life": { "low": 0.7 }
+      "life": { "low": 0.70 },
+      "decimal": 2
     },
     "Uric Acid": {
       "units": "μmol/L",
       "ref": {
         "female": { "low": 150, "high": 430 },
         "male": { "low": 150, "high": 480 }
-      }
+      },
+      "decimal": 0
     },
     "Total Bilirubin": {
       "units": "μmol/L",
       "ref": { "low": 2, "high": 22 },
-      "critical": { "high": 300}
+      "critical": { "high": 300},
+      "decimal": 0
     },
     "Direct Bilirubin": {
       "units": "μmol/L",
-      "ref": { "low": 0, "high": 5 }
+      "ref": { "low": 0, "high": 5 },
+      "decimal": 0
     },
     "Indirect Bilirubin": {
       "units": "μmol/L",
-      "ref": { "low": 0, "high": 19 }
+      "ref": { "low": 0, "high": 19 },
+      "decimal": 0
     },
     "pH": {
       "units": "",
       "ref": { "low": 7.35, "high": 7.45 },
       "critical": { "low": 6.80, "high": 7.50 },
-      "life": { "low": 6.80, "high": 7.80 }
+      "life": { "low": 6.80, "high": 7.80 },
+      "decimal": 2
     },
     "pO2": {
       "units": "mmHg",
       "ref": { "low": 85, "high": 105 },
-      "critical": { "low": 40 }
+      "critical": { "low": 40 },
+      "decimal": 0
     },
     "pCO2": {
       "units": "mmHg",
       "ref": { "low": 35, "high": 45 },
-      "critical": { "low": 20, "high": 60 }
+      "critical": { "low": 20, "high": 60 },
+      "decimal": 0
     },
     "HCO3-": {
       "units": "mmol/L",
-      "ref": { "low": 22, "high": 26 }
+      "ref": { "low": 22, "high": 26 },
+      "decimal": 0
     },
     "O2 Saturation": {
       "units": "%",
-      "ref": { "low": 95 }
+      "ref": { "low": 95 },
+      "decimal": 0
     },
-
     "Amikacin": {
       "units": "mg/mL",
       "ref": {
         "peak": { "low": 20.0, "high": 25.0 },
         "trough": { "low": 1.0, "high": 4.0 }
       },
-      "critical": { "high": 40.0 }
+      "critical": { "high": 40.0 },
+      "decimal": 1
     },
-
     "Carbamazepine": {
       "units": "mg/L",
       "ref": { "low": 34.0, "high": 50.0},
-      "critical": { "high": 60.0 }
+      "critical": { "high": 60.0 },
+      "decimal": 1
     },
-
     "Digoxin": {
       "units": "nmol/L",
       "ref": { "low": 1.1, "high": 2.2 },
-      "critical": { "high": 2.6 }
+      "critical": { "high": 2.6 },
+      "decimal": 1
     },
-
     "Gentamicin": {
       "units": "mg/mL",
       "ref": {
         "peak": { "low": 5.0, "high": 8.0 },
         "trough": { "low": 1.0, "high": 2.0 }
       },
-      "critical": { "high": 10.0 }
+      "critical": { "high": 10.0 },
+      "decimal": 1
     },
-
     "Lithium": {
       "units": "mmol/L",
       "ref": { "low": 0.8, "high": 1.2 },
-      "critical": { "high": 2.0 }
+      "critical": { "high": 2.0 },
+      "decimal": 1
     },
-
     "Phenobarbital": {
       "units": "μmol/L",
       "ref": { "low": 65.0, "high": 170.0 },
-      "critical": { "high": 225.0 }
+      "critical": { "high": 225.0 },
+      "decimal": 1
     },
-
     "Phenytoin": {
       "units": "μmol/L",
       "ref": { "low": 40.0, "high": 80.0 },
-      "critical": { "high": 120.0 }
+      "critical": { "high": 120.0 },
+      "decimal": 1
     },
-
     "Tobramycin": {
       "units": "μg/mL",
       "ref": {
         "peak": { "low": 6.0, "high": 10.0 },
         "trough": { "low": 0.5, "high": 2.0 }
       },
-      "critical": { "high": 10.0 }
+      "critical": { "high": 10.0 },
+      "decimal": 1
     },
-
     "Theophylline": {
       "units": "μmol/L",
       "ref": { "low": 55.0, "high": 110.0 },
-      "critical": { "high": 110.0 }
+      "critical": { "high": 110.0 },
+      "decimal": 1
     },
-
     "Valproic Acid": {
       "units": "μmol/L",
       "ref": { "low": 350, "high": 700 },
-      "critical": { "high": 1400 }
+      "critical": { "high": 1400 },
+      "decimal": 0
     },
-
     "Vancomycin": {
       "units": "μg/mL",
       "ref": {
         "peak": { "low": 25.0, "high": 40.0 },
         "trough": { "low": 5.0, "high": 15.0 }
       },
-      "critical": { "high": 470.0 }
+      "critical": { "high": 470.0 },
+      "decimal": 1
     },
-
     "Acetaminophen": {
       "units": "μmol/L",
       "ref": { "low": 60, "high": 135 },
-      "critical": { "high": 330 }
+      "critical": { "high": 330 },
+      "decimal": 0
     },
-
     "Salicylate": {
       "units": "mmol/L",
       "ref": { "low": 1.10, "high": 2.20 },
-      "critical": { "high": 2.50 }
+      "critical": { "high": 2.50 },
+      "decimal": 2
     },
-
     "TSH": {
       "units": "mIU/L",
-      "ref": { "low": 0.49, "high": 4.67 }
+      "ref": { "low": 0.49, "high": 4.67 },
+      "decimal": 2
     },
     "Free T3": {
       "units": "ρmol/L",
-      "ref": { "low": 2.6, "high": 5.7 }
+      "ref": { "low": 2.6, "high": 5.7 },
+      "decimal": 1
     },
     "Free T4": {
       "units": "ρmol/L",
-      "ref": { "low": 9.0, "high": 19.0 }
+      "ref": { "low": 9.0, "high": 19.0 },
+      "decimal": 1
     },
-
     "hsTroponin": {
       "units": "ng/L",
       "note": "• <15.0 ng/L on two consecutive draws: Rule out MI.\n• 15.0 - 50.0 ng/L Grey zone, repeat at 3, 6, and 12 hours.\nIncrease in 20.0 ng/L or 50%: Rule in MI.\n• >50.0 ng/L: Rule in MI."
@@ -320,11 +364,13 @@
     },
     "AFP": {
       "units": "μg/L",
-      "ref": { "low": 0.0, "high": 6.9 }
+      "ref": { "low": 0.0, "high": 6.9 },
+      "decimal": 1
     },
     "βHCG": {
       "units": "U/L",
-      "ref": { "low": 0, "high": 5 }
+      "ref": { "low": 0, "high": 5 },
+      "decimal": 0
     },
     "PSA": {
       "units": "μg/L",
@@ -332,12 +378,71 @@
     },
     "PT": {
       "units": "sec",
-      "ref": { "low": 11.5, "high": 14.5 }
+      "ref": { "low": 11.5, "high": 14.5 },
+      "decimal": 1
     },
     "INR": {
       "units": "",
       "ref": { "low": 0.8, "high": 1.2 },
-      "critical": { "high": 4.0 }
+      "critical": { "high": 4.0 },
+      "decimal": 1
+    },
+    "APTT": {
+      "units": "sec",
+      "ref": { "low": 25, "high": 40 },
+      "critical": { "high": 150 },
+      "decimal": 0
+    },
+    "Fibrinogen": {
+      "units": "g/L",
+      "ref": { "low": 2.0, "high": 4.0 },
+      "critical": { "low": 1.0 },
+      "decimal": 1
+    },
+    "D-Dimer": {
+      "units": "μg/mL FEU",
+      "ref": { "high": 0.50 },
+      "critical": { "high": 0.50 },
+      "decimal": 2
+    },
+    "Thrombin Time": {
+      "units": "sec",
+      "ref": { "high": 21 },
+      "decimal": 0
+    },
+    "Factor Assay": {
+      "units": "%",
+      "ref": { "low": 50, "high": 150},
+      "decimal": 0
+    },
+    "vWFag": {
+      "units": "%",
+      "ref": { "low": 50, "high": 160},
+      "decimal": 0
+    },
+    "Antithrombin": {
+      "units": "%",
+      "ref": { "low": 80, "high": 120},
+      "decimal": 0
+    },
+    "Protein C": {
+      "units": "%",
+      "ref": { "low": 70, "high": 130},
+      "decimal": 0
+    },
+    "Protein S Free": {
+      "units": "%",
+      "ref": { "low": 60, "high": 140},
+      "decimal": 0
+    },
+    "Factor V Leiden": {
+      "units": "",
+      "note": "Negative"
+    },
+    "dRVVT": {
+      "units": "",
+      "ref": { "high": 1.2},
+      "decimal": 1
     }
   }
 }

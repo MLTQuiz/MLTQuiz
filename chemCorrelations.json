@@ -51,7 +51,7 @@
         "ALP": {"lower": "105", "upper": "120", "units": "U/L", "decimal": "0"},
         "GGT": {"lower": "33", "upper": "70", "units": "U/L", "decimal": "0"}
     },
-    "Malabsorption": {
+    "Malabsorption (including Vitamin K deficiency)": {
         "Na": {"lower": "135", "upper": "146", "units": "mmol/L", "decimal": "0"},
         "K": {"lower": "3.5", "upper": "5.1", "units": "mmol/L", "decimal": "1"},
         "Cl": {"lower": "100", "upper": "110", "units": "mmol/L", "decimal": "0"},
@@ -68,7 +68,7 @@
         "ALP": {"lower": "30", "upper": "110", "units": "U/L", "decimal": "0"},
         "GGT": {"lower": "10", "upper": "35", "units": "U/L", "decimal": "0"},
         "Vitamins A, D, E, K": {"value": "Decreased ▽", "units": "", "decimal": ""},
-        "PT": {"lower": "70.0", "upper": "100.0", "units": "sec", "decimal": "1"},
+        "PT": {"lower": "30.0", "upper": "52.0", "units": "sec", "decimal": "1"},
         "INR": {"value": "Calculate", "units": ""}
     },
     "Big Mike": {

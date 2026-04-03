@@ -1,0 +1,755 @@
+{
+  "Reference Ranges": {
+    "Na": {
+      "units": "mmol/L",
+      "ref": { "low": 135, "high": 146 },
+      "critical": { "low": 120, "high": 160 },
+      "life": { "low": 100, "high": 191 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "K": {
+      "units": "mmol/L",
+      "ref": { "low": 3.5, "high": 5.1 },
+      "critical": { "low": 3.0, "high": 6.0 },
+      "life": { "low": 1.3, "high": 10.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Cl": {
+      "units": "mmol/L",
+      "ref": { "low": 100, "high": 110 },
+      "life": { "low": 65, "high": 138 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "TCO2": {
+      "units": "mmol/L",
+      "ref": { "low": 22, "high": 31 },
+      "critical": { "low": 10, "high": 40 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Urea": {
+      "units": "mmol/L",
+      "ref": { "low": 3.7, "high": 7.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Creatinine": {
+      "units": "μmol/L",
+      "ref": {
+        "female": { "low": 45, "high": 90 },
+        "male": { "low": 60, "high": 104 }
+      },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Anion Gap": {
+      "units": "mmol/L",
+      "ref": { "low": 7, "high": 16 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Random Glucose": {
+      "units": "mmol/L",
+      "ref": { "low": 3.6, "high": 10.0 },
+      "critical": { "low": 2.0, "high": 30.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Fasting Glucose": {
+      "units": "mmol/L",
+      "ref": { "low": 3.6, "high": 6.1 },
+      "critical": { "low": 2.0, "high": 30.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Cholesterol": {
+      "units": "mmol/L",
+      "ref": { "low": 4.20, "high": 6.20 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Triglyceride": {
+      "units": "mmol/L",
+      "ref": { "low": 0.60, "high": 2.30 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "HDL": {
+      "units": "mmol/L",
+      "ref": { "low": 0.90, "high": 2.20 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "LDL": {
+      "units": "mmol/L",
+      "ref": { "low": 2.00, "high": 3.40 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Total Protein": {
+      "units": "g/L",
+      "ref": { "low": 60, "high": 80 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Albumin": {
+      "units": "g/L",
+      "ref": { "low": 35, "high": 52 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Ethanol": {
+      "units": "mmol/L",
+      "ref": { "high": 2.2 },
+      "critical": { "high": 65.0 },
+      "life": { "high": 97.6 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "AST": {
+      "units": "U/L",
+      "ref": { "low": 10, "high": 40 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "ALT": {
+      "units": "U/L",
+      "ref": {
+        "female": { "low": 5, "high": 45 },
+        "male": { "low": 8, "high": 60 }
+      },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "ALP": {
+      "units": "U/L",
+      "ref": { "low": 30, "high": 110 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "GGT": {
+      "units": "U/L",
+      "ref": {
+        "female": { "low": 10, "high": 35 },
+        "male": { "low": 10, "high": 50 }
+      },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "CK": {
+      "units": "U/L",
+      "ref": { "low": 30, "high": 200 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "LD": {
+      "units": "U/L",
+      "ref": { "low": 60, "high": 200 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Myoglobin": {
+      "units": "μg/L",
+      "ref": { "low": 18.1, "high": 77.7 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Amylase": {
+      "units": "U/L",
+      "ref": { "low": 35, "high": 130 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Lipase": {
+      "units": "U/L",
+      "ref": { "low": 0, "high": 60 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Ammonia": {
+      "units": "μmol/L",
+      "ref": { "low": 10, "high": 40 },
+      "critical": { "high": 100 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Mg": {
+      "units": "mmol/L",
+      "ref": { "low": 0.70, "high": 1.10 },
+      "critical": { "low": 0.50, "high": 2.00 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Phosphate": {
+      "units": "mmol/L",
+      "ref": { "low": 0.78, "high": 1.53 },
+      "critical": { "low": 0.40, "high": 4.00 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Total Calcium": {
+      "units": "mmol/L",
+      "ref": { "low": 2.10, "high": 2.55 },
+      "critical": { "low": 1.50, "high": 3.00 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Uric Acid": {
+      "units": "μmol/L",
+      "ref": {
+        "female": { "low": 150, "high": 430 },
+        "male": { "low": 150, "high": 480 }
+      },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Total Bilirubin": {
+      "units": "μmol/L",
+      "ref": { "low": 2, "high": 22 },
+      "critical": { "high": 300},
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Direct Bilirubin": {
+      "units": "μmol/L",
+      "ref": { "low": 0, "high": 5 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Indirect Bilirubin": {
+      "units": "μmol/L",
+      "ref": { "low": 0, "high": 19 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Amikacin": {
+      "units": "mg/mL",
+      "ref": {
+        "peak": { "low": 20.0, "high": 25.0 },
+        "trough": { "low": 1.0, "high": 4.0 }
+      },
+      "critical": { "high": 40.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Carbamazepine": {
+      "units": "mg/L",
+      "ref": { "low": 34.0, "high": 50.0},
+      "critical": { "high": 60.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Digoxin": {
+      "units": "nmol/L",
+      "ref": { "low": 1.1, "high": 2.2 },
+      "critical": { "high": 2.6 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Gentamicin": {
+      "units": "mg/mL",
+      "ref": {
+        "peak": { "low": 5.0, "high": 8.0 },
+        "trough": { "low": 1.0, "high": 2.0 }
+      },
+      "critical": { "high": 10.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Lithium": {
+      "units": "mmol/L",
+      "ref": { "low": 0.8, "high": 1.2 },
+      "critical": { "high": 2.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Phenobarbital": {
+      "units": "μmol/L",
+      "ref": { "low": 65.0, "high": 170.0 },
+      "critical": { "high": 225.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Phenytoin": {
+      "units": "μmol/L",
+      "ref": { "low": 40.0, "high": 80.0 },
+      "critical": { "high": 120.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Tobramycin": {
+      "units": "μg/mL",
+      "ref": {
+        "peak": { "low": 6.0, "high": 10.0 },
+        "trough": { "low": 0.5, "high": 2.0 }
+      },
+      "critical": { "high": 10.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Theophylline": {
+      "units": "μmol/L",
+      "ref": { "low": 55.0, "high": 110.0 },
+      "critical": { "high": 110.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Valproic Acid": {
+      "units": "μmol/L",
+      "ref": { "low": 350, "high": 700 },
+      "critical": { "high": 1400 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Vancomycin": {
+      "units": "μg/mL",
+      "ref": {
+        "peak": { "low": 25.0, "high": 40.0 },
+        "trough": { "low": 5.0, "high": 15.0 }
+      },
+      "critical": { "high": 470.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Acetaminophen": {
+      "units": "μmol/L",
+      "ref": { "low": 60, "high": 135 },
+      "critical": { "high": 330 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Salicylate": {
+      "units": "mmol/L",
+      "ref": { "low": 1.10, "high": 2.20 },
+      "critical": { "high": 2.50 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "TSH": {
+      "units": "mIU/L",
+      "ref": { "low": 0.49, "high": 4.67 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Free T3": {
+      "units": "ρmol/L",
+      "ref": { "low": 2.6, "high": 5.7 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Free T4": {
+      "units": "ρmol/L",
+      "ref": { "low": 9.0, "high": 19.0 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "hsTroponin": {
+      "units": "ng/L",
+      "note": "• <15.0 ng/L on two consecutive draws: Rule out MI.\n• 15.0 - 50.0 ng/L Grey zone, repeat at 3, 6, and 12 hours.\nIncrease in 20.0 ng/L or 50%: Rule in MI.\n• >50.0 ng/L: Rule in MI.",
+      "analyzer": "Serum Chemistry Results"
+    },
+    "NT-Pro BNP": {
+      "units": "ng/L",
+      "note": "• Heart Failure unlikely if <300 ng/L.\nHeart Failure likely if:\n\t• >450 ng/L for patients <50 years of age.\n\t• >900 ng/L for patients 50-75 years of age.\n\t• >1800 ng/L for patients >75 years of age.",
+      "analyzer": "Serum Chemistry Results"
+    },
+    "AFP": {
+      "units": "μg/L",
+      "ref": { "low": 0.0, "high": 6.9 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "βHCG": {
+      "units": "U/L",
+      "ref": { "low": 0, "high": 5 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "PSA": {
+      "units": "μg/L",
+      "note": "• 0.0 - 3.5 μg/L for patients 50-59 years of age.\n• 0.0 - 4.5 μg/L for patients 60-69 years of age.\n• 0.0 - 6.5 μg/L for patients 70-150 years of age.",
+      "analyzer": "Serum Chemistry Results"
+    },
+    "CRPH": {
+      "units": "mg/L",
+      "note": "• Low risk if < 1.0 mg/L.\n• Intermediate risk if 1.0 - 3.0 mg/L.\n• High risk if > 3.0 mg/L",
+      "analyzer": "Serum Chemistry Results"
+    },
+
+
+    "Serum Osmolality": {
+      "units": "mOsm/kg",
+      "ref": { "low": 275, "high": 295 },
+      "critical": { "low": 250, "high": 330 },
+      "decimal": 0,
+      "analyzer": "Osmometry Results"
+    },
+    "Osmo Gap": {
+      "units": "mOsm/kg",
+      "ref": { "high": 10 },
+      "decimal": 0,
+      "analyzer": "Osmometry Results"
+    },
+    "Urine Osmolality": {
+      "units": "mOsm/kg",
+      "ref": { "low": 250, "high": 1200 },
+      "decimal": 0,
+      "analyzer": "Osmometry Results"
+    },
+
+
+    "pH": {
+      "units": "",
+      "ref": { "low": 7.35, "high": 7.45 },
+      "critical": { "low": 6.80, "high": 7.50 },
+      "life": { "low": 6.80, "high": 7.80 },
+      "decimal": 2,
+      "analyzer": "Blood Gas Results"
+    },
+    "pO2": {
+      "units": "mmHg",
+      "ref": { "low": 85, "high": 105 },
+      "critical": { "low": 40 },
+      "decimal": 0,
+      "analyzer": "Blood Gas Results"
+    },
+    "pCO2": {
+      "units": "mmHg",
+      "ref": { "low": 35, "high": 45 },
+      "critical": { "low": 20, "high": 60 },
+      "decimal": 0,
+      "analyzer": "Blood Gas Results"
+    },
+    "HCO3-": {
+      "units": "mmol/L",
+      "ref": { "low": 22, "high": 26 },
+      "decimal": 0,
+      "analyzer": "Blood Gas Results"
+    },
+    "O2 Saturation": {
+      "units": "%",
+      "ref": { "low": 95 },
+      "decimal": 0,
+      "analyzer": "Blood Gas Results"
+    },
+    "Lactate": {
+      "units": "mmol/L",
+      "ref": { "low": 0.6, "high": 2.4 },
+      "critical": { "high": 5.1 },
+      "decimal": 1,
+      "analyzer": "Blood Gas Results"
+    },
+    "Ionized Calcium": {
+      "units": "mmol/L",
+      "ref": { "low": 1.10, "high": 1.36 },
+      "life": { "low": 0.70 },
+      "decimal": 2,
+      "analyzer": "Blood Gas Results"
+    },
+
+
+    "Methanol": {
+      "note": "Critical: >6.0 mmol/L",
+      "ref": { "high": 0.0 },
+      "critical": { "high": 6.0},
+      "decimal": 1,
+      "analyzer": "Gas Chromatography Results"
+    },
+    "Isopropanol": {
+      "note": "Critical: >7.0 mmol/L",
+      "ref": { "high": 0.0 },
+      "critical": { "high": 7.0},
+      "decimal": 1,
+      "analyzer": "Gas Chromatography Results"
+    },
+    "Acetone": {
+      "note": "Critical: >2.0 mmol/L",
+      "ref": { "high": 0.0 },
+      "critical": { "high": 2.0},
+      "decimal": 1,
+      "analyzer": "Gas Chromatography Results"
+    },
+    "Ethylene Glycol": {
+      "note": "Critical: >5.0 mmol/L",
+      "ref": { "high": 0.0 },
+      "critical": { "high": 5.0},
+      "decimal": 1,
+      "analyzer": "Gas Chromatography Results"
+    },
+
+
+    "HbA1C": {
+      "units": "%",
+      "ref": { "low": 4.0, "high": 6.0 },
+      "decimal": 1,
+      "analyzer": "HPLC-MS Results"
+    },
+
+
+    "PT": {
+      "units": "sec",
+      "ref": { "low": 11.5, "high": 14.5 },
+      "decimal": 1,
+      "analyzer": "Hemostasis Results"
+    },
+    "INR": {
+      "units": "",
+      "ref": { "low": 0.8, "high": 1.2 },
+      "critical": { "high": 4.0 },
+      "decimal": 1,
+      "analyzer": "Hemostasis Results"
+    },
+    "APTT": {
+      "units": "sec",
+      "ref": { "low": 25, "high": 40 },
+      "critical": { "high": 150 },
+      "decimal": 0,
+      "analyzer": "Hemostasis Results"
+    },
+    "Fibrinogen": {
+      "units": "g/L",
+      "ref": { "low": 2.0, "high": 4.0 },
+      "critical": { "low": 1.0 },
+      "decimal": 1,
+      "analyzer": "Hemostasis Results"
+    },
+    "D-Dimer": {
+      "units": "μg/mL FEU",
+      "ref": { "high": 0.50 },
+      "critical": { "high": 0.50 },
+      "decimal": 2,
+      "analyzer": "Hemostasis Results"
+    },
+    "Thrombin Time": {
+      "units": "sec",
+      "ref": { "high": 21 },
+      "decimal": 0,
+      "analyzer": "Hemostasis Results"
+    },
+    "Factor Assay": {
+      "units": "%",
+      "ref": { "low": 50, "high": 150},
+      "decimal": 0,
+      "analyzer": "Hemostasis Results"
+    },
+    "vWFag": {
+      "units": "%",
+      "ref": { "low": 50, "high": 160},
+      "decimal": 0,
+      "analyzer": "Hemostasis Results"
+    },
+    "Antithrombin": {
+      "units": "%",
+      "ref": { "low": 80, "high": 120},
+      "decimal": 0,
+      "analyzer": "Hemostasis Results"
+    },
+    "Protein C": {
+      "units": "%",
+      "ref": { "low": 70, "high": 130},
+      "decimal": 0,
+      "analyzer": "Hemostasis Results"
+    },
+    "Protein S Free": {
+      "units": "%",
+      "ref": { "low": 60, "high": 140},
+      "decimal": 0,
+      "analyzer": "Hemostasis Results"
+    },
+    "Factor V Leiden": {
+      "note": "Negative",
+      "analyzer": "Hemostasis Results"
+    },
+    "dRVVT": {
+      "ref": { "high": 1.2},
+      "decimal": 1,
+      "analyzer": "Hemostasis Results"
+    },
+
+    "WBC": {
+      "units": "x 10^9/L",
+      "ref": { "low": 4.00, "high": 10.00 },
+      "critical": { "low": 2.00, "high": 25.00 },
+      "decimal": 2,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "RBC": {
+      "units": "x 10^12/L",
+      "ref": { 
+        "male": { "low": 4.50, "high": 5.90 },
+        "female": { "low": 4.00, "high": 5.20 },
+        "newborn": { "low": 4.00, "high": 6.60 }
+    },
+      "decimal": 2,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "HGB": {
+      "units": "g/L",
+      "ref": { 
+        "male": { "low": 135, "high": 180 },
+        "female": { "low": 115, "high": 164 },
+        "newborn": { "low": 160, "high": 240 }
+    },
+        "critical": { "low": 70, "high": 200 },
+      "decimal": 0,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "HCT": {
+      "units": "L/L",
+      "ref": { 
+        "male": { "low": 0.400, "high": 0.540 },
+        "female": { "low": 0.330, "high": 0.480 },
+        "newborn": { "low": 0.400, "high": 0.620 }
+    },
+      "decimal": 3,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "MCV": {
+      "units": "fL",
+      "ref": { "low": 79, "high": 99 },
+      "decimal": 0,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "MCH": {
+      "units": "pg",
+      "ref": { "low": 28, "high": 32 },
+      "decimal": 0,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "MCHC": {
+      "units": "g/L",
+      "ref": { "low": 320, "high": 360 },
+      "decimal": 0,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "RDW": {
+      "units": "%",
+      "ref": { "low": 11.5, "high": 15.0 },
+      "decimal": 1,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "PLT": {
+      "units": "x 10^9/L",
+      "ref": { "low": 150, "high": 450 },
+      "critical": { "low": 25, "high": 750 },
+      "decimal": 0,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "MPV": {
+      "units": "fL",
+      "ref": { "low": 7.4, "high": 10.6 },
+      "decimal": 1,
+      "analyzer": "Complete Blood Count Results"
+    },
+    "Segmented Neutrophil": {
+      "relative": {
+        "units": "%",
+        "ref": { "low": 50, "high": 70 },
+        "decimal": 0
+      },
+      "absolute": {
+        "units": "x 10^9/L",
+        "ref": { "low": 2.00, "high": 7.00 },
+        "decimal": "2"
+      },
+      "analyzer": "Complete Blood Count Results"
+    },
+    "Band Neutrophil": {
+      "relative": {
+        "units": "%",
+        "ref": { "low": 0, "high": 5 },
+        "decimal": "0"
+      },
+      "absolute": {
+        "units": "x 10^9/L",
+        "ref": { "low": 0.00, "high": 0.50 },
+        "decimal": "2"
+      },
+      "analyzer": "Complete Blood Count Results"
+    },
+    "Lymphocyte": {
+      "relative": {
+        "units": "%",
+        "ref": { 
+          "adult": { "low": 20, "high": 40 },
+          "children": { "low": 20, "high": 60 }
+        },
+        "decimal": "0"
+      },
+      "absolute": {
+        "units": "x 10^9/L",
+        "ref": { 
+          "adult": { "low": 0.80, "high": 4.00 },
+          "children": { "low": 0.80, "high": 6.00 }
+        },
+        "decimal": "2"
+      },
+      "analyzer": "Complete Blood Count Results"
+    },
+    "Monocyte": {
+      "relative": {
+        "units": "%",
+        "ref": { "low": 2, "high": 6 },
+        "decimal": "0"
+      },
+      "absolute": {
+        "units": "x 10^9/L",
+        "ref": { "low": 0.08, "high": 0.60 },
+        "decimal": "2"
+      },
+      "analyzer": "Complete Blood Count Results"
+    },
+    "Eosinophil": {
+      "relative": {
+        "units": "%",
+        "ref": { "low": 1, "high": 3 },
+        "decimal": "0"
+      },
+      "absolute": {
+        "units": "x 10^9/L",
+        "ref": { "low": 0.04, "high": 0.30 },
+        "decimal": "2"
+      },
+      "analyzer": "Complete Blood Count Results"
+    },
+    "Basophil": {
+      "relative": {
+        "units": "%",
+        "ref": { "low": 0, "high": 1 },
+        "decimal": "0"
+      },
+      "absolute": {
+        "units": "x 10^9/L",
+        "ref": { "low": 0.00, "high": 0.10 },
+        "decimal": "2"
+      },
+      "analyzer": "Complete Blood Count Results"
+    },
+    "Retic": {
+      "relative": {
+        "units": "%",
+        "ref": { "low": 0.4, "high": 2.0 },
+        "decimal": "1"
+      },
+      "absolute": {
+        "units": "x 10^9/L",
+        "ref": { "low": 25, "high": 75 },
+        "decimal": "0"
+      },
+      "analyzer": "Complete Blood Count Results"
+    },
+    "ESR": {
+      "units": "mm in one hour",
+      "ref": {
+        "male": { "low": 0, "high": 15 },
+        "female": { "low": 0, "high": 20 },
+        "newborn": { "low": 0, "high": 15 }
+      },
+      "decimal": 0,
+      "analyzer": "ESR Results"
+    }
+  }
+}

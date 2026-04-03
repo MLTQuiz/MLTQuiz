@@ -183,7 +183,7 @@
         }
 
         async function loadData() {
-            const refRes = await fetch("chemRefRanges.json");
+            const refRes = await fetch("refRanges.json");
             const corrRes = await fetch("chemCorrelations.json");
 
             chemRefs = await refRes.json();
@@ -204,7 +204,6 @@
 
             selectedCases.forEach(item => {
                 const [topic, disease] = item.split("|||");
-
                 if (chemData[topic] && chemData[topic][disease]) {
                     pool.push({
                         disease,
@@ -213,7 +212,6 @@
                 }
             });
 
-            // fallback
             if (pool.length === 0) {
                 Object.keys(chemData).forEach(topic => {
                     Object.keys(chemData[topic]).forEach(disease => {
@@ -229,58 +227,117 @@
             const disease = chosen.disease;
             const analytes = chosen.analytes;
 
-            let results = {};
-            const analyteOrder = Object.keys(analytes);
+            let resultsByAnalyzer = {};
 
-            for (let key of analyteOrder) {
+            for (let key of Object.keys(analytes)) {
                 const a = analytes[key];
 
+                let value;
                 if (a.value !== undefined && a.value !== "Calculate") {
-                    results[key] = {
-                        value: a.value,
-                        units: a.units || ""
-                    };
-                } else if (a.lower !== undefined) {
-                    results[key] = {
-                        value: getRandom(
-                            parseFloat(a.lower),
-                            parseFloat(a.upper),
-                            parseInt(a.decimal)
-                        ),
-                        units: a.units
-                    };
+                    value = a.value;
+                } else if (a.low !== undefined) {
+                    value = getRandom(
+                        parseFloat(a.low),
+                        parseFloat(a.high),
+                        parseInt(a.decimal ?? 0)
+                    );
                 }
+
+                const analyzer = chemRefs["Reference Ranges"][key]?.analyzer || "Other";
+
+                if (!resultsByAnalyzer[analyzer]) resultsByAnalyzer[analyzer] = {};
+
+                resultsByAnalyzer[analyzer][key] = {
+                    value: value,
+                    units: a.units || "",
+                    decimal: a.decimal ?? 0
+                };
             }
 
-            // ✅ Calculate INR from PT
-            if (results["PT"] && analytes["INR"]) {
-                const pt = parseFloat(results["PT"].value);
-
+            if (resultsByAnalyzer["Hemostasis Results"]?.PT && analytes["INR"]) {
+                const pt = parseFloat(resultsByAnalyzer["Hemostasis Results"].PT.value);
                 if (!isNaN(pt)) {
-                    results["INR"] = {
-                        value: (pt / 13.1).toFixed(1), // ✅ always 1 decimal
-                        units: ""
+                    resultsByAnalyzer["Hemostasis Results"].INR = {
+                        value: (pt / 13.1).toFixed(1),
+                        units: "",
+                        decimal: 1
                     };
                 }
             }
 
-            // ✅ Calculate pH from HCO3- and pCO2
             if (analytes["pH"] && analytes["pH"].value === "Calculate") {
-                const hco3 = parseFloat(results["HCO3-"]?.value);
-                const pco2 = parseFloat(results["pCO2"]?.value);
-
+                const hco3 = parseFloat(resultsByAnalyzer["Blood Gas Results"]?.["HCO3-"]?.value);
+                const pco2 = parseFloat(resultsByAnalyzer["Blood Gas Results"]?.["pCO2"]?.value);
                 if (!isNaN(hco3) && !isNaN(pco2) && pco2 !== 0) {
                     const pH = 6.1 + Math.log10(hco3 / (0.03 * pco2));
-
-                    results["pH"] = {
-                        value: pH.toFixed(2), // typical pH precision
-                        units: ""
+                    resultsByAnalyzer["Blood Gas Results"].pH = {
+                        value: pH.toFixed(2),
+                        units: "",
+                        decimal: 2
                     };
                 }
             }
 
-            return { disease, results, analytes, analyteOrder };
+            if (analytes["Anion Gap"]) {
+                const agData = analytes["Anion Gap"];
+                const low = parseFloat(agData.low);
+                const high = parseFloat(agData.high);
+                const decimals = parseInt(agData.decimal ?? 0);
+
+                let attempts = 0;
+                let valid = false;
+
+                while (attempts < 50 && !valid) {
+                    attempts++;
+                    const na = parseFloat(getRandom(
+                        analytes["Na"].low,
+                        analytes["Na"].high,
+                        analytes["Na"].decimal
+                    ));
+                    const cl = parseFloat(getRandom(
+                        analytes["Cl"].low,
+                        analytes["Cl"].high,
+                        analytes["Cl"].decimal
+                    ));
+                    const tco2 = parseFloat(getRandom(
+                        analytes["TCO2"].low,
+                        analytes["TCO2"].high,
+                        analytes["TCO2"].decimal
+                    ));
+                    const ag = na - cl - tco2;
+
+                    if (ag >= low && ag <= high) {
+                        resultsByAnalyzer["Serum Chemistry Results"].Na.value = na.toFixed(analytes["Na"].decimal);
+                        resultsByAnalyzer["Serum Chemistry Results"].Cl.value = cl.toFixed(analytes["Cl"].decimal);
+                        resultsByAnalyzer["Serum Chemistry Results"].TCO2.value = tco2.toFixed(analytes["TCO2"].decimal);
+
+                        resultsByAnalyzer["Serum Chemistry Results"]["Anion Gap"] = {
+                            value: ag.toFixed(decimals),
+                            units: agData.units,
+                            decimal: decimals
+                        };
+
+                        valid = true;
+                    }
+                }
+
+                if (!valid) {
+                    const na = parseFloat(resultsByAnalyzer["Serum Chemistry Results"].Na.value);
+                    const cl = parseFloat(resultsByAnalyzer["Serum Chemistry Results"].Cl.value);
+                    const tco2 = parseFloat(resultsByAnalyzer["Serum Chemistry Results"].TCO2.value);
+                    const ag = na - cl - tco2;
+
+                    resultsByAnalyzer["Serum Chemistry Results"]["Anion Gap"] = {
+                        value: ag.toFixed(decimals),
+                        units: agData.units,
+                        decimal: decimals
+                    };
+                }
+            }
+
+            return { disease, resultsByAnalyzer };
         }
+
 
         function formatReferenceRange(analyte) {
             const data = chemRefs["Reference Ranges"][analyte];
@@ -288,7 +345,6 @@
 
             const units = data.units ? ` ${data.units}` : "";
 
-            // ✅ Handle notes first (no formatting needed)
             if (data.note) {
                 return data.note.replace(/\n/g, "<br>");
             }
@@ -296,7 +352,6 @@
             const ref = data.ref;
             if (!ref) return "";
 
-            // ✅ Decimal formatter
             const decimals = data.decimal ?? null;
 
             const format = (num) => {
@@ -307,7 +362,6 @@
                 return num;
             };
 
-            // ✅ Male / Female ranges
             if (ref.male || ref.female) {
                 let text = "";
 
@@ -323,7 +377,6 @@
                 return text;
             }
 
-            // ✅ Peak / Trough ranges
             if (ref.peak || ref.trough) {
                 let text = "";
 
@@ -339,17 +392,14 @@
                 return text;
             }
 
-            // ✅ Standard ranges
             if (ref.low !== undefined && ref.high !== undefined) {
                 return `${format(ref.low)} - ${format(ref.high)}${units}`;
             }
 
-            // ✅ Upper only
             if (ref.high !== undefined) {
                 return `< ${format(ref.high)}${units}`;
             }
 
-            // ✅ Lower only
             if (ref.low !== undefined) {
                 return `> ${format(ref.low)}${units}`;
             }
@@ -428,66 +478,46 @@
 
         function renderTable(caseData) {
             const container = document.getElementById("labTableContainer");
+            let html = "";
 
-            const bloodGasKeys = ["pH", "HCO3-", "pCO2", "Lactate"];
+            for (let analyzer in caseData.resultsByAnalyzer) {
+                const analytes = caseData.resultsByAnalyzer[analyzer];
+                let rows = "";
 
-            let mainRows = "";
-            let bloodGasRows = "";
+                for (let key in analytes) {
+                    const r = analytes[key];
+                    const ref = formatReferenceRange(key);
 
-            for (let key of caseData.analyteOrder) {
-                const r = caseData.results[key] || { value: "", units: "" };
-                const ref = formatReferenceRange(key);
-
-                const rowHTML = `
-        <tr>
-            <td>${key}</td>
-            <td style="white-space: nowrap;">
-                ${(key === "Anion Gap") && !showAnionGap
-                        ? `__ ${r.units || ""}`
-                        : `${r.value}${r.units ? " " + r.units : ""} ${getFlag(key, parseFloat(r.value))}`
-                    }
-            </td>
-            <td>${ref}</td>
-        </tr>
-        `;
-
-                if (bloodGasKeys.includes(key)) {
-                    bloodGasRows += rowHTML;
-                } else {
-                    mainRows += rowHTML;
+                    rows += `
+                <tr>
+                    <td>${key}</td>
+                    <td style="white-space: nowrap;">
+                        ${(key === "Anion Gap") && !showAnionGap
+                            ? `__ ${r.units || ""}`
+                            : `${r.value}${r.units ? " " + r.units : ""} ${getFlag(key, parseFloat(r.value))}`
+                        }
+                    </td>
+                    <td>${ref}</td>
+                </tr>
+            `;
                 }
-            }
 
-            let html = `
-<table border="1" style="width:100%; border-collapse: collapse; margin-top:20px;">
-
-    <tr>
-        <th colspan="3" style="text-align:center; background:#f0f0f0;">
-            Serum Chemistry Results
-        </th>
-    </tr>
-
-    <tr>
-        <th>Analyte</th>
-        <th>Result</th>
-        <th>Reference Range</th>
-    </tr>
-
-    ${mainRows}
-`;
-
-            if (bloodGasRows) {
                 html += `
-        <tr>
-            <th colspan="3" style="text-align:center; background:#f0f0f0;">
-                Blood Gas Results
-            </th>
-        </tr>
-        ${bloodGasRows}
+            <table border="1" style="width:100%; border-collapse: collapse; margin-top:20px;">
+                <tr>
+                    <th colspan="3" style="text-align:center; background:#f0f0f0;">
+                        ${analyzer}
+                    </th>
+                </tr>
+                <tr>
+                    <th>Analyte</th>
+                    <th>Result</th>
+                    <th>Reference Range</th>
+                </tr>
+                ${rows}
+            </table>
         `;
             }
-
-            html += "</table>";
 
             container.innerHTML = html;
         }

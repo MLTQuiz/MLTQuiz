@@ -11,12 +11,12 @@
             "Random Glucose": {"low": 4.0, "high": 8.5, "units": "mmol/L", "decimal": 1},
             "Total Protein": {"low": 60, "high": 65, "units": "g/L", "decimal": 0},
             "Albumin": {"low": 32, "high": 38, "units": "g/L", "decimal": 0},
-            "NT-Pro BNP": {"low": 1100, "high": 2000, "units": "ng/L", "decimal": 0},
-            "hsTroponin": {"low": 20.0, "high": 30.0, "units": "ng/L", "decimal": 1},
             "AST": {"low": 20, "high": 43, "units": "U/L", "decimal": 0},
             "ALT": {"low": 20, "high": 45, "units": "U/L", "decimal": 0},
             "ALP": {"low": 50, "high": 100, "units": "U/L", "decimal": 0},
-            "GGT": {"low": 10, "high": 32, "units": "U/L", "decimal": 0}
+            "GGT": {"low": 10, "high": 32, "units": "U/L", "decimal": 0},
+            "NT-Pro BNP": {"low": 1100, "high": 2000, "units": "ng/L", "decimal": 0},
+            "hsTroponin": {"low": 20.0, "high": 30.0, "units": "ng/L", "decimal": 1}
         },
         "Congestive Heart Failure (Late Stage)": {
             "Na": {"low": 130, "high": 138, "units": "mmol/L", "decimal": 0},
@@ -29,12 +29,12 @@
             "Random Glucose": {"low": 4.0, "high": 8.5, "units": "mmol/L", "decimal": 1},
             "Total Protein": {"low": 60, "high": 65, "units": "g/L", "decimal": 0},
             "Albumin": {"low": 32, "high": 38, "units": "g/L", "decimal": 0},
-            "NT-Pro BNP": {"low": 2000, "high": 3300, "units": "ng/L", "decimal": 0},
-            "hsTroponin": {"low": 30.0, "high": 45.0, "units": "ng/L", "decimal": 1},
             "AST": {"low": 38, "high": 60, "units": "U/L", "decimal": 0},
             "ALT": {"low": 45, "high": 75, "units": "U/L", "decimal": 0},
             "ALP": {"low": 105, "high": 120, "units": "U/L", "decimal": 0},
-            "GGT": {"low": 33, "high": 70, "units": "U/L", "decimal": 0}
+            "GGT": {"low": 33, "high": 70, "units": "U/L", "decimal": 0},
+            "NT-Pro BNP": {"low": 2000, "high": 3300, "units": "ng/L", "decimal": 0},
+            "hsTroponin": {"low": 30.0, "high": 45.0, "units": "ng/L", "decimal": 1}
         }
     },
     "Disgestive System": {

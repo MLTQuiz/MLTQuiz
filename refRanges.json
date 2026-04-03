@@ -347,13 +347,17 @@
       "analyzer": "Serum Chemistry Results"
     },
     "hsTroponin": {
-      "units": "ng/L",
       "note": "• <15.0 ng/L on two consecutive draws: Rule out MI.\n• 15.0 - 50.0 ng/L Grey zone, repeat at 3, 6, and 12 hours.\nIncrease in 20.0 ng/L or 50%: Rule in MI.\n• >50.0 ng/L: Rule in MI.",
+      "ref": { "low": 0.0, "high": 15.0 },
+      "critical": { "high": 50.0 },
+      "decimal": 1,
       "analyzer": "Serum Chemistry Results"
     },
     "NT-Pro BNP": {
-      "units": "ng/L",
       "note": "• Heart Failure unlikely if <300 ng/L.\nHeart Failure likely if:\n\t• >450 ng/L for patients <50 years of age.\n\t• >900 ng/L for patients 50-75 years of age.\n\t• >1800 ng/L for patients >75 years of age.",
+      "ref": { "low": 0, "high": 300 },
+      "critical": { "high": 1800 },
+      "decimal": 0,
       "analyzer": "Serum Chemistry Results"
     },
     "AFP": {
@@ -369,13 +373,17 @@
       "analyzer": "Serum Chemistry Results"
     },
     "PSA": {
-      "units": "μg/L",
       "note": "• 0.0 - 3.5 μg/L for patients 50-59 years of age.\n• 0.0 - 4.5 μg/L for patients 60-69 years of age.\n• 0.0 - 6.5 μg/L for patients 70-150 years of age.",
+      "ref": { "low": 0, "high": 3.5 },
+      "critical": { "high": 6.5 },
+      "decimal": 1,
       "analyzer": "Serum Chemistry Results"
     },
     "CRPH": {
-      "units": "mg/L",
       "note": "• Low risk if < 1.0 mg/L.\n• Intermediate risk if 1.0 - 3.0 mg/L.\n• High risk if > 3.0 mg/L",
+      "ref": { "low": 0, "high": 1.0 },
+      "critical": { "high": 3.0 },
+      "decimal": 1,
       "analyzer": "Serum Chemistry Results"
     },
 

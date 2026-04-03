@@ -82,7 +82,7 @@
             white-space: nowrap;
         }
 
-        .menu-header {
+/*         .menu-header {
             font-weight: bold;
             margin-top: 10px;
         }
@@ -96,7 +96,7 @@
 
         #answerOptions input[type="radio"] {
             margin-right: 8px;
-        }
+        } */
     </style>
 </head>
 
@@ -132,8 +132,6 @@
         <input type="checkbox" id="june_feedback">
         Junea Noises
     </label>
-
-    </div>
 
     <script>
         let showAnionGap = false;
@@ -405,43 +403,6 @@
             }
 
             return "";
-        }
-
-        function parseRange(text) {
-            if (!text) return {};
-
-            const rangeMatch = text.match(/(-?\d+\.?\d*)\s*-\s*(-?\d+\.?\d*)/);
-            if (rangeMatch) {
-                return {
-                    low: parseFloat(rangeMatch[1]),
-                    high: parseFloat(rangeMatch[2])
-                };
-            }
-
-            const lessMatch = text.match(/<\s*(-?\d+\.?\d*)/);
-            if (lessMatch) {
-                return { high: parseFloat(lessMatch[1]) };
-            }
-
-            const greaterMatch = text.match(/>\s*(-?\d+\.?\d*)/);
-            if (greaterMatch) {
-                return { low: parseFloat(greaterMatch[1]) };
-            }
-
-            return {};
-        }
-
-        function getCriticalRange(analyte) {
-            const critText = chemRefs["Critical Value"]?.[analyte];
-            if (!critText) return {};
-
-            const lowMatch = critText.match(/Lower:\s*<\s*(-?\d+\.?\d*)/);
-            const highMatch = critText.match(/Upper:\s*>\s*(-?\d+\.?\d*)/);
-
-            return {
-                low: lowMatch ? parseFloat(lowMatch[1]) : undefined,
-                high: highMatch ? parseFloat(highMatch[1]) : undefined
-            };
         }
 
         function getFlag(key, value) {

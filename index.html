@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: large;
             background: #f5f7fa;
             margin: 40px;
         }
@@ -26,9 +28,10 @@
             text-align: left;
             width: 100%;
             background: white;
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         label {
@@ -47,32 +50,9 @@
             font-weight: bold;
         }
 
-        button {
-            font-size: 22px;
-            padding: 10px 18px;
-            border-radius: 6px;
-            border: none;
-            background: #2f6fed;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #1f55c4;
-        }
-
-        .button-back {
-            font-size: 15px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: none;
-            background: #2f6fed;
-            color: white;
-            cursor: pointer;
-        }
-
-        .button-back:hover {
-            background: #1f55c4;
+        .main-title {
+            font-size: 24px;
+            font-weight: bold;
         }
 
         #quizImage {
@@ -83,30 +63,113 @@
             border-radius: 6px;
         }
 
-        #answerOptions label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+        button {
+            font-size: 25px;
+            padding: 10px 18px;
+            border-radius: 5px;
+            border: none;
+            background: #2f6fed;
+            color: white;
             cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f55c4;
+        }
+
+        button-back {
+            font-size: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        button-back:hover {
+            background: #1f55c4;
+        }
+
+        #scrollMenu {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #answerOptions label {
+            display: block;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #answerOptions input[type="radio"] {
+            margin-right: 8px;
         }
 
         #answerOptions br {
             display: none;
         }
+
+        .large-textbox {
+            font-size: large;
+        }
     </style>
 </head>
+
 <body>
     <h1>Welcome to MLT Quizzes!</h1>
-    <h2>Select the department you'd like to study:</h2>
-    <a href="hematology_choice.html"><button class="button">Hematology</button></a>
-    <label>Working on</label><br>
-    <a href="chemistry_choices.html"><br><button class="button">Chemistry</button></a>
-    <label>Not Started</label><br>
-    <a><br><button class="button">Transfusions</button></a>
-    <label>Not Started</label><br>
-    <a><br><button class="button">Microbiology</button></a>
-    <label>Not Started</label><br>
-    <a href="histology_quiz.html"><br><button class="button">Histology</button></a>
-    <label>Almost done! Give feedback please :)</label><br>
+    <h2>Select the department you'd like to study</h2>
+
+    <div class="category">
+        <button onclick="Chemistry()">Chemistry</button>
+        <label>Started Correlation Quiz. Adding more case studies soon!</label>
+        <br><br>
+
+        <button onclick="Hematology()">Hematology</button>
+        <label>Cell ID Quiz in final stages! Others not started.</label>
+        <br><br>
+
+        <button onclick="Histology()">Histology</button>
+        <label>Final stages! Adding tissue identification in the future.</label>
+        <br><br>
+
+        <button onclick="Microbiology()">Microbiology</button>
+        <label>Not started.</label>
+        <br><br>
+
+        <button onclick="Transfusions()">Transfusions</button>
+        <label>Not started.</label>
+    </div>
+
+    <script>
+
+        function Chemistry() {
+            window.location.href = "chemistry_choices.html";
+        }
+
+        function Hematology() {
+            window.location.href = "hematology_choice.html";
+        }
+
+        function Transfusions() {
+            window.location.href = "";
+        }
+
+        function Microbiology() {
+            window.location.href = "";
+        }
+
+        function Histology() {
+            window.location.href = "histology_quiz.html";
+        }
+
+    </script>
 </body>
+
 </html>

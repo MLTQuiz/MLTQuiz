@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: large;
             background: #f5f7fa;
             margin: 40px;
         }
@@ -26,9 +28,10 @@
             text-align: left;
             width: 100%;
             background: white;
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         label {
@@ -47,32 +50,9 @@
             font-weight: bold;
         }
 
-        button {
-            font-size: 22px;
-            padding: 10px 18px;
-            border-radius: 6px;
-            border: none;
-            background: #2f6fed;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #1f55c4;
-        }
-
-        .button-back {
-            font-size: 15px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: none;
-            background: #2f6fed;
-            color: white;
-            cursor: pointer;
-        }
-
-        .button-back:hover {
-            background: #1f55c4;
+        .main-title {
+            font-size: 24px;
+            font-weight: bold;
         }
 
         #quizImage {
@@ -83,28 +63,108 @@
             border-radius: 6px;
         }
 
-        #answerOptions label {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
+        button {
+            font-size: 25px;
+            padding: 10px 18px;
+            border-radius: 5px;
+            border: none;
+            background: #2f6fed;
+            color: white;
             cursor: pointer;
+        }
+
+        button:hover {
+            background: #1f55c4;
+        }
+
+        button-back {
+            font-size: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #2f6fed;
+            color: white;
+            cursor: pointer;
+        }
+
+        button-back:hover {
+            background: #1f55c4;
+        }
+
+        #scrollMenu {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #answerOptions label {
+            display: block;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: large;
+        }
+
+        #answerOptions input[type="radio"] {
+            margin-right: 8px;
         }
 
         #answerOptions br {
             display: none;
         }
+
+        .large-textbox {
+            font-size: large;
+        }
     </style>
 </head>
+
 <body>
+
     <h1>Hematology</h1>
-    <h2>Select the area you'd like to study:</h2>
-    
-    <a href="hematology_cellidchoices.html"><br><button style="font-size:25px; border-radius:5px">Cell Identification</button></a>
-    <label>Final stages. Please give feedback :)</label><br>
-    <a><br><button style="font-size:25px; border-radius:5px">Coagulation</button></a>
-    <label>Not Started</label><br>
-    <a><br><button style="font-size:25px; border-radius:5px">CBC Correlations</button></a>
-    <label>Not Started</label><br><br><br><br><br><br><br><br><br>
-    <a href="index.html"><button style="font-size:15px; border-radius:5px">Go back</button><br></a>
+    <h2>Select the area you'd like to study</h2>
+
+    <div class="category">
+        <button onclick="CellID()">Cell Identification</button>
+        <label>Final stages. Please give feedback :)</label>
+        <br><br>
+
+        <button onclick="Coagulation()">Coagulation</button>
+        <label>Not Started.</label>
+        <br><br>
+
+        <button onclick="Correlations()">CBC Correlations</button>
+        <label>Not Started.</label>
+
+        <br><br><br><br><br><br><br><br>
+        <hr><br>
+
+        <button-back onclick="Home()">Home</button-back>
+    </div>
+
+    <script>
+
+        function CellID() {
+            window.location.href = "hematology_cellidchoices.html";
+        }
+
+        function Coagulation() {
+            window.location.href = "";
+        }
+
+        function Correlations() {
+            window.location.href = "";
+        }
+
+        function Home() {
+            window.location.href = "index.html";
+        }
+
+    </script>
+
 </body>
+
 </html>

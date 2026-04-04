@@ -8,8 +8,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #ffffff;
+            font-size: large;
+            background: #f5f7fa;
             margin: 40px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
         }
 
         .quiz-container {
@@ -19,10 +24,23 @@
         }
 
         .category {
+            display: inline-block;
             background: white;
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 6px 0;
+            cursor: pointer;
+        }
+
+        .category-title {
+            font-weight: bold;
+            font-size: 20px;
         }
 
         .question {
@@ -30,17 +48,23 @@
             font-weight: bold;
         }
 
+        .main-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
         #quizImage {
             margin-top: 20px;
             max-width: 100%;
+            height: auto;
             border: 2px solid #ccc;
             border-radius: 6px;
         }
 
         button {
-            font-size: 22px;
+            font-size: 25px;
             padding: 10px 18px;
-            border-radius: 6px;
+            border-radius: 5px;
             border: none;
             background: #2f6fed;
             color: white;
@@ -51,7 +75,7 @@
             background: #1f55c4;
         }
 
-        .button-back {
+        button-back {
             font-size: 15px;
             padding: 8px 12px;
             border-radius: 6px;
@@ -61,7 +85,7 @@
             cursor: pointer;
         }
 
-        .button-back:hover {
+        button-back:hover {
             background: #1f55c4;
         }
 
@@ -81,6 +105,7 @@
 
         #answerOptions label {
             display: block;
+            align-items: center;
             margin-bottom: 10px;
             cursor: pointer;
             font-size: large;
@@ -88,6 +113,14 @@
 
         #answerOptions input[type="radio"] {
             margin-right: 8px;
+        }
+
+        #answerOptions br {
+            display: none;
+        }
+
+        .large-textbox {
+            font-size: large;
         }
     </style>
 </head>
@@ -104,15 +137,18 @@
             <div id="answerOptions"></div>
             <div id="feedback"></div>
 
-            <button class="button" onclick="nextQuestion()">Next Question</button>
+            <br>
+            <button onclick="nextQuestion()">Next Question</button>
+
+            <br><br><hr><br>
+
+            <button-back id="muteBtn">🔊 Mute</button-back>
+            <br><br><br>
+            <button-back onclick="Back()">Back</button-back>
+            <br><br><br>
+            <button-back onclick="Home()">Home</button-back>
+
         </div>
-
-        <hr />
-        <br />
-
-        <button class="button-back" onclick="changeCells()">Change Cells</button><br><br>
-        <button class="button-back" onclick="Home()">Home</button><br><br>
-        <button class="button-back" id="muteBtn">🔊 Mute</button>
     </div>
 
     <div style="height:2000px;"></div>
@@ -121,8 +157,6 @@
         <input type="checkbox" id="june_feedback">
         Junea Noises
     </label>
-
-    </div>
 
     <script>
 
@@ -409,7 +443,7 @@
             }
         }
 
-        function changeCells() {
+        function Back() {
             window.location.href = "hematology_cellidchoices.html";
         }
 

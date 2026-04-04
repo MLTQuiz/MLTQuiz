@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: large;
             background: #f5f7fa;
             margin: 40px;
         }
@@ -26,9 +28,10 @@
             text-align: left;
             width: 100%;
             background: white;
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         label {
@@ -47,10 +50,18 @@
             font-weight: bold;
         }
 
-        button {
-            font-size: 22px;
-            padding: 10px 18px;
+        #quizImage {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
             border-radius: 6px;
+        }
+
+        button {
+            font-size: 25px;
+            padding: 10px 18px;
+            border-radius: 5px;
             border: none;
             background: #2f6fed;
             color: white;
@@ -61,7 +72,7 @@
             background: #1f55c4;
         }
 
-        .button-back {
+        button-back {
             font-size: 15px;
             padding: 8px 12px;
             border-radius: 6px;
@@ -71,37 +82,74 @@
             cursor: pointer;
         }
 
-        .button-back:hover {
+        button-back:hover {
             background: #1f55c4;
         }
 
-        #quizImage {
+        #scrollMenu {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
             margin-top: 20px;
-            max-width: 100%;
-            height: auto;
-            border: 2px solid #ccc;
-            border-radius: 6px;
+            text-align: left;
         }
 
         #answerOptions label {
-            display: flex;
+            display: block;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             cursor: pointer;
+            font-size: large;
+        }
+
+        #answerOptions input[type="radio"] {
+            margin-right: 8px;
         }
 
         #answerOptions br {
             display: none;
         }
+
+        .large-textbox {
+            font-size: large;
+        }
     </style>
 </head>
+
 <body>
     <h1>Chemistry</h1>
-    <h2>Select the area you'd like to study:</h2>
-    <a href="chemistry_correlationschoices.html"><br><button style="font-size:25px; border-radius:5px">Correlations</button></a><br>
-    <label>Working on</label><br>
-    <a><br><button style="font-size:25px; border-radius:5px">Urine Microscopy</button></a>
-    <label>Not Started</label><br><br><br><br><br><br><br><br><br>
-    <a href="index.html"><button style="font-size:15px; border-radius:5px">Go back</button><br></a>
+    <h2>Select the area you'd like to study</h2>
+
+    <div class="category">
+        <button onclick="Correlations()">Correlations</button>
+        <label>Adding new Case Studies soon!</label>
+        <br><br>
+
+        <button onclick="Microscopy()">Urine Microscopy</button>
+        <label>Not Started.</label>
+
+        <br><br><br><br><br><br><br><br>
+        <hr><br>
+
+        <button-back onclick="Home()">Home</button-back>
+    </div>
+
+    <script>
+
+        function Correlations() {
+            window.location.href = "chemistry_correlationschoices.html";
+        }
+
+        function Microscopy() {
+            window.location.href = "";
+        }
+
+        function Home() {
+            window.location.href = "index.html";
+        }
+
+    </script>
 </body>
+
 </html>

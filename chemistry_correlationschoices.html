@@ -8,6 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: large;
             background: #f5f7fa;
             margin: 40px;
         }
@@ -17,11 +18,14 @@
         }
 
         .category {
+            display: inline-block;
+            text-align: left;
+            width: 100%;
             background: white;
             padding: 15px 20px;
-            margin-bottom: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         label {
@@ -41,9 +45,9 @@
         }
 
         button {
-            font-size: 22px;
+            font-size: 25px;
             padding: 10px 18px;
-            border-radius: 6px;
+            border-radius: 5px;
             border: none;
             background: #2f6fed;
             color: white;
@@ -54,7 +58,7 @@
             background: #1f55c4;
         }
 
-        backbutton {
+        button-back {
             font-size: 15px;
             padding: 8px 12px;
             border-radius: 6px;
@@ -62,10 +66,9 @@
             background: #2f6fed;
             color: white;
             cursor: pointer;
-            text-decoration: none;
         }
 
-        backbutton:hover {
+        button-back:hover {
             background: #1f55c4;
         }
 
@@ -91,20 +94,22 @@
 
 <body>
     <h1>Chemistry Correlations Quiz</h1>
-    <h2>Which topcis would you like to be quizzed on?</h2>
+    <h2>Which topics would you like to be quizzed on?</h2>
 
     <div class="category">
         <div id="scrollMenu"></div>
 
         <br>
+
         <button onclick="startQuiz()">Begin Quiz</button>
 
-        <hr><br>
-        <backbutton onclick="Back()">Back</backbutton><br><br>
-        <backbutton onclick="Home()">Home</backbutton>
+        <br><br><hr><br>
 
+        <button-back onclick="Back()">Back</button-back>
+        <br><br><br>
+        <button-back onclick="Home()">Home</button-back>
+    </div>
         <script>
-
 
             let chemData = {};
 

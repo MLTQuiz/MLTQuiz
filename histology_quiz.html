@@ -9,8 +9,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: large;
             background: #f5f7fa;
             margin: 40px;
+            font-size: large;
         }
 
         h1 {
@@ -25,13 +27,11 @@
 
         .category {
             display: inline-block;
-            text-align: left;
-            width: 100%;
             background: white;
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            font-size: large;
+            margin-bottom: 15px;
         }
 
         label {
@@ -50,14 +50,18 @@
             font-weight: bold;
         }
 
-        .large-textbox {
-            font-size: large;
+        #quizImage {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ccc;
+            border-radius: 6px;
         }
 
         button {
-            font-size: 22px;
+            font-size: 25px;
             padding: 10px 18px;
-            border-radius: 6px;
+            border-radius: 5px;
             border: none;
             background: #2f6fed;
             color: white;
@@ -68,7 +72,7 @@
             background: #1f55c4;
         }
 
-        .button-back {
+        button-back {
             font-size: 15px;
             padding: 8px 12px;
             border-radius: 6px;
@@ -78,27 +82,42 @@
             cursor: pointer;
         }
 
-        .button-back:hover {
+        button-back:hover {
             background: #1f55c4;
         }
 
-        #quizImage {
+        #scrollMenu {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
             margin-top: 20px;
-            max-width: 100%;
-            height: auto;
-            border: 2px solid #ccc;
-            border-radius: 6px;
+            text-align: left;
+        }
+
+        .menu-header {
+            font-weight: bold;
+            margin-top: 10px;
         }
 
         #answerOptions label {
-            display: flex;
+            display: block;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             cursor: pointer;
+            font-size: large;
+        }
+
+        #answerOptions input[type="radio"] {
+            margin-right: 8px;
         }
 
         #answerOptions br {
             display: none;
+        }
+
+        .large-textbox {
+            font-size: large;
         }
     </style>
 </head>
@@ -108,47 +127,51 @@
         <h1>Histology Stain Quiz</h1>
 
         <div class="category">
-            <span class="question">Answer the following questions. Spelling counts!</span><br />
-            <img id="quizImage" src="" alt="Good luck!" /><br />
-            
-            <br /><label>What stain is this?</label>
-            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="stain_id"></input><br />
-            <span id="fb_stain_id"></span><br />
-            
-            <br /><label>What is being demonstrated?</label>
-            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="demonstrating"></input><br />
-            <span id="fb_demonstrating"></span><br />
-            
-            <br /><label>In what color?</label>
-            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="color"></input><br />
-            <span id="fb_color"></span><br />
-            
-            <br /><label>What is the principle?</label>
-            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="principle"></input><br />
-            <span id="fb_principle"></span><br />
-            
-            <br /><label>What is used as a control?</label>
-            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="control"></input><br />
+            <span class="question">Answer the following questions. Spelling counts!</span><br>
+            <img id="quizImage" src="" alt="Good luck!" /><br>
+
+            <br><label>What stain is this?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="stain_id"></input><br>
+            <span id="fb_stain_id"></span><br>
+
+            <br><label>What is being demonstrated?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox"
+                id="demonstrating"></input><br>
+            <span id="fb_demonstrating"></span><br>
+
+            <br><label>In what color?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="color"></input><br>
+            <span id="fb_color"></span><br>
+
+            <br><label>What is the principle?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="principle"></input><br>
+            <span id="fb_principle"></span><br>
+
+            <br><label>What is used as a control?</label>
+            <input type="text" style="width: 500px; height: 20px;" class="large-textbox" id="control"></input><br>
             <span id="fb_control"></span></input>
-            
+
             <div id="answerOptions" style="margin-top: 15px"></div>
-            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div><br />
+            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div><br>
             <button onclick="checkAnswer()">Check Answer</button>
 
-            <br /><br />
+            <br><br>
             <button onclick="nextStain()">Next Stain</button>
+
+            <br><br>
+            <hr>
+            <br>
+
+            <button-back id="muteBtn">🔊 Mute</button-back>
+            <br><br><br>
+            <button-back onclick="Home()">Home</button-back>
+
         </div>
-
-        <hr />
-        <br />
-
-        <button class="button-back" onclick="Home()">Home</button><br><br>
-        <button class="button-back" id="muteBtn">🔊 Mute</button>
     </div>
-
+    
     <div style="height:2000px;"></div>
 
-    <label class="tab2">
+    <label>
         <input type="checkbox" id="june_feedback">
         Junea Noises
     </label>

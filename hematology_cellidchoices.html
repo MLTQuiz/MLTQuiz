@@ -10,6 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: large;
             background: #f5f7fa;
             margin: 40px;
         }
@@ -19,11 +20,14 @@
         }
 
         .category {
+            display: inline-block;
+            text-align: left;
+            width: 100%;
             background: white;
             padding: 15px 20px;
-            margin-bottom: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
 
         label {
@@ -37,15 +41,20 @@
             font-size: 20px;
         }
 
+        .question {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
         .main-title {
             font-size: 24px;
             font-weight: bold;
         }
 
         button {
-            font-size: 22px;
+            font-size: 25px;
             padding: 10px 18px;
-            border-radius: 6px;
+            border-radius: 5px;
             border: none;
             background: #2f6fed;
             color: white;
@@ -56,7 +65,7 @@
             background: #1f55c4;
         }
 
-        backbutton {
+        button-back {
             font-size: 15px;
             padding: 8px 12px;
             border-radius: 6px;
@@ -64,10 +73,9 @@
             background: #2f6fed;
             color: white;
             cursor: pointer;
-            text-decoration: none;
         }
 
-        backbutton:hover {
+        button-back:hover {
             background: #1f55c4;
         }
 
@@ -142,168 +150,173 @@
         </label>
 
         <hr>
+
         <h3>Or select individual cells:</h3>
         <div id="scrollMenu"></div>
 
         <br>
+
         <button onclick="startQuiz()">Begin Quiz</button>
 
-        <hr><br>
-        <backbutton onclick="Back()">Back</backbutton><br><br>
-        <backbutton onclick="Home()">Home</backbutton>
+        <br><br><hr><br>
 
-        <div style="height:2000px;"></div>
+        <button-back onclick="Back()">Back</button-back>
+        <br><br><br>
+        <button-back onclick="Home()">Home</button-back>
+    </div>
 
-        <label class="tab2">
-            <input type="checkbox" id="hard_mode">
-            Hard Mode!!!
-        </label>
+    <div style="height:2000px;"></div>
 
-        <script>
+    <label class="tab2">
+        <input type="checkbox" id="hard_mode">
+        Hard Mode!!!
+    </label>
 
-            const allCells = document.querySelector(".allCells");
-            const groupParents = document.querySelectorAll(".group-parent");
-            const children = document.querySelectorAll(".child");
+    <script>
 
-            function clearScrollMenuSelection() {
-                document.querySelectorAll("#scrollMenu input")
-                    .forEach(cb => cb.checked = false);
-            }
+        const allCells = document.querySelector(".allCells");
+        const groupParents = document.querySelectorAll(".group-parent");
+        const children = document.querySelectorAll(".child");
 
-            function clearCategorySelection() {
-                allCells.checked = false;
-                groupParents.forEach(p => p.checked = false);
-                children.forEach(c => c.checked = false);
-            }
+        function clearScrollMenuSelection() {
+            document.querySelectorAll("#scrollMenu input")
+                .forEach(cb => cb.checked = false);
+        }
 
-            allCells.addEventListener("change", () => {
+        function clearCategorySelection() {
+            allCells.checked = false;
+            groupParents.forEach(p => p.checked = false);
+            children.forEach(c => c.checked = false);
+        }
+
+        allCells.addEventListener("change", () => {
+
+            clearScrollMenuSelection(); // 🔥 NEW
+
+            groupParents.forEach(p => p.checked = allCells.checked);
+            children.forEach(c => c.checked = allCells.checked);
+
+        });
+
+        groupParents.forEach(parent => {
+            parent.addEventListener("change", () => {
 
                 clearScrollMenuSelection(); // 🔥 NEW
 
-                groupParents.forEach(p => p.checked = allCells.checked);
-                children.forEach(c => c.checked = allCells.checked);
+                const group = parent.dataset.group;
+                const groupChildren = document.querySelectorAll("." + group);
+                groupChildren.forEach(child => child.checked = parent.checked);
 
+                updateAllCells();
+            });
+        });
+
+        children.forEach(child => {
+            child.addEventListener("change", () => {
+
+                clearScrollMenuSelection(); // 🔥 NEW
+
+                const group = [...child.classList].find(c => c !== "child");
+                const groupChildren = document.querySelectorAll("." + group);
+                const parent = document.querySelector(`[data-group="${group}"]`);
+
+                parent.checked = [...groupChildren].every(c => c.checked);
+                updateAllCells();
+            });
+        });
+
+        function updateAllCells() {
+            allCells.checked = [...groupParents].every(p => p.checked);
+        }
+
+        let imageDatabase = {};
+
+        fetch("hematologyImageDatabase.json")
+            .then(res => res.json())
+            .then(db => {
+                imageDatabase = db;
+                buildScrollMenu();
             });
 
-            groupParents.forEach(parent => {
-                parent.addEventListener("change", () => {
+        function buildScrollMenu() {
+            const menu = document.getElementById("scrollMenu");
 
-                    clearScrollMenuSelection(); // 🔥 NEW
+            Object.keys(imageDatabase).forEach(category => {
 
-                    const group = parent.dataset.group;
-                    const groupChildren = document.querySelectorAll("." + group);
-                    groupChildren.forEach(child => child.checked = parent.checked);
+                if (category === "hard_mode") return;
 
-                    updateAllCells();
-                });
-            });
+                const header = document.createElement("div");
+                header.textContent = category === "standalone"
+                    ? "Others"
+                    : category.replace(/_/g, " ").toUpperCase();
 
-            children.forEach(child => {
-                child.addEventListener("change", () => {
+                header.style.fontWeight = "bold";
+                header.style.marginTop = "10px";
+                menu.appendChild(header);
 
-                    clearScrollMenuSelection(); // 🔥 NEW
+                const catData = imageDatabase[category];
 
-                    const group = [...child.classList].find(c => c !== "child");
-                    const groupChildren = document.querySelectorAll("." + group);
-                    const parent = document.querySelector(`[data-group="${group}"]`);
+                Object.keys(catData).forEach(subtype => {
 
-                    parent.checked = [...groupChildren].every(c => c.checked);
-                    updateAllCells();
-                });
-            });
+                    const label = document.createElement("label");
 
-            function updateAllCells() {
-                allCells.checked = [...groupParents].every(p => p.checked);
-            }
+                    const cb = document.createElement("input");
+                    cb.type = "checkbox";
+                    cb.value = subtype;
 
-            let imageDatabase = {};
-
-            fetch("hematologyImageDatabase.json")
-                .then(res => res.json())
-                .then(db => {
-                    imageDatabase = db;
-                    buildScrollMenu();
-                });
-
-            function buildScrollMenu() {
-                const menu = document.getElementById("scrollMenu");
-
-                Object.keys(imageDatabase).forEach(category => {
-
-                    if (category === "hard_mode") return;
-
-                    const header = document.createElement("div");
-                    header.textContent = category === "standalone"
-                        ? "Others"
-                        : category.replace(/_/g, " ").toUpperCase();
-
-                    header.style.fontWeight = "bold";
-                    header.style.marginTop = "10px";
-                    menu.appendChild(header);
-
-                    const catData = imageDatabase[category];
-
-                    Object.keys(catData).forEach(subtype => {
-
-                        const label = document.createElement("label");
-
-                        const cb = document.createElement("input");
-                        cb.type = "checkbox";
-                        cb.value = subtype;
-
-                        cb.addEventListener("change", () => {
-                            clearCategorySelection();
-                        });
-
-                        label.appendChild(cb);
-                        label.append(" " + subtype.replace(/_/g, " "));
-                        menu.appendChild(label);
+                    cb.addEventListener("change", () => {
+                        clearCategorySelection();
                     });
+
+                    label.appendChild(cb);
+                    label.append(" " + subtype.replace(/_/g, " "));
+                    menu.appendChild(label);
                 });
+            });
+        }
+
+        function startQuiz() {
+
+            const selectedCategories = [...document.querySelectorAll('.child:checked')]
+                .map(cb => cb.value);
+
+            const selectedSubtypes = [...document.querySelectorAll('#scrollMenu input:checked')]
+                .map(cb => cb.value);
+
+            const hardModeCheckbox = document.getElementById("hard_mode");
+            const hardMode = hardModeCheckbox.checked;
+
+            if (selectedSubtypes.length > 0) {
+
+                localStorage.setItem("quizSubtypes", JSON.stringify(selectedSubtypes));
+                localStorage.setItem("quizMode", "subtypes");
+
+            } else if (selectedCategories.length > 0 || hardMode) {
+
+                if (hardMode) selectedCategories.push("hard_mode");
+
+                localStorage.setItem("quizCells", JSON.stringify(selectedCategories));
+                localStorage.setItem("quizMode", "categories");
+
+            } else {
+                alert("Please select at least one option.");
+                return;
             }
 
-            function startQuiz() {
+            localStorage.setItem("hardMode", hardMode);
 
-                const selectedCategories = [...document.querySelectorAll('.child:checked')]
-                    .map(cb => cb.value);
+            window.location.href = "hematology_cellidquiz.html";
+        }
 
-                const selectedSubtypes = [...document.querySelectorAll('#scrollMenu input:checked')]
-                    .map(cb => cb.value);
+        function Back() {
+            window.location.href = "hematology_choice.html";
+        }
 
-                const hardModeCheckbox = document.getElementById("hard_mode");
-                const hardMode = hardModeCheckbox.checked;
+        function Home() {
+            window.location.href = "index.html";
+        }
 
-                if (selectedSubtypes.length > 0) {
-
-                    localStorage.setItem("quizSubtypes", JSON.stringify(selectedSubtypes));
-                    localStorage.setItem("quizMode", "subtypes");
-
-                } else if (selectedCategories.length > 0 || hardMode) {
-
-                    if (hardMode) selectedCategories.push("hard_mode");
-
-                    localStorage.setItem("quizCells", JSON.stringify(selectedCategories));
-                    localStorage.setItem("quizMode", "categories");
-
-                } else {
-                    alert("Please select at least one option.");
-                    return;
-                }
-
-                localStorage.setItem("hardMode", hardMode);
-
-                window.location.href = "hematology_cellidquiz.html";
-            }
-
-            function Back() {
-                window.location.href = "hematology_choice.html";
-            }
-
-            function Home() {
-                window.location.href = "index.html";
-            }
-
-        </script>
+    </script>
 </body>
 
 </html>

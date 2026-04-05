@@ -8,17 +8,25 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: large;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
             background: #f5f7fa;
-            margin: 40px;
+            margin: clamp(calc(40px/3), calc(40vw/7.2), 40px);
+            padding-right: 5vw;
+            padding-left: 5vw;
+            white-space: nowrap;
         }
 
         h1 {
-            margin-bottom: 10px;
+            margin-bottom: clamp(calc(10px/3), calc(10vw/7.2), 10px);
+            font-size: clamp(calc(36px/3), calc(36vw/7.2), 36px);
+        }
+
+        h2 {
+            font-size: clamp(calc(27px/3), calc(27vw/7.2), 27px);
         }
 
         .quiz-container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
@@ -28,45 +36,48 @@
             text-align: left;
             width: 100%;
             background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
+            padding: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+            border-radius: clamp(calc(8px/3), calc(8vw/7.2), 8px);
+            box-shadow: 0 clamp(calc(2px/3), calc(2vw/7.2), 2px) clamp(calc(6px/3), calc(6vw/7.2), 6px) rgba(0, 0, 0, 0.1);
+            margin-bottom: clamp(calc(15px/3), calc(15vw/7.2), 15px);
+            box-sizing: border-box;
         }
 
         label {
             display: block;
-            margin: 6px 0;
+            margin: clamp(calc(6px/3), calc(6vw/7.2), 6px) 0;
             cursor: pointer;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
         }
 
         .category-title {
+            font-size: clamp(calc(20px/3), calc(20vw/7.2), 20px);
             font-weight: bold;
-            font-size: 20px;
         }
 
         .question {
-            font-size: 24px;
+            font-size: clamp(calc(24px/3), calc(24vw/7.2), 24px);
             font-weight: bold;
         }
 
         .main-title {
-            font-size: 24px;
+            font-size: clamp(calc(24px/3), calc(24vw/7.2), 24px);
             font-weight: bold;
         }
 
         #quizImage {
-            margin-top: 20px;
+            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
             max-width: 100%;
             height: auto;
-            border: 2px solid #ccc;
-            border-radius: 6px;
+            border: clamp(calc(2px/3), calc(2vw/7.2), 2px) solid #ccc;
+            border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
         }
 
         button {
-            font-size: 25px;
-            padding: 10px 18px;
-            border-radius: 5px;
+            line-height: 1.2;
+            font-size: clamp(calc(25px/3), calc(25vw/7.2), 25px);
+            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px) clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            border-radius: clamp(calc(5px/3), calc(5vw/7.2), 5px);
             border: none;
             background: #2f6fed;
             color: white;
@@ -78,9 +89,9 @@
         }
 
         button-back {
-            font-size: 15px;
-            padding: 8px 12px;
-            border-radius: 6px;
+            font-size: clamp(calc(15px/3), calc(15vw/7.2), 15px);
+            padding: clamp(calc(8px/3), calc(8vw/7.2), 8px) clamp(calc(12px/3), calc(12vw/7.2), 12px);
+            border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
             border: none;
             background: #2f6fed;
             color: white;
@@ -91,25 +102,35 @@
             background: #1f55c4;
         }
 
+        .tab1 {
+            margin-left: clamp(calc(25px/3), calc(25vw/7.2), 25px);
+        }
+
+        .tab2 {
+            margin-left: clamp(calc(50px/3), calc(50vw/7.2), 50px);
+        }
+
         #scrollMenu {
             max-height: 300px;
             overflow-y: auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 20px;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            border: clamp(calc(1px/3), calc(1vw/7.2), 1px) solid #ccc;
+            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px);
+            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
             text-align: left;
+            white-space: nowrap;
         }
 
         #answerOptions label {
             display: block;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: clamp(calc(10px/3), calc(10vw/7.2), 10px);
             cursor: pointer;
-            font-size: large;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
         }
 
         #answerOptions input[type="radio"] {
-            margin-right: 8px;
+            margin-right: clamp(calc(8px/3), calc(8vw/7.2), 8px);
         }
 
         #answerOptions br {
@@ -117,7 +138,23 @@
         }
 
         .large-textbox {
-            font-size: large;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+        }
+
+        .large-textarea {
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            font-family: Arial, sans-serif;
+            width: clamp(calc(500px/3), calc(500vw/7.2), 500px);
+            height: clamp(calc(100px/3), calc(100vw/7.2), 100px);
+            resize: none;
+        }
+
+        td:nth-child(2) {
+            white-space: nowrap;
+        }
+
+        td:nth-child(1) {
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -142,7 +179,7 @@
         <br><br><br><br><br><br><br><br>
         <hr><br>
 
-        <button-back onclick="Home()">Home</button-back>
+        <button-back onclick="Home()">🏠 Home</button-back>
     </div>
 
     <script>

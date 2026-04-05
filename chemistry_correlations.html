@@ -8,9 +8,21 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: large;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
             background: #f5f7fa;
-            margin: 40px;
+            margin: clamp(calc(40px/3), calc(40vw/7.2), 40px);
+            padding-right: 5vw;
+            padding-left: 5vw;
+            white-space: nowrap;
+        }
+
+        h1 {
+            margin-bottom: clamp(calc(10px/3), calc(10vw/7.2), 10px);
+            font-size: clamp(calc(36px/3), calc(36vw/7.2), 36px);
+        }
+
+        h2 {
+            font-size: clamp(calc(27px/3), calc(27vw/7.2), 27px);
         }
 
         .quiz-container {
@@ -21,29 +33,51 @@
 
         .category {
             display: inline-block;
+            text-align: center;
+            width: 100%;
             background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
+            padding: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+            border-radius: clamp(calc(8px/3), calc(8vw/7.2), 8px);
+            box-shadow: 0 clamp(calc(2px/3), calc(2vw/7.2), 2px) clamp(calc(6px/3), calc(6vw/7.2), 6px) rgba(0, 0, 0, 0.1);
+            margin-bottom: clamp(calc(15px/3), calc(15vw/7.2), 15px);
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin: clamp(calc(6px/3), calc(6vw/7.2), 6px) 0;
+            cursor: pointer;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+        }
+
+        .category-title {
+            font-size: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+            font-weight: bold;
         }
 
         .question {
-            font-size: 24px;
+            font-size: clamp(calc(24px/3), calc(24vw/7.2), 24px);
+            font-weight: bold;
+        }
+
+        .main-title {
+            font-size: clamp(calc(24px/3), calc(24vw/7.2), 24px);
             font-weight: bold;
         }
 
         #quizImage {
-            margin-top: 20px;
+            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
             max-width: 100%;
-            border: 2px solid #ccc;
-            border-radius: 6px;
+            height: auto;
+            border: clamp(calc(2px/3), calc(2vw/7.2), 2px) solid #ccc;
+            border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
         }
 
         button {
-            font-size: 25px;
-            padding: 10px 18px;
-            border-radius: 5px;
+            line-height: 1.2;
+            font-size: clamp(calc(25px/3), calc(25vw/7.2), 25px);
+            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px) clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            border-radius: clamp(calc(5px/3), calc(5vw/7.2), 5px);
             border: none;
             background: #2f6fed;
             color: white;
@@ -55,9 +89,9 @@
         }
 
         button-back {
-            font-size: 15px;
-            padding: 8px 12px;
-            border-radius: 6px;
+            font-size: clamp(calc(15px/3), calc(15vw/7.2), 15px);
+            padding: clamp(calc(8px/3), calc(8vw/7.2), 8px) clamp(calc(12px/3), calc(12vw/7.2), 12px);
+            border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
             border: none;
             background: #2f6fed;
             color: white;
@@ -68,11 +102,50 @@
             background: #1f55c4;
         }
 
+        .tab1 {
+            margin-left: clamp(calc(25px/3), calc(25vw/7.2), 25px);
+        }
+
+        .tab2 {
+            margin-left: clamp(calc(50px/3), calc(50vw/7.2), 50px);
+        }
+
+        #scrollMenu {
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            border: clamp(calc(1px/3), calc(1vw/7.2), 1px) solid #ccc;
+            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px);
+            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        #answerOptions label {
+            display: block;
+            align-items: center;
+            margin-bottom: clamp(calc(10px/3), calc(10vw/7.2), 10px);
+            cursor: pointer;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+        }
+
+        #answerOptions input[type="radio"] {
+            margin-right: clamp(calc(8px/3), calc(8vw/7.2), 8px);
+        }
+
+        #answerOptions br {
+            display: none;
+        }
+
+        .large-textbox {
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+        }
+
         .large-textarea {
-            font-size: large;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
             font-family: Arial, sans-serif;
-            width: 500px;
-            height: 100px;
+            width: clamp(calc(500px/3), calc(500vw/7.2), 500px);
+            height: clamp(calc(100px/3), calc(100vw/7.2), 100px);
             resize: none;
         }
 
@@ -87,7 +160,6 @@
 </head>
 
 <body>
-
     <div class="quiz-container">
         <h1>Chemistry Correlations Quiz</h1>
 
@@ -103,13 +175,14 @@
             <button onclick="revealAnswer()">Reveal Answer</button><br><br>
             <button onclick="nextQuestion()">Next Question</button>
 
-            <br><br><hr><br>
+            <br><br>
+            <hr><br>
 
             <button-back id="muteBtn">🔊 Mute</button-back>
             <br><br><br>
-            <button-back onclick="Back()">Back</button-back>
+            <button-back onclick="Back()">⬅ Back</button-back>
             <br><br><br>
-            <button-back onclick="Home()">Home</button-back>
+            <button-back onclick="Home()">🏠 Home</button-back>
 
         </div>
     </div>
@@ -126,6 +199,32 @@
         let chemRefs = {};
         let chemData = {};
         let currentCase = null;
+
+        const analyteFormats = {
+            "Cl": "Cl<sup>-</sup>",
+            "HCO3-": "HCO<sub>3</sub><sup>-</sup>",
+            "HbA1C": "HbA<sub>1</sub>C",
+            "K": "K<sup>+</sup>",
+            "Mg": "Mg<sup>2+</sup>",
+            "Na": "Na<sup>+</sup>",
+            "O2 Sat": "O<sub>2</sub> Sat",
+            "pCO2": "pCO<sub>2</sub>",
+            "pO2": "pO<sub>2</sub>",
+            "TCO2": "TCO<sub>2</sub>"
+        };
+
+        function formatAnalyteLabel(label) {
+            return analyteFormats[label] || label;
+        }
+
+        const unitFormats = {
+            "x 10^9/L": "x 10<sup>9</sup>/L",
+            "x 10^12/L": "x 10<sup>12</sup>/L"
+        };
+
+        function formatUnits(units) {
+            return unitFormats[units] || units;
+        }
 
         function similarity(a, b) {
             a = a.toLowerCase();
@@ -439,8 +538,8 @@
 
                     rows += `
                 <tr>
-                    <td>${key}</td>
-                    <td style="white-space: nowrap;">
+                    <td>${formatAnalyteLabel(key)}</td>
+                    <td style="font-size:clamp(calc(18px/3), calc(18vw/7.2), 18px); white-space: nowrap;">
                         ${(key === "Anion Gap") && !showAnionGap
                             ? `__ ${r.units || ""}`
                             : `${r.value}${r.units ? " " + r.units : ""} ${getFlag(key, parseFloat(r.value))}`
@@ -452,7 +551,7 @@
                 }
 
                 html += `
-            <table border="1" style="width:100%; border-collapse: collapse; margin-top:20px;">
+            <table border="1" style="font-size:clamp(calc(18px/3), calc(18vw/7.2), 18px); width:100%; border-collapse: collapse; margin-top:20px;">
                 <tr>
                     <th colspan="3" style="text-align:center; background:#f0f0f0;">
                         ${analyzer}
@@ -508,6 +607,11 @@
             renderTable(currentCase);
 
             document.getElementById("feedback").textContent = "";
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
 
         loadData();
@@ -539,7 +643,7 @@
                 wrongSound.src = "";
 
                 document.body.style.backgroundImage = "none";
-                document.body.style.backgroundColor = "#ffffff";
+                document.body.style.backgroundColor = "#f5f7fa";
             }
 
             correctSound.muted = muted;

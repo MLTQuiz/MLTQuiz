@@ -410,7 +410,6 @@
 
 
     "pH": {
-      "units": "",
       "ref": { "low": 7.35, "high": 7.45 },
       "critical": { "low": 6.80, "high": 7.50 },
       "life": { "low": 6.80, "high": 7.80 },
@@ -437,7 +436,7 @@
       "decimal": 0,
       "analyzer": "Blood Gas Results"
     },
-    "O2 Saturation": {
+    "O2 Sat": {
       "units": "%",
       "ref": { "low": 95 },
       "decimal": 0,
@@ -572,6 +571,7 @@
       "analyzer": "Hemostasis Results"
     },
     "dRVVT": {
+      "note": "Ratio <1.2",
       "ref": { "high": 1.2},
       "decimal": 1,
       "analyzer": "Hemostasis Results"

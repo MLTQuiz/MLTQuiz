@@ -4,7 +4,7 @@
     "stain_id": "Alcian Blue",
     "demonstrating": "Acid Mucins",
     "color": "Turquoise",
-    "principle": "Ionic Bonding",
+    "principle": ["Ionic Bonding", "Salt Bridges"],
     "control": "Intestine"
   },
   {
@@ -12,7 +12,7 @@
     "stain_id": "Alcian Blue",
     "demonstrating": "Acid Mucins",
     "color": "Turquoise",
-    "principle": "Ionic Bonding",
+    "principle": ["Ionic Bonding", "Salt Bridges"],
     "control": "Intestine"
   },
   {
@@ -36,7 +36,7 @@
     "stain_id": "Cresyl Echt Violet",
     "demonstrating": "Nissl Substance",
     "color": "Purple",
-    "principle": "Ionic Bonding",
+    "principle": ["Ionic Bonding", "Salt Bridges"],
     "control": "Spinal Cord"
   },
   {

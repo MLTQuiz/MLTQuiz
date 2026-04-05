@@ -197,7 +197,8 @@
             <br><br>
             <button onclick="nextStain()">Next Stain</button>
 
-            <br><br><hr><br>
+            <br><br>
+            <hr><br>
 
             <button-back id="muteBtn">🔊 Mute</button-back>
             <br><br><br>
@@ -218,6 +219,7 @@
         let imageDatabase = [];
         let currentItem = null;
 
+        // Load JSON
         fetch("histologyImageDatabase.json")
             .then(res => res.json())
             .then(data => {
@@ -226,6 +228,7 @@
             })
             .catch(err => console.error("Error loading JSON:", err));
 
+        // Move to next stain
         function nextStain() {
             clearInputs();
 
@@ -241,126 +244,135 @@
 
             document.getElementById("quizImage").src = currentItem.image;
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
+        // Clear inputs and feedback
         function clearInputs() {
             const fields = ["stain_id", "demonstrating", "color", "principle", "control"];
-
             fields.forEach(id => {
                 document.getElementById(id).value = "";
                 document.getElementById("fb_" + id).textContent = "";
             });
-
             document.getElementById("feedback").textContent = "";
         }
 
+        // Normalize string for comparison
         function normalize(str) {
             return str
                 .toLowerCase()
                 .trim()
                 .replace(/-/g, " ")
-                .replace(/[^a-z0-9\s]/g, "")
+                .replace(/[^a-z0-9\s/]/g, "")
                 .replace(/\s+/g, " ");
         }
 
+        // Levenshtein similarity
         function similarity(a, b) {
             const matrix = [];
+            const lenA = a.length, lenB = b.length;
 
-            const lenA = a.length;
-            const lenB = b.length;
-
-            for (let i = 0; i <= lenB; i++) {
-                matrix[i] = [i];
-            }
-
-            for (let j = 0; j <= lenA; j++) {
-                matrix[0][j] = j;
-            }
+            for (let i = 0; i <= lenB; i++) matrix[i] = [i];
+            for (let j = 0; j <= lenA; j++) matrix[0][j] = j;
 
             for (let i = 1; i <= lenB; i++) {
                 for (let j = 1; j <= lenA; j++) {
-                    if (b.charAt(i - 1) === a.charAt(j - 1)) {
-                        matrix[i][j] = matrix[i - 1][j - 1];
-                    } else {
-                        matrix[i][j] = Math.min(
-                            matrix[i - 1][j - 1] + 1,
-                            matrix[i][j - 1] + 1,
-                            matrix[i - 1][j] + 1
-                        );
-                    }
+                    if (b.charAt(i - 1) === a.charAt(j - 1)) matrix[i][j] = matrix[i - 1][j - 1];
+                    else matrix[i][j] = Math.min(
+                        matrix[i - 1][j - 1] + 1,
+                        matrix[i][j - 1] + 1,
+                        matrix[i - 1][j] + 1
+                    );
                 }
             }
-
-            const distance = matrix[lenB][lenA];
-            return 1 - distance / Math.max(lenA, lenB);
+            return 1 - matrix[lenB][lenA] / Math.max(lenA, lenB);
         }
 
-        function checkField(field, correctValue) {
+        function checkField(field, correctValues) {
             const inputEl = document.getElementById(field);
             const fbEl = document.getElementById("fb_" + field);
-
             const userAnswer = normalize(inputEl.value);
 
-            const correctAnswers = Array.isArray(correctValue)
-                ? correctValue.map(a => normalize(a))
-                : [normalize(correctValue)];
+            let answersList;
 
-            let isCorrect = false;
-            let isClose = false;
-            let bestMatch = correctAnswers[0];
+            // Normalize JSON input into standard format: array of variants, each variant is array of groups
+            if (typeof correctValues === "string") {
+                answersList = [[[correctValues]]];
+            } else if (Array.isArray(correctValues)) {
+                if (correctValues.length === 0) return false;
+                if (Array.isArray(correctValues[0])) {
+                    if (typeof correctValues[0][0] === "string") {
+                        answersList = [[correctValues]];
+                    } else {
+                        answersList = correctValues;
+                    }
+                } else {
+                    answersList = [[correctValues]];
+                }
+            } else {
+                console.error("Unsupported answer format for field:", field);
+                return false;
+            }
 
-            if (field === "stain_id") {
-                for (let answer of correctAnswers) {
-                    if (userAnswer === answer) {
-                        isCorrect = true;
-                        bestMatch = answer;
-                        break;
+            let isCorrectOverall = false;
+            let feedbackText = "";
+
+            for (let answerGroups of answersList) {
+                let isCorrectVariant = true;
+                let closeEnough = false;
+                let closestMatches = [];
+
+                for (let group of answerGroups) {
+                    const normalizedMap = {};
+                    const normalizedGroup = group.map(a => {
+                        const norm = normalize(a);
+                        normalizedMap[norm] = a;
+                        return norm;
+                    });
+
+                    let groupMatch = null;
+                    let exactMatch = false;
+
+                    for (let normAnswer of normalizedGroup) {
+                        if (userAnswer === normAnswer) {
+                            groupMatch = normalizedMap[normAnswer];
+                            exactMatch = true;
+                            break;
+                        } else if (field !== "stain_id" && similarity(userAnswer, normAnswer) > 0.8) {
+                            // Only allow similarity if NOT stain_id
+                            groupMatch = normalizedMap[normAnswer];
+                            exactMatch = false;
+                            break;
+                        }
+                    }
+
+                    if (groupMatch) {
+                        closestMatches.push(groupMatch);
+                        if (!exactMatch) closeEnough = true;
+                    } else {
+                        isCorrectVariant = false;
+                        closestMatches.push(group.join(" or "));
                     }
                 }
 
-                if (isCorrect) {
-                    fbEl.textContent = `✔ Correct: ${bestMatch}`;
-                    fbEl.style.color = "green";
-                    return true;
+                if (isCorrectVariant) {
+                    isCorrectOverall = true;
+                    feedbackText = (closeEnough && field !== "stain_id")
+                        ? `✔ Close enough!: ${closestMatches.join(" and ")}`
+                        : `✔ Correct: ${closestMatches.join(" and ")}`;
+                    break;
                 } else {
-                    fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
-                    fbEl.style.color = "red";
-                    return false;
+                    feedbackText = `✖ Wrong. Correct answer: ${closestMatches.join(" and ")}`;
                 }
             }
 
-            for (let answer of correctAnswers) {
-                const score = similarity(userAnswer, answer);
+            fbEl.textContent = feedbackText;
+            fbEl.style.color = isCorrectOverall ? "green" : "red";
 
-                if (userAnswer === answer) {
-                    isCorrect = true;
-                    bestMatch = answer;
-                    break;
-                } else if (score > 0.8) {
-                    isCorrect = true;
-                    isClose = true;
-                    bestMatch = answer;
-                    break;
-                }
-            }
-
-            if (isCorrect) {
-                fbEl.textContent = isClose
-                    ? `✔ Close enough! Correct: ${bestMatch}`
-                    : `✔ Correct: ${bestMatch}`;
-                fbEl.style.color = "green";
-                return true;
-            } else {
-                fbEl.textContent = `✖ Wrong. Correct: ${bestMatch}`;
-                fbEl.style.color = "red";
-                return false;
-            }
+            return isCorrectOverall;
         }
 
+        // Check all fields
         function checkAnswer() {
             if (!currentItem) return;
 
@@ -373,7 +385,6 @@
             if (checkField("control", currentItem.control)) correctCount++;
 
             const feedbackEl = document.getElementById("feedback");
-
             if (correctCount === 5) {
                 feedbackEl.textContent = "Perfect! 🎉";
                 feedbackEl.style.color = "green";
@@ -385,11 +396,10 @@
             }
         }
 
+        // --- Sound and mute logic remains unchanged ---
         let muted = true;
-
         const correctSound = new Audio();
         const wrongSound = new Audio();
-
         const muteBtn = document.getElementById("muteBtn");
         const juneCheckbox = document.getElementById("june_feedback");
 
@@ -397,24 +407,19 @@
 
         function updateSounds() {
             const juneEnabled = juneCheckbox.checked;
-
             if (juneEnabled) {
                 correctSound.src = "sounds/June - I'm eating yogurt.wav";
                 wrongSound.src = "sounds/June - Yell 2 (Short).wav";
-
                 document.body.style.backgroundImage = "url('June.jpg')";
                 document.body.style.backgroundSize = "33.33vw auto";
                 document.body.style.backgroundRepeat = "repeat";
                 document.body.style.backgroundPosition = "top left";
-
             } else {
                 correctSound.src = "sounds/correct.mp3";
                 wrongSound.src = "";
-
                 document.body.style.backgroundImage = "none";
                 document.body.style.backgroundColor = "#f5f7fa";
             }
-
             correctSound.muted = muted;
             wrongSound.muted = muted;
         }
@@ -435,21 +440,16 @@
 
         function toggleMute() {
             muted = !muted;
-
             correctSound.muted = muted;
             wrongSound.muted = muted;
-
             muteBtn.textContent = muted ? "🔇 Unmute" : "🔊 Mute";
         }
 
         muteBtn.addEventListener("click", toggleMute);
         juneCheckbox.addEventListener("change", updateSounds);
-
         updateSounds();
 
-        function Home() {
-            window.location.href = "index.html";
-        }
+        function Home() { window.location.href = "index.html"; }
     </script>
 </body>
 

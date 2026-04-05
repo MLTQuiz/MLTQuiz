@@ -219,7 +219,6 @@
         let imageDatabase = [];
         let currentItem = null;
 
-        // Load JSON
         fetch("histologyImageDatabase.json")
             .then(res => res.json())
             .then(data => {
@@ -228,7 +227,6 @@
             })
             .catch(err => console.error("Error loading JSON:", err));
 
-        // Move to next stain
         function nextStain() {
             clearInputs();
 
@@ -247,7 +245,6 @@
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
-        // Clear inputs and feedback
         function clearInputs() {
             const fields = ["stain_id", "demonstrating", "color", "principle", "control"];
             fields.forEach(id => {
@@ -257,7 +254,6 @@
             document.getElementById("feedback").textContent = "";
         }
 
-        // Normalize string for comparison
         function normalize(str) {
             return str
                 .toLowerCase()
@@ -267,7 +263,6 @@
                 .replace(/\s+/g, " ");
         }
 
-        // Levenshtein similarity
         function similarity(a, b) {
             const matrix = [];
             const lenA = a.length, lenB = b.length;
@@ -295,7 +290,6 @@
 
             let answersList;
 
-            // Normalize JSON input into standard format: array of variants, each variant is array of groups
             if (typeof correctValues === "string") {
                 answersList = [[[correctValues]]];
             } else if (Array.isArray(correctValues)) {
@@ -339,7 +333,6 @@
                             exactMatch = true;
                             break;
                         } else if (field !== "stain_id" && similarity(userAnswer, normAnswer) > 0.8) {
-                            // Only allow similarity if NOT stain_id
                             groupMatch = normalizedMap[normAnswer];
                             exactMatch = false;
                             break;
@@ -372,7 +365,6 @@
             return isCorrectOverall;
         }
 
-        // Check all fields
         function checkAnswer() {
             if (!currentItem) return;
 
@@ -396,7 +388,6 @@
             }
         }
 
-        // --- Sound and mute logic remains unchanged ---
         let muted = true;
         const correctSound = new Audio();
         const wrongSound = new Audio();

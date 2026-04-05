@@ -8,21 +8,20 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            font-size: clamp(calc(18px / 3), calc(18vw / 7.2), 18px);
             background: #f5f7fa;
-            margin: clamp(calc(40px/3), calc(40vw/7.2), 40px);
+            margin: clamp(calc(40px / 3), calc(40vw / 7.2), 40px);
             padding-right: 5vw;
             padding-left: 5vw;
-            white-space: nowrap;
         }
 
         h1 {
-            margin-bottom: clamp(calc(10px/3), calc(10vw/7.2), 10px);
-            font-size: clamp(calc(36px/3), calc(36vw/7.2), 36px);
+            margin-bottom: clamp(calc(10px / 3), calc(10vw / 7.2), 10px);
+            font-size: clamp(calc(36px / 3), calc(36vw / 7.2), 36px);
         }
 
         h2 {
-            font-size: clamp(calc(27px/3), calc(27vw/7.2), 27px);
+            font-size: clamp(calc(27px / 3), calc(27vw / 7.2), 27px);
         }
 
         .quiz-container {
@@ -36,48 +35,48 @@
             text-align: center;
             width: 100%;
             background: white;
-            padding: clamp(calc(20px/3), calc(20vw/7.2), 20px);
-            border-radius: clamp(calc(8px/3), calc(8vw/7.2), 8px);
-            box-shadow: 0 clamp(calc(2px/3), calc(2vw/7.2), 2px) clamp(calc(6px/3), calc(6vw/7.2), 6px) rgba(0, 0, 0, 0.1);
-            margin-bottom: clamp(calc(15px/3), calc(15vw/7.2), 15px);
+            padding: clamp(calc(20px / 3), calc(20vw / 7.2), 20px);
+            border-radius: clamp(calc(8px / 3), calc(8vw / 7.2), 8px);
+            box-shadow: 0 clamp(calc(2px / 3), calc(2vw / 7.2), 2px) clamp(calc(6px / 3), calc(6vw / 7.2), 6px) rgba(0, 0, 0, 0.1);
+            margin-bottom: clamp(calc(15px / 3), calc(15vw / 7.2), 15px);
             box-sizing: border-box;
         }
 
         label {
             display: block;
-            margin: clamp(calc(6px/3), calc(6vw/7.2), 6px) 0;
+            margin: clamp(calc(6px / 3), calc(6vw / 7.2), 6px) 0;
             cursor: pointer;
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            font-size: clamp(calc(18px / 3), calc(18vw / 7.2), 18px);
         }
 
         .category-title {
-            font-size: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+            font-size: clamp(calc(20px / 3), calc(20vw / 7.2), 20px);
             font-weight: bold;
         }
 
         .question {
-            font-size: clamp(calc(24px/3), calc(24vw/7.2), 24px);
+            font-size: clamp(calc(24px / 3), calc(24vw / 7.2), 24px);
             font-weight: bold;
         }
 
         .main-title {
-            font-size: clamp(calc(24px/3), calc(24vw/7.2), 24px);
+            font-size: clamp(calc(24px / 3), calc(24vw / 7.2), 24px);
             font-weight: bold;
         }
 
         #quizImage {
-            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+            margin-top: clamp(calc(20px / 3), calc(20vw / 7.2), 20px);
             max-width: 100%;
             height: auto;
-            border: clamp(calc(2px/3), calc(2vw/7.2), 2px) solid #ccc;
-            border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
+            border: clamp(calc(2px / 3), calc(2vw / 7.2), 2px) solid #ccc;
+            border-radius: clamp(calc(6px / 3), calc(6vw / 7.2), 6px);
         }
 
         button {
             line-height: 1.2;
-            font-size: clamp(calc(25px/3), calc(25vw/7.2), 25px);
-            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px) clamp(calc(18px/3), calc(18vw/7.2), 18px);
-            border-radius: clamp(calc(5px/3), calc(5vw/7.2), 5px);
+            font-size: clamp(calc(25px / 3), calc(25vw / 7.2), 25px);
+            padding: clamp(calc(10px / 3), calc(10vw / 7.2), 10px) clamp(calc(18px / 3), calc(18vw / 7.2), 18px);
+            border-radius: clamp(calc(5px / 3), calc(5vw / 7.2), 5px);
             border: none;
             background: #2f6fed;
             color: white;
@@ -89,9 +88,9 @@
         }
 
         button-back {
-            font-size: clamp(calc(15px/3), calc(15vw/7.2), 15px);
-            padding: clamp(calc(8px/3), calc(8vw/7.2), 8px) clamp(calc(12px/3), calc(12vw/7.2), 12px);
-            border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
+            font-size: clamp(calc(15px / 3), calc(15vw / 7.2), 15px);
+            padding: clamp(calc(8px / 3), calc(8vw / 7.2), 8px) clamp(calc(12px / 3), calc(12vw / 7.2), 12px);
+            border-radius: clamp(calc(6px / 3), calc(6vw / 7.2), 6px);
             border: none;
             background: #2f6fed;
             color: white;
@@ -103,20 +102,20 @@
         }
 
         .tab1 {
-            margin-left: clamp(calc(25px/3), calc(25vw/7.2), 25px);
+            margin-left: clamp(calc(25px / 3), calc(25vw / 7.2), 25px);
         }
 
         .tab2 {
-            margin-left: clamp(calc(50px/3), calc(50vw/7.2), 50px);
+            margin-left: clamp(calc(50px / 3), calc(50vw / 7.2), 50px);
         }
 
         #scrollMenu {
             max-height: 300px;
             overflow-y: auto;
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
-            border: clamp(calc(1px/3), calc(1vw/7.2), 1px) solid #ccc;
-            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px);
-            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+            font-size: clamp(calc(18px / 3), calc(18vw / 7.2), 18px);
+            border: clamp(calc(1px / 3), calc(1vw / 7.2), 1px) solid #ccc;
+            padding: clamp(calc(10px / 3), calc(10vw / 7.2), 10px);
+            margin-top: clamp(calc(20px / 3), calc(20vw / 7.2), 20px);
             text-align: left;
             white-space: nowrap;
         }
@@ -124,13 +123,13 @@
         #answerOptions label {
             display: block;
             align-items: center;
-            margin-bottom: clamp(calc(10px/3), calc(10vw/7.2), 10px);
+            margin-bottom: clamp(calc(10px / 3), calc(10vw / 7.2), 10px);
             cursor: pointer;
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            font-size: clamp(calc(18px / 3), calc(18vw / 7.2), 18px);
         }
 
         #answerOptions input[type="radio"] {
-            margin-right: clamp(calc(8px/3), calc(8vw/7.2), 8px);
+            margin-right: clamp(calc(8px / 3), calc(8vw / 7.2), 8px);
         }
 
         #answerOptions br {
@@ -138,23 +137,54 @@
         }
 
         .large-textbox {
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            font-size: clamp(calc(18px / 3), calc(18vw / 7.2), 18px);
         }
 
         .large-textarea {
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            font-size: clamp(calc(18px / 3), calc(18vw / 7.2), 18px);
             font-family: Arial, sans-serif;
-            width: clamp(calc(500px/3), calc(500vw/7.2), 500px);
-            height: clamp(calc(100px/3), calc(100vw/7.2), 100px);
+            width: clamp(calc(500px / 3), calc(500vw / 7.2), 500px);
+            height: clamp(calc(100px / 3), calc(100vw / 7.2), 100px);
             resize: none;
         }
 
-        td:nth-child(2) {
-            white-space: nowrap;
+        #labTableContainer {
+            width: 100%;
+            overflow-x: auto;
         }
 
-        td:nth-child(1) {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: clamp(10px, 2.5vw, 18px);
+        }
+
+        td {
+            overflow-wrap: break-word;
+        }
+
+        th {
+            text-align: center;
+            background: none;
+        }
+
+        th[colspan="3"] {
+            background: #f0f0f0;
+        }
+
+        td:nth-child(1),
+        th:nth-child(1),
+        td:nth-child(2),
+        th:nth-child(2) {
             white-space: nowrap;
+            width: 1%;
+        }
+
+        td:nth-child(3),
+        th:nth-child(3) {
+            width: auto;
+            white-space: normal;
         }
     </style>
 </head>
@@ -164,33 +194,37 @@
         <h1>Chemistry Correlations Quiz</h1>
 
         <div class="category">
-            <div class="question">What disease state correlates best with these results?<br>You'll need to calculate the
-                Anion/Osmo Gap.<br>Use the text box below to
-                work through the case study!</div>
+            <div class="question">
+                What disease state correlates best with these results?<br />You'll
+                need to calculate the Anion/Osmo Gap.<br />Use the text box below to
+                work through the case study!
+            </div>
 
-            <div id="labTableContainer"></div><br>
+            <div id="labTableContainer"></div>
+            <br />
 
-            <textarea class="large-textarea" placeholder="Type your thoughts here..."></textarea><br>
-            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div><br>
-            <button onclick="revealAnswer()">Reveal Answer</button><br><br>
+            <textarea class="large-textarea" placeholder="Type your thoughts here..."></textarea><br />
+            <div id="feedback" style="margin-top: 10px; font-weight: bold"></div>
+            <br />
+            <button onclick="revealAnswer()">Reveal Answer</button><br /><br />
             <button onclick="nextQuestion()">Next Question</button>
 
-            <br><br>
-            <hr><br>
+            <br /><br />
+            <hr />
+            <br />
 
             <button-back id="muteBtn">🔊 Mute</button-back>
-            <br><br><br>
+            <br /><br /><br />
             <button-back onclick="Back()">⬅ Back</button-back>
-            <br><br><br>
+            <br /><br /><br />
             <button-back onclick="Home()">🏠 Home</button-back>
-
         </div>
     </div>
 
-    <div style="height:2000px;"></div>
+    <div style="height: 2000px"></div>
 
     <label class="tab2">
-        <input type="checkbox" id="june_feedback">
+        <input type="checkbox" id="june_feedback" />
         Junea Noises
     </label>
 
@@ -201,16 +235,16 @@
         let currentCase = null;
 
         const analyteFormats = {
-            "Cl": "Cl<sup>-</sup>",
+            Cl: "Cl<sup>-</sup>",
             "HCO3-": "HCO<sub>3</sub><sup>-</sup>",
-            "HbA1C": "HbA<sub>1</sub>C",
-            "K": "K<sup>+</sup>",
-            "Mg": "Mg<sup>2+</sup>",
-            "Na": "Na<sup>+</sup>",
+            HbA1C: "HbA<sub>1</sub>C",
+            K: "K<sup>+</sup>",
+            Mg: "Mg<sup>2+</sup>",
+            Na: "Na<sup>+</sup>",
             "O2 Sat": "O<sub>2</sub> Sat",
-            "pCO2": "pCO<sub>2</sub>",
-            "pO2": "pO<sub>2</sub>",
-            "TCO2": "TCO<sub>2</sub>"
+            pCO2: "pCO<sub>2</sub>",
+            pO2: "pO<sub>2</sub>",
+            TCO2: "TCO<sub>2</sub>",
         };
 
         function formatAnalyteLabel(label) {
@@ -219,7 +253,7 @@
 
         const unitFormats = {
             "x 10^9/L": "x 10<sup>9</sup>/L",
-            "x 10^12/L": "x 10<sup>12</sup>/L"
+            "x 10^12/L": "x 10<sup>12</sup>/L",
         };
 
         function formatUnits(units) {
@@ -258,7 +292,7 @@
                         matrix[i][j] = Math.min(
                             matrix[i - 1][j - 1] + 1,
                             matrix[i][j - 1] + 1,
-                            matrix[i - 1][j] + 1
+                            matrix[i - 1][j] + 1,
                         );
                     }
                 }
@@ -283,26 +317,27 @@
         }
 
         function generateCase() {
-            const selectedCases = JSON.parse(localStorage.getItem("selectedCases")) || [];
+            const selectedCases =
+                JSON.parse(localStorage.getItem("selectedCases")) || [];
 
             let pool = [];
 
-            selectedCases.forEach(item => {
+            selectedCases.forEach((item) => {
                 const [topic, disease] = item.split("|||");
                 if (chemData[topic] && chemData[topic][disease]) {
                     pool.push({
                         disease,
-                        analytes: chemData[topic][disease]
+                        analytes: chemData[topic][disease],
                     });
                 }
             });
 
             if (pool.length === 0) {
-                Object.keys(chemData).forEach(topic => {
-                    Object.keys(chemData[topic]).forEach(disease => {
+                Object.keys(chemData).forEach((topic) => {
+                    Object.keys(chemData[topic]).forEach((disease) => {
                         pool.push({
                             disease,
-                            analytes: chemData[topic][disease]
+                            analytes: chemData[topic][disease],
                         });
                     });
                 });
@@ -324,41 +359,48 @@
                     value = getRandom(
                         parseFloat(a.low),
                         parseFloat(a.high),
-                        parseInt(a.decimal ?? 0)
+                        parseInt(a.decimal ?? 0),
                     );
                 }
 
-                const analyzer = chemRefs["Reference Ranges"][key]?.analyzer || "Other";
+                const analyzer =
+                    chemRefs["Reference Ranges"][key]?.analyzer || "Other";
 
                 if (!resultsByAnalyzer[analyzer]) resultsByAnalyzer[analyzer] = {};
 
                 resultsByAnalyzer[analyzer][key] = {
                     value: value,
                     units: a.units || "",
-                    decimal: a.decimal ?? 0
+                    decimal: a.decimal ?? 0,
                 };
             }
 
             if (resultsByAnalyzer["Hemostasis Results"]?.PT && analytes["INR"]) {
-                const pt = parseFloat(resultsByAnalyzer["Hemostasis Results"].PT.value);
+                const pt = parseFloat(
+                    resultsByAnalyzer["Hemostasis Results"].PT.value,
+                );
                 if (!isNaN(pt)) {
                     resultsByAnalyzer["Hemostasis Results"].INR = {
                         value: (pt / 13.1).toFixed(1),
                         units: "",
-                        decimal: 1
+                        decimal: 1,
                     };
                 }
             }
 
             if (analytes["pH"] && analytes["pH"].value === "Calculate") {
-                const hco3 = parseFloat(resultsByAnalyzer["Blood Gas Results"]?.["HCO3-"]?.value);
-                const pco2 = parseFloat(resultsByAnalyzer["Blood Gas Results"]?.["pCO2"]?.value);
+                const hco3 = parseFloat(
+                    resultsByAnalyzer["Blood Gas Results"]?.["HCO3-"]?.value,
+                );
+                const pco2 = parseFloat(
+                    resultsByAnalyzer["Blood Gas Results"]?.["pCO2"]?.value,
+                );
                 if (!isNaN(hco3) && !isNaN(pco2) && pco2 !== 0) {
                     const pH = 6.1 + Math.log10(hco3 / (0.03 * pco2));
                     resultsByAnalyzer["Blood Gas Results"].pH = {
                         value: pH.toFixed(2),
                         units: "",
-                        decimal: 2
+                        decimal: 2,
                     };
                 }
             }
@@ -374,32 +416,41 @@
 
                 while (attempts < 50 && !valid) {
                     attempts++;
-                    const na = parseFloat(getRandom(
-                        analytes["Na"].low,
-                        analytes["Na"].high,
-                        analytes["Na"].decimal
-                    ));
-                    const cl = parseFloat(getRandom(
-                        analytes["Cl"].low,
-                        analytes["Cl"].high,
-                        analytes["Cl"].decimal
-                    ));
-                    const tco2 = parseFloat(getRandom(
-                        analytes["TCO2"].low,
-                        analytes["TCO2"].high,
-                        analytes["TCO2"].decimal
-                    ));
+                    const na = parseFloat(
+                        getRandom(
+                            analytes["Na"].low,
+                            analytes["Na"].high,
+                            analytes["Na"].decimal,
+                        ),
+                    );
+                    const cl = parseFloat(
+                        getRandom(
+                            analytes["Cl"].low,
+                            analytes["Cl"].high,
+                            analytes["Cl"].decimal,
+                        ),
+                    );
+                    const tco2 = parseFloat(
+                        getRandom(
+                            analytes["TCO2"].low,
+                            analytes["TCO2"].high,
+                            analytes["TCO2"].decimal,
+                        ),
+                    );
                     const ag = na - cl - tco2;
 
                     if (ag >= low && ag <= high) {
-                        resultsByAnalyzer["Serum Chemistry Results"].Na.value = na.toFixed(analytes["Na"].decimal);
-                        resultsByAnalyzer["Serum Chemistry Results"].Cl.value = cl.toFixed(analytes["Cl"].decimal);
-                        resultsByAnalyzer["Serum Chemistry Results"].TCO2.value = tco2.toFixed(analytes["TCO2"].decimal);
+                        resultsByAnalyzer["Serum Chemistry Results"].Na.value =
+                            na.toFixed(analytes["Na"].decimal);
+                        resultsByAnalyzer["Serum Chemistry Results"].Cl.value =
+                            cl.toFixed(analytes["Cl"].decimal);
+                        resultsByAnalyzer["Serum Chemistry Results"].TCO2.value =
+                            tco2.toFixed(analytes["TCO2"].decimal);
 
                         resultsByAnalyzer["Serum Chemistry Results"]["Anion Gap"] = {
                             value: ag.toFixed(decimals),
                             units: agData.units,
-                            decimal: decimals
+                            decimal: decimals,
                         };
 
                         valid = true;
@@ -407,22 +458,27 @@
                 }
 
                 if (!valid) {
-                    const na = parseFloat(resultsByAnalyzer["Serum Chemistry Results"].Na.value);
-                    const cl = parseFloat(resultsByAnalyzer["Serum Chemistry Results"].Cl.value);
-                    const tco2 = parseFloat(resultsByAnalyzer["Serum Chemistry Results"].TCO2.value);
+                    const na = parseFloat(
+                        resultsByAnalyzer["Serum Chemistry Results"].Na.value,
+                    );
+                    const cl = parseFloat(
+                        resultsByAnalyzer["Serum Chemistry Results"].Cl.value,
+                    );
+                    const tco2 = parseFloat(
+                        resultsByAnalyzer["Serum Chemistry Results"].TCO2.value,
+                    );
                     const ag = na - cl - tco2;
 
                     resultsByAnalyzer["Serum Chemistry Results"]["Anion Gap"] = {
                         value: ag.toFixed(decimals),
                         units: agData.units,
-                        decimal: decimals
+                        decimal: decimals,
                     };
                 }
             }
 
             return { disease, resultsByAnalyzer };
         }
-
 
         function formatReferenceRange(analyte) {
             const data = chemRefs["Reference Ranges"][analyte];
@@ -507,11 +563,11 @@
             if (ref.male || ref.female) {
                 low = Math.min(
                     ref.male?.low ?? Infinity,
-                    ref.female?.low ?? Infinity
+                    ref.female?.low ?? Infinity,
                 );
                 high = Math.max(
                     ref.male?.high ?? -Infinity,
-                    ref.female?.high ?? -Infinity
+                    ref.female?.high ?? -Infinity,
                 );
             }
 
@@ -537,34 +593,34 @@
                     const ref = formatReferenceRange(key);
 
                     rows += `
-                <tr>
-                    <td>${formatAnalyteLabel(key)}</td>
-                    <td style="font-size:clamp(calc(18px/3), calc(18vw/7.2), 18px); white-space: nowrap;">
-                        ${(key === "Anion Gap") && !showAnionGap
+<tr>
+    <td>${formatAnalyteLabel(key)}</td>
+    <td>
+        ${key === "Anion Gap" && !showAnionGap
                             ? `__ ${r.units || ""}`
                             : `${r.value}${r.units ? " " + r.units : ""} ${getFlag(key, parseFloat(r.value))}`
                         }
-                    </td>
-                    <td>${ref}</td>
-                </tr>
-            `;
+    </td>
+    <td>${ref}</td>
+</tr>
+`;
                 }
 
                 html += `
-            <table border="1" style="font-size:clamp(calc(18px/3), calc(18vw/7.2), 18px); width:100%; border-collapse: collapse; margin-top:20px;">
-                <tr>
-                    <th colspan="3" style="text-align:center; background:#f0f0f0;">
-                        ${analyzer}
-                    </th>
-                </tr>
-                <tr>
-                    <th>Analyte</th>
-                    <th>Result</th>
-                    <th>Reference Range</th>
-                </tr>
-                ${rows}
-            </table>
-        `;
+<table border="1">
+    <tr>
+        <th colspan="3">
+            ${analyzer}
+        </th>
+    </tr>
+    <tr>
+        <th>Analyte</th>
+        <th>Result</th>
+        <th>Reference Range</th>
+    </tr>
+    ${rows}
+</table>
+`;
             }
 
             container.innerHTML = html;
@@ -575,7 +631,10 @@
 
             if (!currentCase) return;
 
-            const userInput = document.querySelector(".large-textarea").value.trim().toLowerCase();
+            const userInput = document
+                .querySelector(".large-textarea")
+                .value.trim()
+                .toLowerCase();
             const correctAnswer = currentCase.disease.toLowerCase();
 
             const score = similarity(userInput, correctAnswer);
@@ -610,7 +669,7 @@
 
             window.scrollTo({
                 top: 0,
-                behavior: "smooth"
+                behavior: "smooth",
             });
         }
 
@@ -637,7 +696,6 @@
                 document.body.style.backgroundSize = "33.33vw auto";
                 document.body.style.backgroundRepeat = "repeat";
                 document.body.style.backgroundPosition = "top left";
-
             } else {
                 correctSound.src = "sounds/correct1.mp3";
                 wrongSound.src = "";
@@ -687,9 +745,7 @@
         function Home() {
             window.location.href = "index.html";
         }
-
     </script>
-
 </body>
 
 </html>

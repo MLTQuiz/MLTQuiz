@@ -1,0 +1,37 @@
+{
+    "panels": {
+        "LYTE7": {
+            "analytes": ["Na", "K", "Cl", "TCO2", "Urea", "Creatinine", "Random Glucose", "AGAP"]
+        },
+        "REN": {
+            "analytes": ["Urea", "Creatinine", "Phos", "Mg", "Total Calcium"]
+        },
+        "LIV": {
+            "analytes": ["AST", "ALT", "ALP", "GGT", "Albumin", "Total Protein", "Total Bilirubin", "Direct Bilirubin", "Indirect Bilirubin"]
+        },
+        "BGV": {
+            "analytes": ["pH", "pCO2", "HCO3-", "pO2", "SO2"]
+        },
+        "COAG": {
+            "analytes": ["PT", "INR", "APTT"]
+        },
+        "CARD": {
+            "analytes": ["Myoglobin", "hsTN", "CK", "AST", "LDH", "PT", "INR", "APTT"]
+        },
+        "LIPID": {
+            "analytes": ["Total Cholesterol", "Triglycerides", "HDL", "LDL", "VLDL"]
+        },
+        "THYR": {
+            "analytes": ["TSH", "Free T3", "Free T4"]
+        },
+        "IRONP": {
+            "analytes": ["Iron", "TIBC", "% Trsfn Sat", "Ferritin"]
+        },
+        "CBC": {
+            "analytes": ["WBC", "RBC", "HGB", "HCT", "MCV", "MCH", "MCHC", "RDW", "PLT", "MPV", "Retic"]
+        },
+        "DIFF": {
+            "analytes": ["Segmented Neutrophil", "Band Neutrophil", "Lymphocyte", "Monocyte", "Eosinophil", "Basophil"]
+        }
+    }
+}

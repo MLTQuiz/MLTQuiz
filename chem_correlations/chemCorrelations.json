@@ -1,11 +1,26 @@
 {
+    "Contaminations/Interferences": {
+        "Hemolyzed sample": {},
+        "Icteric sample": {},
+        "Lipemic sample": {},
+        "Mislabeled specimen": {},
+        "Delayed centrifugation": {},
+        "Prolonged tourniquet": {},
+        "Exposure to ambient air (tube left uncapped)": {},
+        "Delayed blood gas testing": {},
+        "Blood gas not kept on ice": {},
+        "Saline contamination": {},
+        "TPN contamination": {},
+        "Ringer's lactate contamination": {},
+        "K2 EDTA contamination": {}
+    },
     "Cardiac": {
         "Congestive Heart Failure (Early Stage)": {
             "Na": {"low": 130, "high": 138, "units": "mmol/L", "decimal": 0},
             "K": {"low": 4.0, "high": 5.1, "units": "mmol/L", "decimal": 1},
             "Cl": {"low": 100, "high": 105, "units": "mmol/L", "decimal": 0},
             "TCO2": {"low": 22, "high": 31, "units": "mmol/L", "decimal": 0},
-            "Anion Gap": {"low": 5, "high": 13, "units": "mmol/L", "decimal": 0},
+            "AGAP": {"low": 5, "high": 13, "units": "mmol/L", "decimal": 0},
             "Urea": {"low": 9.0, "high": 15.0, "units": "mmol/L", "decimal": 1},
             "Creatinine": {"low": 70, "high": 100, "units": "μmol/L", "decimal": 0},
             "Random Glucose": {"low": 4.0, "high": 8.5, "units": "mmol/L", "decimal": 1},
@@ -16,14 +31,14 @@
             "ALP": {"low": 50, "high": 100, "units": "U/L", "decimal": 0},
             "GGT": {"low": 10, "high": 32, "units": "U/L", "decimal": 0},
             "NT-Pro BNP": {"low": 1100, "high": 2000, "units": "ng/L", "decimal": 0},
-            "hsTroponin": {"low": 20.0, "high": 30.0, "units": "ng/L", "decimal": 1}
+            "hsTN": {"low": 20.0, "high": 30.0, "units": "ng/L", "decimal": 1}
         },
         "Congestive Heart Failure (Late Stage)": {
             "Na": {"low": 130, "high": 138, "units": "mmol/L", "decimal": 0},
             "K": {"low": 4.8, "high": 5.4, "units": "mmol/L", "decimal": 1},
             "Cl": {"low": 100, "high": 105, "units": "mmol/L", "decimal": 0},
             "TCO2": {"low": 22, "high": 31, "units": "mmol/L", "decimal": 0},
-            "Anion Gap": {"low": 5, "high": 13, "units": "mmol/L", "decimal": 0},
+            "AGAP": {"low": 5, "high": 13, "units": "mmol/L", "decimal": 0},
             "Urea": {"low": 14.0, "high": 19.0, "units": "mmol/L", "decimal": 1},
             "Creatinine": {"low": 105, "high": 115, "units": "μmol/L", "decimal": 0},
             "Random Glucose": {"low": 4.0, "high": 8.5, "units": "mmol/L", "decimal": 1},
@@ -34,7 +49,7 @@
             "ALP": {"low": 105, "high": 120, "units": "U/L", "decimal": 0},
             "GGT": {"low": 33, "high": 70, "units": "U/L", "decimal": 0},
             "NT-Pro BNP": {"low": 2000, "high": 3300, "units": "ng/L", "decimal": 0},
-            "hsTroponin": {"low": 30.0, "high": 45.0, "units": "ng/L", "decimal": 1}
+            "hsTN": {"low": 30.0, "high": 45.0, "units": "ng/L", "decimal": 1}
         }
     },
     "Disgestive System": {
@@ -43,7 +58,7 @@
             "K": {"low": 3.5, "high": 5.1, "units": "mmol/L", "decimal": 1},
             "Cl": {"low": 100, "high": 110, "units": "mmol/L", "decimal": 0},
             "TCO2": {"low": 22, "high": 31, "units": "mmol/L", "decimal": 0},
-            "Anion Gap": {"low": 7, "high": 16, "units": "mmol/L", "decimal": 0},
+            "AGAP": {"low": 7, "high": 16, "units": "mmol/L", "decimal": 0},
             "Urea": {"low": 3.7, "high": 7.0, "units": "mmol/L", "decimal": 1},
             "Creatinine": {"low": 60, "high": 90, "units": "μmol/L", "decimal": 0},
             "Random Glucose": {"low": 3.6, "high": 10.0, "units": "mmol/L", "decimal": 1},
@@ -67,7 +82,7 @@
             "K": {"low": 3.5, "high": 5.1, "units": "mmol/L", "decimal": 1},
             "Cl": {"low": 100, "high": 110, "units": "mmol/L", "decimal": 0},
             "TCO2": {"low": 22, "high": 31, "units": "mmol/L", "decimal": 0},
-            "Anion Gap": {"low": 7, "high": 16, "units": "mmol/L", "decimal": 0},
+            "AGAP": {"low": 7, "high": 16, "units": "mmol/L", "decimal": 0},
             "Urea": {"low": 3.7, "high": 7.0, "units": "mmol/L", "decimal": 1},
             "Creatinine": {"low": 60, "high": 90, "units": "μmol/L", "decimal": 0},
             "Random Glucose": {"low": 3.6, "high": 10.0, "units": "mmol/L", "decimal": 1},
@@ -81,14 +96,6 @@
             "Age": {"value": "Above linearity ;)"}
         },
         "Nothing clinically significant": {
-            "Na": {"low": 135, "high": 146, "units": "mmol/L", "decimal": 0},
-            "K": {"low": 3.5, "high": 5.1, "units": "mmol/L", "decimal": 1},
-            "Cl": {"low": 100, "high": 110, "units": "mmol/L", "decimal": 0},
-            "TCO2": {"low": 22, "high": 31, "units": "mmol/L", "decimal": 0},
-            "Anion Gap": {"low": 7, "high": 16, "units": "mmol/L", "decimal": 0},
-            "Urea": {"low": 3.7, "high": 7.0, "units": "mmol/L", "decimal": 1},
-            "Creatinine": {"low": 60, "high": 90, "units": "μmol/L", "decimal": 0},
-            "Random Glucose": {"low": 3.6, "high": 10.0, "units": "mmol/L", "decimal": 1},
             "Total Protein": {"low": 60, "high": 80, "units": "g/L", "decimal": 0},
             "Albumin": {"low": 35, "high": 52, "units": "g/L", "decimal": 0},
             "AST": {"low": 10, "high": 40, "units": "U/L", "decimal": 0},
@@ -98,7 +105,8 @@
 
             "pH": {"value": "Calculate"},
             "HCO3-": {"low": 23, "high": 25, "units": "mmol/L", "decimal": 0},
-            "pCO2": {"low": 38, "high": 43, "units": "mmHg", "decimal": 0}
+            "pCO2": {"low": 38, "high": 43, "units": "mmHg", "decimal": 0},
+            "panels": ["CBC", "DIFF", "LYTE7"]
         }
     }
 }

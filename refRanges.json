@@ -45,7 +45,7 @@
       "decimal": 0,
       "analyzer": "Serum Chemistry Results"
     },
-    "Anion Gap": {
+    "AGAP": {
       "units": "mmol/L",
       "ref": { "low": 7, "high": 16 },
       "decimal": 0,
@@ -65,13 +65,13 @@
       "decimal": 1,
       "analyzer": "Serum Chemistry Results"
     },
-    "Cholesterol": {
+    "Total Cholesterol": {
       "units": "mmol/L",
       "ref": { "low": 4.20, "high": 6.20 },
       "decimal": 2,
       "analyzer": "Serum Chemistry Results"
     },
-    "Triglyceride": {
+    "Triglycerides": {
       "units": "mmol/L",
       "ref": { "low": 0.60, "high": 2.30 },
       "decimal": 2,
@@ -145,7 +145,7 @@
       "decimal": 0,
       "analyzer": "Serum Chemistry Results"
     },
-    "LD": {
+    "LDH": {
       "units": "U/L",
       "ref": { "low": 60, "high": 200 },
       "decimal": 0,
@@ -183,7 +183,7 @@
       "decimal": 2,
       "analyzer": "Serum Chemistry Results"
     },
-    "Phosphate": {
+    "Phos": {
       "units": "mmol/L",
       "ref": { "low": 0.78, "high": 1.53 },
       "critical": { "low": 0.40, "high": 4.00 },
@@ -206,23 +206,77 @@
       "decimal": 0,
       "analyzer": "Serum Chemistry Results"
     },
-    "Total Bilirubin": {
+    "T Bilirubin": {
       "units": "μmol/L",
       "ref": { "low": 2, "high": 22 },
-      "critical": { "high": 300},
+      "critical": { "high": 300 },
       "decimal": 0,
       "analyzer": "Serum Chemistry Results"
     },
-    "Direct Bilirubin": {
+    "D Bilirubin": {
       "units": "μmol/L",
       "ref": { "low": 0, "high": 5 },
       "decimal": 0,
       "analyzer": "Serum Chemistry Results"
     },
-    "Indirect Bilirubin": {
+    "I Bilirubin": {
       "units": "μmol/L",
       "ref": { "low": 0, "high": 19 },
       "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Iron": {
+      "units": "μg/dL",
+      "ref": { "low": 50, "high": 167 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "TIBC": {
+      "units": "μg/dL",
+      "ref": { "low": 223, "high": 447 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "% Trsfn Sat": {
+      "units": "%",
+      "ref": { "low": 20, "high": 50 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Ferritin": {
+      "units": "ng/mL",
+      "ref": { "low": 12, "high": 160 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Vitamin D": {
+      "units": "ng/mL",
+      "ref": { "low": 9, "high": 38 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Vitamin B12": {
+      "units": "ng/L",
+      "ref": { "low": 180, "high": 914 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Folate": {
+      "units": "ng/mL",
+      "ref": { "low": 3, "high": 16 },
+      "decimal": 0,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Methylmalonic Acid": {
+      "units": "μmol/L",
+      "ref": { "high": 0.38 },
+      "decimal": 1,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "Homocysteine": {
+      "units": "μmol/L",
+      "ref": { "low": 4.9, "high": 13.7 },
+      "decimal": 1,
       "analyzer": "Serum Chemistry Results"
     },
     "Amikacin": {
@@ -237,7 +291,7 @@
     },
     "Carbamazepine": {
       "units": "mg/L",
-      "ref": { "low": 34.0, "high": 50.0},
+      "ref": { "low": 34.0, "high": 50.0 },
       "critical": { "high": 60.0 },
       "decimal": 1,
       "analyzer": "Serum Chemistry Results"
@@ -346,7 +400,13 @@
       "decimal": 1,
       "analyzer": "Serum Chemistry Results"
     },
-    "hsTroponin": {
+    "Copeptin": {
+      "units": "ρmol/L",
+      "ref": { "low": 1.70, "high": 11.25 },
+      "decimal": 2,
+      "analyzer": "Serum Chemistry Results"
+    },
+    "hsTN": {
       "note": "• <15.0 ng/L on two consecutive draws: Rule out MI.\n• 15.0 - 50.0 ng/L Grey zone, repeat at 3, 6, and 12 hours.\nIncrease in 20.0 ng/L or 50%: Rule in MI.\n• >50.0 ng/L: Rule in MI.",
       "ref": { "low": 0.0, "high": 15.0 },
       "critical": { "high": 50.0 },
@@ -395,12 +455,6 @@
       "decimal": 0,
       "analyzer": "Osmometry Results"
     },
-    "Osmo Gap": {
-      "units": "mOsm/kg",
-      "ref": { "high": 10 },
-      "decimal": 0,
-      "analyzer": "Osmometry Results"
-    },
     "Urine Osmolality": {
       "units": "mOsm/kg",
       "ref": { "low": 250, "high": 1200 },
@@ -436,7 +490,7 @@
       "decimal": 0,
       "analyzer": "Blood Gas Results"
     },
-    "O2 Sat": {
+    "SO2": {
       "units": "%",
       "ref": { "low": 95 },
       "decimal": 0,
@@ -461,28 +515,28 @@
     "Methanol": {
       "note": "Critical: >6.0 mmol/L",
       "ref": { "high": 0.0 },
-      "critical": { "high": 6.0},
+      "critical": { "high": 6.0 },
       "decimal": 1,
       "analyzer": "Gas Chromatography Results"
     },
     "Isopropanol": {
       "note": "Critical: >7.0 mmol/L",
       "ref": { "high": 0.0 },
-      "critical": { "high": 7.0},
+      "critical": { "high": 7.0 },
       "decimal": 1,
       "analyzer": "Gas Chromatography Results"
     },
     "Acetone": {
       "note": "Critical: >2.0 mmol/L",
       "ref": { "high": 0.0 },
-      "critical": { "high": 2.0},
+      "critical": { "high": 2.0 },
       "decimal": 1,
       "analyzer": "Gas Chromatography Results"
     },
     "Ethylene Glycol": {
       "note": "Critical: >5.0 mmol/L",
       "ref": { "high": 0.0 },
-      "critical": { "high": 5.0},
+      "critical": { "high": 5.0 },
       "decimal": 1,
       "analyzer": "Gas Chromatography Results"
     },
@@ -491,6 +545,24 @@
     "HbA1C": {
       "units": "%",
       "ref": { "low": 4.0, "high": 6.0 },
+      "decimal": 1,
+      "analyzer": "HPLC-MS Results"
+    },
+    "MetHb": {
+      "units": "%",
+      "critical": { "high": 5.0 },
+      "decimal": 1,
+      "analyzer": "HPLC-MS Results"
+    },
+    "COHb": {
+      "units": "%",
+      "critical": { "high": 15.0 },
+      "decimal": 1,
+      "analyzer": "HPLC-MS Results"
+    },
+    "SulfHb": {
+      "units": "%",
+      "critical": { "high": 5.0 },
       "decimal": 1,
       "analyzer": "HPLC-MS Results"
     },
@@ -538,31 +610,31 @@
     },
     "Factor Assay": {
       "units": "%",
-      "ref": { "low": 50, "high": 150},
+      "ref": { "low": 50, "high": 150 },
       "decimal": 0,
       "analyzer": "Hemostasis Results"
     },
     "vWFag": {
       "units": "%",
-      "ref": { "low": 50, "high": 160},
+      "ref": { "low": 50, "high": 160 },
       "decimal": 0,
       "analyzer": "Hemostasis Results"
     },
     "Antithrombin": {
       "units": "%",
-      "ref": { "low": 80, "high": 120},
+      "ref": { "low": 80, "high": 120 },
       "decimal": 0,
       "analyzer": "Hemostasis Results"
     },
     "Protein C": {
       "units": "%",
-      "ref": { "low": 70, "high": 130},
+      "ref": { "low": 70, "high": 130 },
       "decimal": 0,
       "analyzer": "Hemostasis Results"
     },
     "Protein S Free": {
       "units": "%",
-      "ref": { "low": 60, "high": 140},
+      "ref": { "low": 60, "high": 140 },
       "decimal": 0,
       "analyzer": "Hemostasis Results"
     },
@@ -572,7 +644,7 @@
     },
     "dRVVT": {
       "note": "Ratio <1.2",
-      "ref": { "high": 1.2},
+      "ref": { "high": 1.2 },
       "decimal": 1,
       "analyzer": "Hemostasis Results"
     },
@@ -749,6 +821,54 @@
       },
       "analyzer": "Complete Blood Count Results"
     },
+
+    
+    "CSF Clarity": {
+      "note": "Clear",
+      "analyzer": "CSF Results"
+    },
+    "CSF Colour": {
+      "note": "Colourless",
+      "analyzer": "CSF Results"
+    },
+    "CSF RBC": {
+      "units": "x 10^6/L",
+      "ref": { "high": 0 },
+      "critical": { "high": 0 },
+      "decimal": 0,
+      "analyzer": "CSF Results"
+    },
+    "CSF WBC": {
+      "units": "x 10^6/L",
+      "ref": { 
+        "< 12 months old": { "low": 0, "high": 30 },
+        "1-4 years old": { "low": 0, "high": 20 },
+        "5-14 years old": { "low": 0, "high": 10 },
+        "Adult": { "low": 0, "high": 5 }
+    },
+      "critical": { 
+        "< 12 months old": { "high": 30 },
+        "1-4 years old": { "high": 20 },
+        "5-14 years old": { "high": 10 },
+        "Adult": { "high": 5 }
+    },
+      "decimal": 0,
+      "analyzer": "CSF Results"
+    },
+    "CSF Glucose": {
+      "units": "mmol/L",
+      "ref": { "low": 2.5 },
+      "decimal": 1,
+      "analyzer": "CSF Results"
+    },
+    "CSF Total Protein": {
+      "units": "g/L",
+      "ref": { "low": 0.15, "high": 0.45 },
+      "decimal": 2,
+      "analyzer": "CSF Results"
+    },
+    
+
     "ESR": {
       "units": "mm in one hour",
       "ref": {

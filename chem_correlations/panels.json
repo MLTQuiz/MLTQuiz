@@ -1,7 +1,7 @@
 {
     "panels": {
         "LYTE7": {
-            "analytes": ["Na", "K", "Cl", "TCO2", "Urea", "Creatinine", "Random Glucose", "AGAP"]
+            "analytes": ["Na", "K", "Cl", "TCO2", "AGAP", "Urea", "Creatinine", "Random Glucose"]
         },
         "REN": {
             "analytes": ["Urea", "Creatinine", "Phos", "Mg", "Total Calcium"]

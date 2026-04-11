@@ -182,7 +182,7 @@
 
         let chemData = {};
 
-        fetch("chemCorrelations.json")
+        fetch("chem_correlations/chemCorrelations.json")
             .then(res => res.json())
             .then(db => {
                 chemData = db;

@@ -316,9 +316,42 @@
             nextQuestion();
         }
 
-        function getRandom(min, max, decimals) {
-            const value = Math.random() * (max - min) + min;
-            return value.toFixed(decimals);
+        function normalRandom(mean, sd) {
+            let u = 0, v = 0;
+
+            while (u === 0) u = Math.random();
+            while (v === 0) v = Math.random();
+
+            const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+
+            return mean + z * sd;
+        }
+
+        function getAnalyteValue(key, analytes, refs) {
+            const a = analytes[key];
+
+            if (!a) return null;
+
+            // 1. If explicit value exists → ALWAYS use it (even if string)
+            if (a.value !== undefined && a.value !== "Calculate") {
+                return a.value; // <- IMPORTANT: do NOT parseFloat
+            }
+
+            if (a?.low !== undefined && a?.high !== undefined) {
+                return parseFloat(a.low + Math.random() * (a.high - a.low));
+            }
+
+            // 2. Normal physiology from reference range (THIS is your new system)
+            const ref = refs["Reference Ranges"][key]?.ref;
+            if (ref?.low !== undefined && ref?.high !== undefined) {
+
+                const mean = (parseFloat(ref.low) + parseFloat(ref.high)) / 2;
+                const sd = 2; // fixed as you requested
+
+                return normalRandom(mean, sd);
+            }
+
+            return null;
         }
 
         function generateCase() {
@@ -356,13 +389,13 @@
             let analyteKeys = new Set();
 
             if (Array.isArray(caseData.panels)) {
-    caseData.panels.forEach(panelName => {
-        const panel = chemPanels?.panels?.[panelName];
-        if (!panel?.analytes) return;
+                caseData.panels.forEach(panelName => {
+                    const panel = chemPanels?.panels?.[panelName];
+                    if (!panel?.analytes) return;
 
-        panel.analytes.forEach(a => analyteKeys.add(a));
-    });
-}
+                    panel.analytes.forEach(a => analyteKeys.add(a));
+                });
+            }
 
             // 🆕 STEP 2: Add explicitly defined analytes (from your existing JSON)
             Object.keys(caseData).forEach(key => {
@@ -397,28 +430,25 @@
             let resultsByAnalyzer = {};
 
             for (let key of Object.keys(analytes)) {
-                const a = analytes[key];
 
-                let value;
-                if (a.value !== undefined && a.value !== "Calculate") {
-                    value = a.value;
-                } else if (a.low !== undefined) {
-                    value = getRandom(
-                        parseFloat(a.low),
-                        parseFloat(a.high),
-                        parseInt(a.decimal ?? 0),
-                    );
-                }
+                const value = getAnalyteValue(key, analytes, chemRefs);
 
                 const analyzer =
                     chemRefs["Reference Ranges"][key]?.analyzer || "Other";
 
-                if (!resultsByAnalyzer[analyzer]) resultsByAnalyzer[analyzer] = {};
+                if (!resultsByAnalyzer[analyzer]) {
+                    resultsByAnalyzer[analyzer] = {};
+                }
+
+                const refMeta = chemRefs["Reference Ranges"][key];
+                const diseaseMeta = analytes[key];
+
+                const isCustomString = typeof value === "string";
 
                 resultsByAnalyzer[analyzer][key] = {
-                    value: value,
-                    units: a.units || "",
-                    decimal: a.decimal ?? 0,
+                    value,
+                    units: isCustomString ? "" : (refMeta?.units ?? ""),
+                    decimal: refMeta?.decimal ?? 0,
                 };
             }
 
@@ -454,41 +484,80 @@
                 }
             }
 
-            // 🧮 AGAP logic (unchanged, still works)
+            // 🧮 AGAP logic (CONSTRAINT-SAFE VERSION)
             if (analytes["AGAP"]) {
-                const agData = analytes["AGAP"];
-                const low = parseFloat(agData.low);
-                const high = parseFloat(agData.high);
-                const decimals = parseInt(agData.decimal ?? 0);
+                const agRef = chemRefs["Reference Ranges"]["AGAP"];
+
+                const agLow = agRef?.ref?.low;
+                const agHigh = agRef?.ref?.high;
+                const decimals = agRef?.decimal ?? 0;
+
+                const naRef = chemRefs["Reference Ranges"]["Na"];
+                const clRef = chemRefs["Reference Ranges"]["Cl"]["ref"];
+                const tco2Ref = chemRefs["Reference Ranges"]["TCO2"];
 
                 let attempts = 0;
-                let valid = false;
+                let success = false;
 
-                while (attempts < 50 && !valid) {
+                while (attempts < 100 && !success) {
                     attempts++;
-                    const na = parseFloat(getRandom(analytes["Na"].low, analytes["Na"].high, analytes["Na"].decimal));
-                    const cl = parseFloat(getRandom(analytes["Cl"].low, analytes["Cl"].high, analytes["Cl"].decimal));
-                    const tco2 = parseFloat(getRandom(analytes["TCO2"].low, analytes["TCO2"].high, analytes["TCO2"].decimal));
 
-                    const ag = na - cl - tco2;
+                    // 1. Generate Na + TCO2 first (stable anchors)
+                    const Na_raw = getAnalyteValue("Na", analytes, chemRefs);
+                    const TCO2_raw = getAnalyteValue("TCO2", analytes, chemRefs);
 
-                    if (ag >= low && ag <= high) {
-                        resultsByAnalyzer["Serum Chemistry Results"].Na.value = na.toFixed(analytes["Na"].decimal);
-                        resultsByAnalyzer["Serum Chemistry Results"].Cl.value = cl.toFixed(analytes["Cl"].decimal);
-                        resultsByAnalyzer["Serum Chemistry Results"].TCO2.value = tco2.toFixed(analytes["TCO2"].decimal);
+                    const Na = Number(Math.round(Na_raw));
+                    const TCO2 = Number(Math.round(TCO2_raw));
 
-                        resultsByAnalyzer["Serum Chemistry Results"]["AGAP"] = {
-                            value: ag.toFixed(decimals),
-                            units: agData.units,
-                            decimal: decimals,
-                        };
+                    // 2. Compute valid AG range that keeps Cl in range
+                    const agMin = Na - TCO2 - clRef.high; // highest Cl → lowest AG
+                    const agMax = Na - TCO2 - clRef.low;  // lowest Cl → highest AG
 
-                        valid = true;
-                    }
+                    // 3. Intersect with disease target range
+                    const finalMin = Math.max(agMin, agLow);
+                    const finalMax = Math.min(agMax, agHigh);
+
+                    if (finalMin > finalMax) continue; // no solution for this Na/TCO2
+
+                    // 4. Pick AG inside valid window
+                    const AG = finalMin + Math.random() * (finalMax - finalMin);
+
+                    // 5. Solve Cl directly (NO random Cl)
+                    const Cl = Na - TCO2 - AG;
+
+                    // 6. Final safety check (floating precision)
+                    if (Cl < clRef.low || Cl > clRef.high) continue;
+
+                    // 7. Commit results
+                    const chem = resultsByAnalyzer["Serum Chemistry Results"];
+
+                    chem.Na.value = Na.toFixed(naRef.decimal);
+                    chem.TCO2.value = TCO2.toFixed(tco2Ref.decimal);
+                    chem.Cl.value = Cl.toFixed(clRef.decimal);
+
+                    chem["AGAP"] = {
+                        value: AG.toFixed(decimals),
+                        units: agRef?.units ?? "",
+                        decimal: decimals
+                    };
+
+                    console.log({ Na_raw, TCO2_raw, Na, TCO2, clRef });
+
+                    success = true;
                 }
             }
 
             return { disease, resultsByAnalyzer };
+        }
+
+        function formatValue(value, decimals) {
+            if (value === null || value === undefined) return "";
+
+            const num = Number(value);
+
+            if (!isFinite(num)) return value; // preserves strings like "Decreased ▽"
+
+            return num.toFixed(decimals ?? 0);
         }
 
         function formatReferenceRange(analyte) {
@@ -609,7 +678,7 @@
     <td>
         ${key === "AGAP" && !showAnionGap
                             ? `__ ${r.units || ""}`
-                            : `${r.value}${r.units ? " " + r.units : ""} ${getFlag(key, parseFloat(r.value))}`
+                            : `${formatValue(r.value, r.decimal)}${r.units ? " " + r.units : ""} ${getFlag(key, parseFloat(r.value))}`
                         }
     </td>
     <td>${ref}</td>

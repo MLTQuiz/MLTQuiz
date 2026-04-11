@@ -1,0 +1,35 @@
+{
+  "AGAP": {
+    "formula": "Na - Cl - TCO2",
+    "decimal": 0,
+    "patterns": {
+      "normal": {
+        "Na": { "low": 135, "high": 145 },
+        "TCO2": { "low": 22, "high": 28 },
+        "AG": { "low": 7, "high": 16 },
+        "Cl_mode": "balanced"
+      },
+
+      "nonAG acidosis": {
+        "Na": { "low": 135, "high": 145 },
+        "TCO2": { "low": 12, "high": 20 },
+        "AG": { "low": 7, "high": 16 },
+        "Cl_mode": "compensate_high"
+      },
+
+      "metabolic acidosis": {
+        "Na": { "low": 135, "high": 145 },
+        "TCO2": { "low": 10, "high": 18 },
+        "AG": { "low": 17, "high": 30 },
+        "Cl_mode": "normal"
+      },
+
+      "metabolic alkalosis": {
+        "Na": { "low": 135, "high": 145 },
+        "TCO2": { "low": 30, "high": 40 },
+        "AG": { "low": 7, "high": 16 },
+        "Cl_mode": "low"
+      }
+    }
+  }
+}

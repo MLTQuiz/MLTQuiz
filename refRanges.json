@@ -190,7 +190,7 @@
       "decimal": 2,
       "analyzer": "Serum Chemistry Results"
     },
-    "Total Calcium": {
+    "Ca": {
       "units": "mmol/L",
       "ref": { "low": 2.10, "high": 2.55 },
       "critical": { "low": 1.50, "high": 3.00 },

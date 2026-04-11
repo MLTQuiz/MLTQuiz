@@ -4,10 +4,10 @@
             "analytes": ["Na", "K", "Cl", "TCO2", "AGAP", "Urea", "Creatinine", "Random Glucose"]
         },
         "REN": {
-            "analytes": ["Urea", "Creatinine", "Phos", "Mg", "Total Calcium"]
+            "analytes": ["Urea", "Creatinine", "Phos", "Mg", "Ca"]
         },
         "LIV": {
-            "analytes": ["AST", "ALT", "ALP", "GGT", "Albumin", "Total Protein", "Total Bilirubin", "Direct Bilirubin", "Indirect Bilirubin"]
+            "analytes": ["AST", "ALT", "ALP", "GGT", "Albumin", "Total Protein", "T Bilirubin", "D Bilirubin", "I Bilirubin"]
         },
         "BGV": {
             "analytes": ["pH", "pCO2", "HCO3-", "pO2", "SO2"]

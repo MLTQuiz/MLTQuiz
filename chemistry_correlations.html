@@ -339,6 +339,7 @@
 
             if (a?.low !== undefined && a?.high !== undefined) {
                 return parseFloat(a.low + Math.random() * (a.high - a.low));
+
             }
 
             // 2. Normal physiology from reference range (THIS is your new system)
@@ -355,6 +356,8 @@
         }
 
         function generateCase() {
+            let regenerate = false;
+
             const selectedCases =
                 JSON.parse(localStorage.getItem("selectedCases")) || [];
 
@@ -484,17 +487,15 @@
                 }
             }
 
-            // 🧮 AGAP logic (CONSTRAINT-SAFE VERSION)
             if (analytes["AGAP"]) {
-                const agRef = chemRefs["Reference Ranges"]["AGAP"];
 
-                const agLow = agRef?.ref?.low;
-                const agHigh = agRef?.ref?.high;
+                const chem = resultsByAnalyzer["Serum Chemistry Results"];
+                const agDef = analytes["AGAP"];
+                const agRef = chemRefs["Reference Ranges"]["AGAP"];
                 const decimals = agRef?.decimal ?? 0;
 
-                const naRef = chemRefs["Reference Ranges"]["Na"];
-                const clRef = chemRefs["Reference Ranges"]["Cl"]["ref"];
-                const tco2Ref = chemRefs["Reference Ranges"]["TCO2"];
+                const refLow = agRef?.ref?.low;
+                const refHigh = agRef?.ref?.high;
 
                 let attempts = 0;
                 let success = false;
@@ -502,48 +503,98 @@
                 while (attempts < 100 && !success) {
                     attempts++;
 
-                    // 1. Generate Na + TCO2 first (stable anchors)
-                    const Na_raw = getAnalyteValue("Na", analytes, chemRefs);
-                    const TCO2_raw = getAnalyteValue("TCO2", analytes, chemRefs);
+                    const chemPanel = resultsByAnalyzer["Serum Chemistry Results"];
 
-                    const Na = Number(Math.round(Na_raw));
-                    const TCO2 = Number(Math.round(TCO2_raw));
+                    const Na = Math.round(Number(chemPanel?.Na?.value));
+                    const Cl = Math.round(Number(chemPanel?.Cl?.value));
+                    const TCO2 = Math.round(Number(chemPanel?.TCO2?.value));
 
-                    // 2. Compute valid AG range that keeps Cl in range
-                    const agMin = Na - TCO2 - clRef.high; // highest Cl → lowest AG
-                    const agMax = Na - TCO2 - clRef.low;  // lowest Cl → highest AG
+                    if (isNaN(Na) || isNaN(Cl) || isNaN(TCO2)) break;
 
-                    // 3. Intersect with disease target range
-                    const finalMin = Math.max(agMin, agLow);
-                    const finalMax = Math.min(agMax, agHigh);
+                    const AG = Na - Cl - TCO2;
 
-                    if (finalMin > finalMax) continue; // no solution for this Na/TCO2
+                    // 🟡 MODE 1: Calculate only → accept immediately
+                    if (agDef.value === "Calculate") {
+                        chem["AGAP"] = {
+                            value: AG.toFixed(decimals),
+                            units: agRef?.units ?? "",
+                            decimal: decimals
+                        };
+                        success = true;
+                        break;
+                    }
 
-                    // 4. Pick AG inside valid window
-                    const AG = finalMin + Math.random() * (finalMax - finalMin);
+                    // 🔵 MODE 2: Must be within reference range
+                    if (AG >= refLow && AG <= refHigh) {
+                        chem["AGAP"] = {
+                            value: AG.toFixed(decimals),
+                            units: agRef?.units ?? "",
+                            decimal: decimals
+                        };
+                        success = true;
+                    }
 
-                    // 5. Solve Cl directly (NO random Cl)
-                    const Cl = Na - TCO2 - AG;
+                    // ❗ If not valid, regenerate FULL CASE
+                    if (!success) {
+                        regenerate = true;
+                        break; // simplest correct reset
+                    }
+                }
+            }
 
-                    // 6. Final safety check (floating precision)
-                    if (Cl < clRef.low || Cl > clRef.high) continue;
+            // T BILIRUBIN BLOCK (ADD THIS)
+            if (analytes["T Bilirubin"]) {
 
-                    // 7. Commit results
-                    const chem = resultsByAnalyzer["Serum Chemistry Results"];
+                const chem = resultsByAnalyzer["Serum Chemistry Results"];
 
-                    chem.Na.value = Na.toFixed(naRef.decimal);
-                    chem.TCO2.value = TCO2.toFixed(tco2Ref.decimal);
-                    chem.Cl.value = Cl.toFixed(clRef.decimal);
+                const tRef = chemRefs["Reference Ranges"]["T Bilirubin"];
+                const decimals = tRef?.decimal ?? 0;
 
-                    chem["AGAP"] = {
-                        value: AG.toFixed(decimals),
-                        units: agRef?.units ?? "",
-                        decimal: decimals
-                    };
+                let attempts = 0;
+                let success = false;
 
-                    console.log({ Na_raw, TCO2_raw, Na, TCO2, clRef });
+                while (attempts < 100 && !success) {
+                    attempts++;
 
-                    success = true;
+                    const D = Math.round(Number(chem?.["D Bilirubin"]?.value));
+                    const I = Math.round(Number(chem?.["I Bilirubin"]?.value));
+
+                    if (isNaN(D) || isNaN(I)) break;
+
+                    const T = D + I;
+
+                    // CASE 1: forced calculation
+                    if (analytes["T Bilirubin"].value === "Calculate") {
+
+                        chem["T Bilirubin"] = {
+                            value: T.toFixed(decimals),
+                            units: tRef?.units ?? "",
+                            decimal: decimals
+                        };
+
+                        success = true;
+                        break;
+                    }
+
+                    // CASE 2: must be in range
+                    const low = tRef?.ref?.low;
+                    const high = tRef?.ref?.high;
+
+                    if (T >= low && T <= high) {
+
+                        chem["T Bilirubin"] = {
+                            value: T.toFixed(decimals),
+                            units: tRef?.units ?? "",
+                            decimal: decimals
+                        };
+
+                        success = true;
+                    }
+
+                    if (!success) {
+                        regenerate = true;
+                        break;
+                    }
                 }
             }
 

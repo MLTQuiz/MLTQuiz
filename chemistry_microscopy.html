@@ -277,10 +277,10 @@
             quizPool = [];
 
             const categoryPrefix = {
-                casts: "c1",
-                cells: "c2",
-                crystals: "c3",
-                other: "o1",
+                Casts: "c1",
+                Cells: "c2",
+                Crystals: "c3",
+                Other: "o1",
             };
 
             Object.keys(imageDatabase).forEach(cat => {
@@ -323,45 +323,45 @@
             optionsEl.innerHTML = "";
             feedbackEl.textContent = "";
 
-            let answers = [];
-
             Object.keys(imageDatabase).forEach(cat => {
 
                 const catData = imageDatabase[cat];
 
+                const categoryTitle = document.createElement("div");
+                categoryTitle.textContent = cat;
+                categoryTitle.style.fontWeight = "bold";
+                categoryTitle.style.fontSize = "20px";
+                categoryTitle.style.marginTop = "28px";
+                categoryTitle.style.marginBottom = "5px";
+
+                optionsEl.appendChild(categoryTitle);
+
                 Object.keys(catData).forEach(subtype => {
-                    answers.push(subtype);
-                });
-            });
 
-            // remove duplicates just in case
-            answers = [...new Set(answers)];
+                    const label = document.createElement("label");
 
+                    const radio = document.createElement("input");
+                    radio.type = "radio";
+                    radio.name = "answer";
+                    radio.value = subtype;
 
-            answers.forEach(subtype => {
+                    radio.addEventListener("change", () => {
+                        if (radio.value === item.subtype) {
+                            feedbackEl.textContent = "Correct! 🎉";
+                            feedbackEl.style.color = "green";
+                            playCorrect();
+                        } else {
+                            feedbackEl.textContent = "Try again!";
+                            feedbackEl.style.color = "red";
+                            playWrong();
+                        }
+                    });
 
-                const label = document.createElement("label");
-
-                const radio = document.createElement("input");
-                radio.type = "radio";
-                radio.name = "answer";
-                radio.value = subtype;
-
-                radio.addEventListener("change", () => {
-                    if (radio.value === item.subtype) {
-                        feedbackEl.textContent = "Correct! 🎉";
-                        feedbackEl.style.color = "green";
-                        playCorrect();
-                    } else {
-                        feedbackEl.textContent = "Try again!";
-                        feedbackEl.style.color = "red";
-                        playWrong();
-                    }
+                    label.appendChild(radio);
+                    label.append(" " + subtype.replace(/_/g, " "));
+                    optionsEl.appendChild(label);
                 });
 
-                label.appendChild(radio);
-                label.append(" " + subtype.replace(/_/g, " "));
-                optionsEl.appendChild(label);
             });
 
             currentQuestion++;

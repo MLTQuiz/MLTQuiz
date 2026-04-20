@@ -1,5 +1,5 @@
 {
-  "casts": {
+  "Casts": {
     "Hyaline_Cast": { "count": 4, "code": "hy"},
     "Coarse_Granular_Cast": { "count": 3, "code": "cg" },
     "Fine_Granular_Cast": { "count": 1, "code": "fg" },
@@ -8,7 +8,7 @@
     "WBC_Cast": { "count": 1, "code": "wb"}
   },
 
-  "cells": {
+  "Cells": {
     "Squamous_Epithelial_Cell": { "count": 7, "code": "sq" },
     "Renal_Tubule_Epithelial_Cell": { "count": 3, "code": "rt" },
     "Transitional_Epithelial_Cell": { "count": 6, "code": "tr" },
@@ -17,7 +17,7 @@
     "Yeast": { "count": 8, "code": "ye" }
   },
 
-  "crystals": {
+  "Crystals": {
     "Bilirubin_Crystal": { "count": 1, "code": "bi" },
     "Calcium_Oxalate_Crystal_(Monohydrate/Dihydrate)": { "count": 6, "code": "co" },
     "Calcium_Phosphate_Crystal": { "count": 2, "code": "cp" },
@@ -28,7 +28,7 @@
     "Uric_Acid_Crystal": { "count": 5, "code": "ua" }
   },
 
-  "other": {
+  "Other": {
     "Mucus": { "count": 1, "code": "mu" },
     "Spermatozoa": { "count": 4, "code": "sp" }
   }

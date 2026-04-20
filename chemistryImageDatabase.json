@@ -1,0 +1,35 @@
+{
+  "casts": {
+    "Hyaline_Cast": { "count": 4, "code": "hy"},
+    "Coarse_Granular_Cast": { "count": 3, "code": "cg" },
+    "Fine_Granular_Cast": { "count": 1, "code": "fg" },
+    "Waxy_Cast": { "count": 6, "code": "wx" },
+    "RBC_Cast": { "count": 1, "code": "rb"},
+    "WBC_Cast": { "count": 1, "code": "wb"}
+  },
+
+  "cells": {
+    "Squamous_Epithelial_Cell": { "count": 7, "code": "sq" },
+    "Renal_Tubule_Epithelial_Cell": { "count": 3, "code": "rt" },
+    "Transitional_Epithelial_Cell": { "count": 6, "code": "tr" },
+    "WBC": { "count": 1, "code": "wb" },
+    "Bacteria": { "count": 2, "code": "ba" },
+    "Yeast": { "count": 8, "code": "ye" }
+  },
+
+  "crystals": {
+    "Bilirubin_Crystal": { "count": 1, "code": "bi" },
+    "Calcium_Oxalate_Crystal_(Monohydrate/Dihydrate)": { "count": 6, "code": "co" },
+    "Calcium_Phosphate_Crystal": { "count": 2, "code": "cp" },
+    "Cholesterol_Crystal": { "count": 1, "code": "ch" },
+    "Cystine_Crystal": { "count": 7, "code": "cy" },
+    "Leucine_Crystal": { "count": 1, "code": "le" },
+    "Tyrosine_Crystal": { "count": 1, "code": "ty" },
+    "Uric_Acid_Crystal": { "count": 5, "code": "ua" }
+  },
+
+  "other": {
+    "Mucus": { "count": 1, "code": "mu" },
+    "Spermatozoa": { "count": 4, "code": "sp" }
+  }
+}

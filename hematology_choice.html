@@ -46,7 +46,7 @@
         label {
             display: block;
             margin: clamp(calc(6px/3), calc(6vw/7.2), 6px) 0;
-            cursor: pointer;
+            cursor: text;
             font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
         }
 
@@ -165,15 +165,15 @@
     <h2>Select the area you'd like to study</h2>
 
     <div class="category">
-        <button onclick="CellID()">Cell Identification</button>
+        <button onclick="CellID()">🔬 Cell Identification</button>
         <label>Final stages. Please give feedback :)</label>
         <br><br>
 
-        <button onclick="Coagulation()">Coagulation</button>
+        <button style="background-color: #4a4a4a; cursor: default" onclick="Coagulation()">🩹 Coagulation</button>
         <label>Not Started.</label>
         <br><br>
 
-        <button onclick="Correlations()">CBC Correlations</button>
+        <button style="background-color: #4a4a4a; cursor: default" onclick="Correlations()">📊 CBC Correlations</button>
         <label>Not Started.</label>
 
         <br><br><br><br><br><br><br><br>

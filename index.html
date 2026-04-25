@@ -88,6 +88,21 @@
             background: #1f55c4;
         }
 
+        buttonNotReady {
+            line-height: 1.2;
+            font-size: clamp(calc(25px/3), calc(25vw/7.2), 25px);
+            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px) clamp(calc(18px/3), calc(18vw/7.2), 18px);
+            border-radius: clamp(calc(5px/3), calc(5vw/7.2), 5px);
+            border: none;
+            background: #4a4a4a;
+            color: white;
+            cursor: pointer;
+        }
+
+        buttonNotReady:hover {
+            background: #2f2f2f;
+        }
+
         button-back {
             font-size: clamp(calc(15px/3), calc(15vw/7.2), 15px);
             padding: clamp(calc(8px/3), calc(8vw/7.2), 8px) clamp(calc(12px/3), calc(12vw/7.2), 12px);
@@ -165,27 +180,27 @@
 
     <div class="category">
         <button onclick="Chemistry()">🧪 Chemistry</button>
-        <label>Started Correlation Quiz. Adding more case studies soon!</label>
+        <label>Adding more case studies soon!</label>
         <br><br>
 
         <button onclick="Hematology()">🩸Hematology</button>
-        <label>Cell ID Quiz in final stages! Others not started.</label>
+        <label>Cell ID Quiz in final stages!</label>
         <br><br>
 
         <button onclick="Histology()">🔬 Histology</button>
         <label>Final stages! Adding tissue identification in the future.</label>
         <br><br>
 
-        <button onclick="Microbiology()">🧫 Microbiology</button>
+        <button style="background-color: #4a4a4a; cursor: default" onclick="Microbiology()">🧫 Microbiology</button>
         <label>Not started.</label>
         <br><br>
 
-        <button onclick="Transfusions()">🆎 Transfusions</button>
+        <button style="background-color: #4a4a4a; cursor: default" onclick="Transfusions()">🆎 Transfusions</button>
         <label>Not started.</label>
         <br><br>
 
         <hr>
-        <br><br>
+        <br>
 
         <label>Have any suggestions or feedback?</label>
         <button onclick="Feedback()">✉️ Contact Me</button>

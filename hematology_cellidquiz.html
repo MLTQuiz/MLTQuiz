@@ -207,6 +207,7 @@
         let imageDatabase = {};
 
         let muted = true;
+        let juneEnabled = false;
 
         const correctSound = new Audio();
         const wrongSound = new Audio();
@@ -263,8 +264,6 @@
         }
 
         muteBtn?.addEventListener("click", toggleMute);
-        
-        let juneEnabled = false;
         
         document.addEventListener('keydown', (event) => {
             if (event.key === 'j') {

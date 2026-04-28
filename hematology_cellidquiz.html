@@ -166,7 +166,7 @@
         <h1>Hematology Cell Identification Quiz</h1>
 
         <div class="category">
-            <div class="question">What cell is this? Test 2</div>
+            <div class="question">What cell is this? Test 1</div>
             <img id="quizImage" src="" />
 
             <div id="answerOptions"></div>
@@ -215,6 +215,7 @@
         let imageDatabase = {};
 
         let muted = true;
+        let juneEnabled = false;
 
         const correctSound = new Audio();
         const wrongSound = new Audio();
@@ -224,10 +225,10 @@
 
         if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 
-        let juneEnabled = false;
+
         document.addEventListener('keydown', (event) => {
             if (event.key === 'j') {
-                juneEnabled != juneEnabled;
+                juneEnabled = !juneEnabled;
                 updateSounds();
             }
         });

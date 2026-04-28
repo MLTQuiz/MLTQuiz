@@ -264,8 +264,6 @@
 
         muteBtn?.addEventListener("click", toggleMute);
         
-        updateSounds();
-
         let juneEnabled = false;
         
         document.addEventListener('keydown', (event) => {
@@ -274,6 +272,8 @@
                 updateSounds();
             }
         });
+
+        updateSounds();
 
         fetch("hematologyImageDatabase.json")
             .then(res => res.json())

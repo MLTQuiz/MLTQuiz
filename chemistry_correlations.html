@@ -856,8 +856,6 @@
 
         muteBtn?.addEventListener("click", toggleMute);
 
-        updateSounds();
-
         let juneEnabled = false;
         
         document.addEventListener('keydown', (event) => {
@@ -866,6 +864,8 @@
                 updateSounds();
             }
         });
+
+        updateSounds();
 
         function Back() {
             window.location.href = "chemistry_correlationschoices.html";

@@ -429,8 +429,6 @@
 
         muteBtn.addEventListener("click", toggleMute);
 
-        updateSounds();
-
         let juneEnabled = false;
         
         document.addEventListener('keydown', (event) => {
@@ -439,6 +437,8 @@
                 updateSounds();
             }
         });
+
+        updateSounds();
 
         function Home() {
             window.location.href = "index.html";

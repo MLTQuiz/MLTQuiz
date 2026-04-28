@@ -149,6 +149,11 @@
             resize: none;
         }
 
+        .disabled-case {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
         td:nth-child(2) {
             white-space: nowrap;
         }
@@ -221,8 +226,18 @@
                     cb.type = "checkbox";
                     cb.value = `${topic}|||${disease}`;
 
+                    const caseData = diseases[disease];
+                    const isEmpty = Object.keys(caseData).length === 0;
+
+                    if (isEmpty) {
+                        cb.disabled = true;
+                        label.classList.add("disabled-case");
+                    }
+
                     topicCb.addEventListener("change", () => {
-                        cb.checked = topicCb.checked;
+                        if (!cb.disabled) {
+                            cb.checked = topicCb.checked;
+                        }
                     });
 
                     cb.addEventListener("change", () => {

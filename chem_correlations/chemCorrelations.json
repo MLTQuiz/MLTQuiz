@@ -87,8 +87,8 @@
             "hsTN": {"low": 30.0, "high": 45.0}
         }
     },
-    "Disgestive System": {
-        "Malabsorption (including Vitamin K deficiency)": {
+    "Digestive System": {
+        "Malabsorption": {
             "panels": ["LYTE7"],
             "Urea": {"low": 3.7, "high": 7.0},
             "Creatinine": {"low": 60, "high": 90},

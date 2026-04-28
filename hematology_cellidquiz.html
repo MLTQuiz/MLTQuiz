@@ -166,7 +166,7 @@
         <h1>Hematology Cell Identification Quiz</h1>
 
         <div class="category">
-            <div class="question">What cell is this? Test 1</div>
+            <div class="question">What cell is this? Test 2</div>
             <img id="quizImage" src="" />
 
             <div id="answerOptions"></div>
@@ -228,6 +228,7 @@
         document.addEventListener('keydown', (event) => {
             if (event.key === 'j') {
                 juneEnabled != juneEnabled;
+                updateSounds();
             }
         });
 

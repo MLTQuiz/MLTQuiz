@@ -166,7 +166,7 @@
         <h1>Hematology Cell Identification Quiz</h1>
 
         <div class="category">
-            <div class="question">What cell is this? Test 1</div>
+            <div class="question">What cell is this?</div>
             <img id="quizImage" src="" />
 
             <div id="answerOptions"></div>
@@ -178,7 +178,6 @@
             <br><br>
             <hr><br>
 
-            
             <button-back id="muteBtn">🔊 Mute</button-back>
             <br><br><br>
             <button-back onclick="Back()">⬅ Back</button-back>
@@ -186,13 +185,6 @@
             <button-back onclick="Home()">🏠 Home</button-back>
         </div>
     </div>
-
-    <div style="height:2000px;"></div>
-
-    <label class="tab2">
-        <input type="checkbox" id="june_feedback">
-        Junea Noises
-    </label>
 
     <script>
 
@@ -221,17 +213,8 @@
         const wrongSound = new Audio();
 
         const muteBtn = document.getElementById("muteBtn");
-        const juneCheckbox = document.getElementById("june_feedback");
 
         if (muteBtn) muteBtn.textContent = "🔇 Unmute";
-
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'j') {
-                juneEnabled = !juneEnabled;
-                updateSounds();
-            }
-        });
 
         function updateSounds() {
             if (juneEnabled) {
@@ -281,9 +264,15 @@
         }
 
         muteBtn?.addEventListener("click", toggleMute);
-        juneCheckbox?.addEventListener("change", updateSounds);
-
+        
         updateSounds();
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'j') {
+                juneEnabled = !juneEnabled;
+                updateSounds();
+            }
+        });
 
         fetch("hematologyImageDatabase.json")
             .then(res => res.json())

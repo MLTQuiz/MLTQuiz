@@ -224,9 +224,14 @@
 
         if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 
-        function updateSounds() {
-            const juneEnabled = juneCheckbox?.checked;
+        let juneEnabled = false;
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'j') {
+                juneEnabled != juneEnabled;
+            }
+        });
 
+        function updateSounds() {
             if (juneEnabled) {
                 correctSound.src = "sounds/June - I'm eating yogurt.wav";
                 wrongSound.src = "sounds/June - Yell 2 (Short).wav";

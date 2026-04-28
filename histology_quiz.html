@@ -208,13 +208,6 @@
         </div>
     </div>
 
-    <div style="height:2000px;"></div>
-
-    <label>
-        <input type="checkbox" id="june_feedback">
-        Junea Noises
-    </label>
-
     <script>
         let imageDatabase = [];
         let currentItem = null;
@@ -392,12 +385,10 @@
         const correctSound = new Audio();
         const wrongSound = new Audio();
         const muteBtn = document.getElementById("muteBtn");
-        const juneCheckbox = document.getElementById("june_feedback");
 
         muteBtn.textContent = "🔇 Unmute";
 
         function updateSounds() {
-            const juneEnabled = juneCheckbox.checked;
             if (juneEnabled) {
                 correctSound.src = "sounds/June - I'm eating yogurt.wav";
                 wrongSound.src = "sounds/June - Yell 2 (Short).wav";
@@ -437,10 +428,21 @@
         }
 
         muteBtn.addEventListener("click", toggleMute);
-        juneCheckbox.addEventListener("change", updateSounds);
+
         updateSounds();
 
-        function Home() { window.location.href = "index.html"; }
+        let juneEnabled = false;
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'j') {
+                juneEnabled = !juneEnabled;
+                updateSounds();
+            }
+        });
+
+        function Home() {
+            window.location.href = "index.html";
+        }
     </script>
 </body>
 

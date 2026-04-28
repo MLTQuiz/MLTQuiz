@@ -187,13 +187,6 @@
         </div>
     </div>
 
-    <div style="height:2000px;"></div>
-
-    <label class="tab2">
-        <input type="checkbox" id="june_feedback">
-        Junea Noises
-    </label>
-
     <script>
 
         let quizPool = [];
@@ -206,13 +199,10 @@
         const wrongSound = new Audio();
 
         const muteBtn = document.getElementById("muteBtn");
-        const juneCheckbox = document.getElementById("june_feedback");
 
         if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 
         function updateSounds() {
-            const juneEnabled = juneCheckbox?.checked;
-
             if (juneEnabled) {
                 correctSound.src = "sounds/June - I'm eating yogurt.wav";
                 wrongSound.src = "sounds/June - Yell 2 (Short).wav";
@@ -260,9 +250,17 @@
         }
 
         muteBtn?.addEventListener("click", toggleMute);
-        juneCheckbox?.addEventListener("change", updateSounds);
 
         updateSounds();
+
+        let juneEnabled = false;
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'j') {
+                juneEnabled = !juneEnabled;
+                updateSounds();
+            }
+        });
 
         fetch("chemistryImageDatabase.json")
             .then(res => res.json())

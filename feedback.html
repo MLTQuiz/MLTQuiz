@@ -184,16 +184,12 @@
 
         <br /><br />
 
-        <form id="feedbackForm">
+        <form style="display: block; text-align: center;" id="feedbackForm">
             <textarea class="large-textarea" name="message" placeholder="Type your thoughts here..."></textarea><br><br>
-            <label style="display: block; text-align: center; font-size: small;">
-                Upload an image (Max file size: 5 MB)
+            <label>
+                Upload images:
             </label>
-            <div id="fileContainer">
-                <input type="file" name="attachment1"><br>
-            </div>
-
-            <button type="button" onclick="addFile()">+ Add another file</button><br><br>
+            <input type="file" name="attachment1" multiple><br><br>
 
             <button type="button" onclick="Feedback()">Submit Feedback</button>
         </form>
@@ -220,25 +216,18 @@
             let hasFile = false;
 
             for (let input of inputs) {
-                if (input.files && input.files[0]) {
-                    formData.append("files", input.files[0]);
-                    hasFile = true;
+                if (input.files && input.files.length > 0) {
+                    for (let file of input.files) {
+                        formData.append("files", file);
+                        hasFile = true;
+                    }
                 }
             }
 
-            const res = await fetch("https://calm-sunset-782d.oowarshockoo.workers.dev", {
+            const res = await fetch("https://royal-pine-da5b.oowarshockoo.workers.dev/", {
                 method: "POST",
                 body: formData
             });
-
-            const text = await res.text();
-
-            if (data.ok) {
-                alert("Thank you!");
-                Home();
-            } else {
-                alert("Error: " + (data.error || "Unknown error"));
-            }
         }
 
 

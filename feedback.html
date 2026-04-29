@@ -177,34 +177,70 @@
     <div class="category">
         <span class="label">
             I’d love your feedback! Have ideas to improve these quizzes? Whether it’s adding or removing questions,
-            updating information, suggesting better photos, or sharing your own images—let me know.
-            If you’d like to submit a photo, please include your email so I can follow up with you.
-            Your input helps make this experience better for everyone.</span><br /><br />
-        <textarea class="large-textarea" id="message" placeholder="Type your thoughts here..."></textarea><br><br>
-        <button onclick="Feedback()">Submit Feedback</button>
+            updating information, or suggesting better/more photos - let me know!
+            If you’d like to submit personal photos for to be used in quizzes, you can attach it
+            below.
+        </span>
+
+        <br /><br />
+
+        <form id="feedbackForm">
+            <textarea class="large-textarea" name="message" placeholder="Type your thoughts here..."></textarea><br><br>
+            <label style="display: block; text-align: center; font-size: small;">
+                Upload an image (Max file size: 5 MB)
+            </label>
+            <div id="fileContainer">
+                <input type="file" name="attachment1"><br>
+            </div>
+
+            <button type="button" onclick="addFile()">+ Add another file</button><br><br>
+
+            <button type="button" onclick="Feedback()">Submit Feedback</button>
+        </form>
         <br><br>
         <hr><br>
+
+        <!-- SAVING FOR LATER: I’d love your feedback! Have ideas to improve these quizzes? Whether it’s adding or removing questions,
+            updating information, suggesting better photos, or sharing your own images—let me know.
+            If you’d like to submit a photo, please include your email so I can follow up with you.
+            Your input helps make this experience better for everyone. -->
 
         <button-back onclick="Home()">🏠 Home</button-back>
     </div>
 
     <script>
-        function Feedback() {
-            const templateParams = {
-                message: document.getElementById("message").value
-            };
-            
-            emailjs
-                .send("service_fuq3whq", "template_hphiiho", templateParams)
-                .then(() => {
-                    alert("Thank you for your feedback!");
-                    Home()
-                })
-                .catch((error) => {
-                    console.lod("Error sending email:", error);
-                    alert("Failed to submit feedback. Please try again.");
-                });
+        async function Feedback() {
+            const formData = new FormData();
+
+            const message = document.querySelector("textarea").value;
+            formData.append("message", message);
+
+            const inputs = document.querySelectorAll('input[type="file"]');
+
+            let hasFile = false;
+
+            for (let input of inputs) {
+                if (input.files && input.files[0]) {
+                    formData.append("files", input.files[0]);
+                    hasFile = true;
+                }
+            }
+
+            const res = await fetch("https://calm-sunset-782d.oowarshockoo.workers.dev", {
+                method: "POST",
+                body: formData
+            });
+
+            const text = await res.text();
+
+            if (data.ok) {
+                alert("Thank you!");
+                Home();
+            } else {
+                alert("Error: " + (data.error || "Unknown error"));
+            }
         }
+
 
         function Home() {
             window.location.href = "index.html";

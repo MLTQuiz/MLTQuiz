@@ -252,10 +252,25 @@
 
         muteBtn?.addEventListener("click", toggleMute);
         
+        const keysPressed = {};
+
+        let comboActive = false;
+
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'j') {
+            keysPressed[event.key.toLowerCase()] = true;
+
+            if (keysPressed['j'] && keysPressed['f'] && !comboActive) {
                 juneEnabled = !juneEnabled;
                 updateSounds();
+                comboActive = true;
+            }
+        });
+
+        document.addEventListener('keyup', (event) => {
+            keysPressed[event.key.toLowerCase()] = false;
+
+            if (!keysPressed['j'] || !keysPressed['f']) {
+                comboActive = false;
             }
         });
 

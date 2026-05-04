@@ -224,10 +224,18 @@
                 }
             }
 
+            if (!message && !hasFile) {
+                return;
+            }
+
             const res = await fetch("https://royal-pine-da5b.oowarshockoo.workers.dev/", {
                 method: "POST",
                 body: formData
             });
+
+            alert("Thank you for message. I will read it as soon as I can!");
+
+            Home();
         }
 
 

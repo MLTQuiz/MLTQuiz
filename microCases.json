@@ -1,0 +1,341 @@
+{
+    "organisms": {
+        "aeromonas": {
+            "id": "Aeromonas species",
+            "BA": "grey BH",
+            "CHOC": "grey",
+            "MAC": "Variable",
+            "XLD": "Yellow",
+            "STEC": "Blue",
+            "CIN": "MF",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Positive",
+            "Rhamnose": "Negative",
+            "MIL": { "Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive" },
+            "TSI": "A/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure"
+        },
+        "plesiomonas": {
+            "id": "Plesiomonas shigelloides",
+            "BA": "grey NH",
+            "CHOC": "grey",
+            "MAC": "Variable",
+            "XLD": "Yellow",
+            "STEC": "Blue",
+            "CIN": "NMF",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Positive",
+            "MIL": { "Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive" },
+            "TSI": "V/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure"
+        },
+        "vibrio": {
+            "id": "Vibrio species",
+            "BA": ["grey-green NH", "grey-green BH"], 
+            "CHOC": "grey glistening",
+            "MAC": "Variable",
+            "XLD": "Yellow",
+            "STEC": "No growth",
+            "CIN": "NMF",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli, curved",
+            "Oxidase": "Positive",
+            "MIL": { "Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive" },
+            "TSI": "V/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure"
+        },
+        "campylobacter": {
+            "id": "Campylobacter species",
+            "BA": "grey NH",
+            "CHOC": "grey",
+            "MAC": "No growth",
+            "XLD": "No growth",
+            "STEC": "No growth",
+            "CIN": "NMF",
+            "Karmali": "grey",
+            "Gram": "Gram negative bacilli, curved",
+            "Oxidase": "Positive",
+            "Catalase": "Positive",
+            "MIL": { "Motility": "Motile", "Indole": "Negative", "Lysine Decarboxylase": "Negative" },
+            "TSI": "K/K",
+            "BA pp": "Pure",
+            "MAC pp": "Pure"
+        },
+        "e_coli_stec_1": {
+            "id": "Shiga-toxin producing Escherichia coli",
+            "BA": ["grey glistening NH", "grey glistening BH"],
+            "CHOC": "grey glistening",
+            "MAC": "LF",
+            "XLD": "Yellow",
+            "STEC": "Mauve",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": {"Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive"},
+            "TSI": "A/A gas",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Positive", "Stx2": "Negative"},
+            "O157 Latex": { "Negative Control": "Negative", "Latex": "Negative" }
+        },
+        "e_coli_stec_2": {
+            "id": "Shiga-toxin producing Escherichia coli",
+            "BA": ["grey glistening NH", "grey glistening BH"],
+            "CHOC": "grey glistening",
+            "MAC": "LF",
+            "XLD": "Yellow",
+            "STEC": "Mauve",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": {"Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive"},
+            "TSI": "A/A gas",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Negative", "Stx2": "Positive" },
+            "O157 Latex": { "Negative Control": "Negative", "Latex": "Negative" }
+        },
+        "e_coli_stec_3": {
+            "id": "Shiga-toxin producing Escherichia coli",
+            "BA": ["grey glistening NH", "grey glistening BH"],
+            "CHOC": "grey glistening",
+            "MAC": "LF",
+            "XLD": "Yellow",
+            "STEC": "Mauve",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": {"Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive"},
+            "TSI": "A/A gas",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Positive", "Stx2": "Positive" },
+            "O157 Latex": { "Negative Control": "Negative", "Latex": "Negative" }
+        },
+        "e_coli_O157_1": {
+            "id": "Escherichia coli O157:H7",
+            "BA": ["grey glistening NH", "grey glistening BH"],
+            "CHOC": "grey glistening",
+            "MAC": "LF",
+            "XLD": "Yellow",
+            "STEC": "Mauve",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": {"Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive"},
+            "TSI": "A/A gas",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Positive", "Stx2": "Negative" },
+            "O157 Latex": { "Negative Control": "Negative", "Latex": "Positive" }
+        },
+        "e_coli_O157_2": {
+            "id": "Escherichia coli O157:H7",
+            "BA": ["grey glistening NH", "grey glistening BH"],
+            "CHOC": "grey glistening",
+            "MAC": "LF",
+            "XLD": "Yellow",
+            "STEC": "Mauve",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": {"Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive"},
+            "TSI": "A/A gas",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Negative", "Stx2": "Positive" },
+            "O157 Latex": { "Negative Control": "Negative", "Latex": "Positive" }
+        },
+        "e_coli_O157_3": {
+            "id": "Escherichia coli O157:H7",
+            "BA": ["grey glistening NH", "grey glistening BH"],
+            "CHOC": "grey glistening",
+            "MAC": "LF",
+            "XLD": "Yellow",
+            "STEC": "Mauve",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": {"Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive"},
+            "TSI": "A/A gas",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Positive", "Stx2": "Positive" },
+            "O157 Latex": { "Negative Control": "Negative", "Latex": "Positive" }
+        },
+        "salmonella": {
+            "id": "Salmonella species",
+            "BA": "grey glistening NH",
+            "CHOC": "grey glistening",
+            "MAC": "NLF",
+            "XLD": ["Red with black centers", "Colorless with black centers"],
+            "STEC": "Blue",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": { "Motility": "Motile", "Indole": "Negative", "Lysine Decarboxylase": "Positive" },
+            "TSI": "K/A gas H2S",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Salmonella Latex": { "Negative Control": "Negative", "Latex": "Positive" }
+        },
+        "shigella_sonnei": {
+            "id": "Shigella sonnei",
+            "BA": "grey glistening NH",
+            "CHOC": "grey glistening",
+            "MAC": "NLF",
+            "XLD": ["Red", "Colorless"],
+            "STEC": "Blue",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": { "Motility": "Non-motile", "Indole": "Negative", "Lysine Decarboxylase": "Negative" },
+            "TSI": "K/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shigella Latex": { "R1": "Red clumps, Blue background", "R2": "No clumps, purple background" }
+        },
+        "shigella_dysenteriae": {
+            "id": "Shigella dysenteriae",
+            "BA": "grey glistening NH",
+            "CHOC": "grey glistening",
+            "MAC": "NLF",
+            "XLD": ["Red", "Colorless"],
+            "STEC": "Blue",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": { "Motility": "Non-motile", "Indole": "Negative", "Lysine Decarboxylase": "Negative" },
+            "TSI": "K/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shigella Latex": { "R1": "No clumps, purple background", "R2": "Red clumps, Blue background" }
+        },
+        "shigella_flexneri": {
+            "id": "Shigella flexneri",
+            "BA": "grey glistening NH",
+            "CHOC": "grey glistening",
+            "MAC": "NLF",
+            "XLD": ["Red", "Colorless"],
+            "STEC": "Blue",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": { "Motility": "Non-motile", "Indole": "Negative", "Lysine Decarboxylase": "Negative" },
+            "TSI": "K/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shigella Latex": { "R1": "Blue clumps, pink background", "R2": "No clumps, purple background" }
+        },
+        "shigella_boydii": {
+            "id": "Shigella boydii",
+            "BA": "grey glistening NH",
+            "CHOC": "grey glistening",
+            "MAC": "NLF",
+            "XLD": ["Red", "Colorless"],
+            "STEC": "Blue",
+            "CIN": "No growth",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": { "Motility": "Non-motile", "Indole": "Negative", "Lysine Decarboxylase": "Negative" },
+            "TSI": "K/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Shigella Latex": { "R1": "No clumps, purple background", "R2": "Blue clumps, pink background" }
+        },
+        "yersinia": {
+            "id": "Yersinia species",
+            "BA": "grey glistening NH",
+            "CHOC": "grey glistening",
+            "MAC": "LF",
+            "XLD": "Yellow",
+            "STEC": "No growth",
+            "CIN": "MF",
+            "Karmali": "No growth",
+            "Gram": "Gram negative bacilli",
+            "Oxidase": "Negative",
+            "MIL": { "Motility": "Non-motile", "Indole": "Variable", "Lysine Decarboxylase": "Negative" },
+            "TSI": "A/A",
+            "BA pp": "Pure",
+            "MAC pp": "Pure",
+            "Rhamnose": "Negative"
+        }
+    },
+    "stool_rules": {
+        "if": {
+            "BA": ["grey", "grey glistening"],
+            "next_test": "Oxidase"
+        },
+        "if": {
+            "Oxidase": "Positive",
+            "next_test": ["TSI", "MIL", "BA pp", "MAC pp"]
+        },
+        "if": {
+            "MAC": "NLF",
+            "next_test": ["TSI", "MIL", "BA pp", "MAC pp"]
+        },
+        "if": {
+            "XLD": ["Red", "Colorless", "Red with black centers", "Colorless with black centers"],
+            "next_test": ["TSI", "MIL", "BA pp", "MAC pp"]
+        },
+        "if": {
+            "STEC": "Mauve",
+            "next_test": ["TSI", "MIL", "BA pp", "MAC pp"]
+        },
+        "if": {
+            "CIN": "MF",
+            "next_test": ["Rhamnose", "TSI", "MIL", "BA pp", "MAC pp"]
+        },
+        "if": {
+            "Karmali": "grey",
+            "next_test": "Gram"
+        },
+        "if": {
+            "Gram": "Gram negative bacilli, curved",
+            "next_test": ["Oxidase", "Catalase"]
+        },
+        "if": {
+            "MIL": { "Motility": "Motile", "Indole": "Negative", "Lysine Decarboxylase": "Positive" },
+            "TSI": "K/A gas H2S",
+            "next_test": "Salmonella Latex"
+        },
+        "if": {
+            "MIL": { "Motility": "Non-motile", "Indole": "Negative", "Lysine Decarboxylase": "Negative" },
+            "TSI": "K/A",
+            "next_test": "Shigella Latex"
+        },
+        "if": {
+            "MIL": {"Motility": "Motile", "Indole": "Positive", "Lysine Decarboxylase": "Positive"},
+            "TSI": "A/A gas",
+            "next_test": "Shiga Toxin Test"
+        },
+        "if": {
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Positive", "Stx2": "Negative" },
+            "next_test": "O157 Latex"
+        },
+        "if": {
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Negative", "Stx2": "Positive" },
+            "next_test": "O157 Latex"
+        },
+        "if": {
+            "Shiga Toxin Test": { "Positive Control": "Positive", "Stx1": "Positive", "Stx2": "Positive" },
+            "next_test": "O157 Latex"
+        }
+    }
+}

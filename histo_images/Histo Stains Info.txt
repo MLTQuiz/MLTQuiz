@@ -1,0 +1,173 @@
+Stain: Alcian Blue
+Demonstrating: Acid Mucins
+Color: Turquoise
+Principle: Ionic Bonding, Salt Bridges
+Control: Intestine
+
+
+Stain: Bielschowsky-Periodic Acid Schiff
+Demonstrating: Neurofibrillary plaques and tangles
+Color: Black
+Principle: Argyrophilic Silver Impregnation
+Control: CNS Tissue
+
+
+Stain: Bielschowsky-Periodic Acid Schiff
+Demonstrating: Neurofibrillary plaques and tangles
+Color: Black
+Principle: Argyrophilic Silver Impregnation
+Control: CNS Tissue
+
+
+Stain: Cresyl Echt Violet
+Demonstrating: Nissl Substance
+Color: Purple
+Principle: Ionic Bonding, Salt Bridges
+Control: Spinal Cord
+
+
+Stain: Congo Red
+Demonstrating: Amyloid
+Color: Red
+Principle: Hydrogen Bonding
+Control: Tissue with Amyloid
+
+
+Stain: Fontana Masson
+Demonstrating: Melanin/Argentaffin Granules
+Color: Brown/Black
+Principle: Argentaffin Silver Impregnation
+Control: Skin with melanin, Intestine with Argentaffin
+
+
+Stain: Giemsa
+Demonstrating: Helicobacter pylori
+Color: Dark blue
+Principle: Polychromasia
+Control: Stomach with Helicobacter pylori
+
+
+Stain: Gordon and Sweets
+Demonstrating: Reticulin
+Color: Black
+Principle: Argyrophilic Silver Impregnation
+Control: Liver
+
+
+Stain: Gram
+Demonstrating: Gram positive and Gram negative bacteria
+Color: Gram positive in blue Gram negative in red
+Principle: Nature of the cell wall
+Control: Tissue with both gram positive and gram negative bacteria
+
+
+Stain: Grocott's Methenamine Silver
+Demonstrating: Fungi and Pneumocystsis jirovecii
+Color: Black wall, grey interior
+Principle: Argentaffin Silver Impregnation
+Control: Tissue with Fungi or Pneumocystsis jirovecii
+
+
+Stain: Hematoxylin and Eosin
+Demonstrating: General relationships of cells and tissues
+Color: Nuclei in blue, at least 3 shades of Eosin
+Principle: Histochemical Reaction
+Control: Any tissue
+
+
+Stain: Luxol Fast Blue
+Demonstrating: Myelin
+Color: Blue
+Principle: Base replacement with salt formation
+Control: Spinal Cord
+
+
+Stain: Luxol Fast Blue/Cresyl Echt Violet
+Demonstrating: Myelin and Nissl Substance
+Color: Blue and Purple
+Principle: Base replacement with salt formation and Ionic Bonding
+Control: Spinal Cord
+
+
+Stain: Masson's Trichrome
+Demonstrating: Collagen
+Color: Blue
+Principle: Porosity of the tissue and molecular weight of the dye
+Control: Intestine/Any Tissue
+
+
+Stain: Oil Red O
+Demonstrating: Neutral Fats
+Color: Red
+Principle: Selective Solubility
+Control: Any Tissue with Fat
+
+
+Stain: Periodic Acid Methenamine Silver
+Demonstrating: Basement Membrane
+Color: Black
+Principle: Argentaffin Silver Impregnation
+Control: Kidney
+
+
+Stain: Periodic Acid Schiff
+Demonstrating: Basement Membrane
+Color: Magenta
+Principle: Histochemical Reaction
+Control: Kidney
+
+
+Stain: Periodic Acid Schiff/Alcian Blue
+Demonstrating: Acid Neutral and Mixed Mucins
+Color: Turquoise Magenta Purple
+Principle: Ionic Bonding and Histochemical Reaction
+Control: Intestine
+
+
+Stain: Perl's Prussian Blue
+Demonstrating: Hemosiderin
+Color: Blue
+Principle: Histochemical Reaction
+Control: Spleen
+
+
+Stain: Toluidine Blue
+Demonstrating: Mast Cell Granules
+Color: Deep Violet
+Principle: Metachromasia
+Control: Tissue with Mast Cells
+
+
+Stain: Van Gieson Picric Acid/Acid Fuchsin
+Demonstrating: Collagen
+Color: Red
+Principle: Porosity of the tissue and molecular weight of the dye
+Control: Intestine/Any Tissue
+
+
+Stain: Verhoeff
+Demonstrating: Elastic Fibres
+Color: Black
+Principle: Van der Waals forces and Hydrogen Bonding
+Control: Artery
+
+
+Stain: Von Kossa
+Demonstrating: Calcium
+Color: Brown/Black
+Principle: Silver Substitution and Argyrophilic Reduction
+Control: Calcified Soft Tissue or Third Trimester Placenta
+
+
+Stain: Warthin-Starry
+Demonstrating: Spirochetes and Helicobacter pylori
+Color: Black
+Principle: Argyrophilic Silver Impregnation
+Control: Tissue with Spirochetes or Stomach containing Helicobacter pylori
+
+
+Stain: Ziehl Neelsen/Fite
+Demonstrating: Acid Fast Bacilli
+Color: Red
+Principle: Nature of the cell wall
+Control: Tissue with Acid Fast Bacilli

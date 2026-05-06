@@ -245,7 +245,7 @@
     "demonstrating": "Neutral Fats",
     "color": "Red",
     "principle": "Selective Solubility",
-    "control": "Any Tissue with Fat"
+    "control": ["Any Tissue", "Any Tissue with Fat"]
   },
   {
     "image": "histo_images/PAMS1.webp",
@@ -314,7 +314,7 @@
   {
     "image": "histo_images/PPB1.webp",
     "stain_id": "Perl's Prussian Blue",
-    "demonstrating": "Hemosiderin",
+    "demonstrating": ["Hemosiderin", "Ferric Iron"],
     "color": "Blue",
     "principle": "Histochemical Reaction",
     "control": "Spleen"
@@ -322,7 +322,7 @@
   {
     "image": "histo_images/PPB2.webp",
     "stain_id": "Perl's Prussian Blue",
-    "demonstrating": "Hemosiderin",
+    "demonstrating": ["Hemosiderin", "Ferric Iron"],
     "color": "Blue",
     "principle": "Histochemical Reaction",
     "control": "Spleen"

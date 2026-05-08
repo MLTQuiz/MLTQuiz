@@ -155,7 +155,7 @@
     "image": "histo_images/stains/HnE1.webp",
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
-    "color": "Nuclei in blue, at least 3 shades of Eosin",
+    "color": "Nuclei in purple, at least 3 shades of pink",
     "principle": ["Histochemical", "Histochemical Reaction"],
     "control": "Any tissue"
   },
@@ -163,7 +163,7 @@
     "image": "histo_images/stains/HnE2.webp",
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
-    "color": "Nuclei in blue, at least 3 shades of Eosin",
+    "color": "Nuclei in purple, at least 3 shades of pink",
     "principle": ["Histochemical", "Histochemical Reaction"],
     "control": "Any tissue"
   },
@@ -171,7 +171,7 @@
     "image": "histo_images/stains/HnE3.webp",
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
-    "color": "Nuclei in blue, at least 3 shades of Eosin",
+    "color": "Nuclei in purple, at least 3 shades of pink",
     "principle": ["Histochemical", "Histochemical Reaction"],
     "control": "Any tissue"
   },

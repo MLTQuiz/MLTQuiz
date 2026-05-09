@@ -171,11 +171,17 @@
         td:nth-child(1) {
             white-space: nowrap;
         }
+
+        #secretLink {
+            cursor: text;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Welcome!</h1>
+    <h1>
+        <span id="secretLink">Welcome!</span>
+    </h1>
     <h2>Select the department you'd like to study</h2>
 
     <div class="category">
@@ -232,6 +238,23 @@
         function Feedback() {
             window.location.href = "feedback.html";
         }
+
+        document.getElementById("secretLink").addEventListener("click", function () {
+            window.location.href = "histology_tissue.html";
+        });
+
+                const keysPressed = {};
+        let comboActive = false;
+
+        document.addEventListener('keydown', (event) => {
+
+            keysPressed[event.key.toLowerCase()] = true;
+
+            if (keysPressed['t']) {
+                window.location.href = "histology_tissue.html";
+            }
+        });
+
     </script>
 </body>
 

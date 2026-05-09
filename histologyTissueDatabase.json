@@ -1,0 +1,49 @@
+{
+    "Circulatory System": {
+        "Artery": {"count": 3, "code": "ar"},
+        "Vein": {"count": 4, "code": "ve"}
+    },
+    "Digestive System": {
+        "Colon": {"count": 3, "code": "co"},
+        "Duodenum": {"count": 2, "code": "du"},
+        "Esophagus": {"count": 1, "code": "es"},
+        "Gall Bladder": {"count": 1, "code": "gb"},
+        "Kidney": {"count": 2, "code": "ki"},
+        "Liver": {"count": 6, "code": "li"},
+        "Small Intestine": {"count": 2, "code": "si"},
+        "Spleen": {"count": 1, "code": "sp"},
+        "Stomach": {"count": 2, "code": "st"},
+        "Bladder": {"count": 3, "code": "bl"}
+    },
+    "Integumentary (Skin) and Connective Tissue": {
+        "Adipose": {"count": 1, "code": "ad"},
+        "Cardiac Muscle": {"count": 2, "code": "cm"},
+        "Cervix": {"count": 1, "code": "cx"},
+        "Ileum": {"count": 1, "code": "il"},
+        "Fallopian Tubes": {"count": 1, "code": "ft"},
+        "Hyaline Cartilage": {"count": 1, "code": "hc"},
+        "Ovary": {"count": 1, "code": "ov"},
+        "Prostate": {"count": 1, "code": "pr"},
+        "Seminiferous Tubules": {"count": 1, "code": "st"},
+        "Skin": {"count": 4, "code": "sk"},
+        "Skeletal Muscle": {"count": 2, "code": "sm"},
+        "Smooth Muscle": {"count": 1, "code": "so"}
+    },
+    "Endocrine System": {
+        "Adrenal Gland": {"count": 1, "code": "ag"},
+        "Pancreas": {"count": 2, "code": "pa"},
+        "Pituitary": {"count": 1, "code": "pi"},
+        "Thyroid": {"count": 3, "code": "th"}
+    },
+    "Lymphatic System": {
+        "Lymph Node": {"count": 1, "code": "ln"}
+    },
+    "Nervous System": {
+        "Nerve Fiber": {"count": 2, "code": "nf"}
+    },
+    "Respiratory System": {
+        "Lung": { "count": 2, "code": "lu"},
+        "Bronchiole": { "count": 2, "code": "br"},
+        "Trachea": {"count": 2, "code": "tr"}
+    }
+}

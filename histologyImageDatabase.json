@@ -39,6 +39,39 @@
     "principle": ["Ionic Bonding", "Salt Bridges"],
     "control": "Spinal Cord"
   },
+    {
+    "image": "histo_images/stains/CEV2.webp",
+    "stain_id": "Cresyl Echt Violet",
+    "demonstrating": "Nissl Substance",
+    "color": "Purple",
+    "principle": ["Ionic Bonding", "Salt Bridges"],
+    "control": "Spinal Cord"
+  },
+    {
+    "image": "histo_images/stains/CEV3.webp",
+    "stain_id": "Cresyl Echt Violet",
+    "demonstrating": "Nissl Substance",
+    "color": "Purple",
+    "principle": ["Ionic Bonding", "Salt Bridges"],
+    "control": "Spinal Cord"
+  },
+    {
+    "image": "histo_images/stains/CEV4.webp",
+    "stain_id": "Cresyl Echt Violet",
+    "demonstrating": "Nissl Substance",
+    "color": "Purple",
+    "principle": ["Ionic Bonding", "Salt Bridges"],
+    "control": "Spinal Cord"
+  },
+    {
+    "image": "histo_images/stains/CEV5.webp",
+    "stain_id": "Cresyl Echt Violet",
+    "demonstrating": "Nissl Substance",
+    "color": "Purple",
+    "principle": ["Ionic Bonding", "Salt Bridges"],
+    "control": "Spinal Cord"
+  },
+  
   {
     "image": "histo_images/stains/CongoRed1.webp",
     "stain_id": "Congo Red",
@@ -337,6 +370,30 @@
   },
   {
     "image": "histo_images/stains/Toluidine2.webp",
+    "stain_id": "Toluidine Blue",
+    "demonstrating": "Mast Cell Granules",
+    "color": ["Purple", "Violet"],
+    "principle": "Metachromasia",
+    "control": "Tissue with Mast Cells"
+  },
+    {
+    "image": "histo_images/stains/Toluidine3.webp",
+    "stain_id": "Toluidine Blue",
+    "demonstrating": "Mast Cell Granules",
+    "color": ["Purple", "Violet"],
+    "principle": "Metachromasia",
+    "control": "Tissue with Mast Cells"
+  },
+    {
+    "image": "histo_images/stains/Toluidine4.webp",
+    "stain_id": "Toluidine Blue",
+    "demonstrating": "Mast Cell Granules",
+    "color": ["Purple", "Violet"],
+    "principle": "Metachromasia",
+    "control": "Tissue with Mast Cells"
+  },
+    {
+    "image": "histo_images/stains/Toluidine5.webp",
     "stain_id": "Toluidine Blue",
     "demonstrating": "Mast Cell Granules",
     "color": ["Purple", "Violet"],

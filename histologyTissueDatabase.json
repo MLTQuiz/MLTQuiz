@@ -17,6 +17,7 @@
     },
     "Integumentary (Skin) and Connective Tissue": {
         "Adipose": {"count": 1, "code": "ad"},
+        "Bone": {"count": 1, "code": "bo"},
         "Cardiac Muscle": {"count": 2, "code": "cm"},
         "Cervix": {"count": 1, "code": "cx"},
         "Ileum": {"count": 1, "code": "il"},
@@ -39,7 +40,8 @@
         "Lymph Node": {"count": 1, "code": "ln"}
     },
     "Nervous System": {
-        "Nerve Fiber": {"count": 2, "code": "nf"}
+        "Nerve Fiber": {"count": 2, "code": "nf"},
+        "Spinal Cord": {"count": 1, "code": "sc"}
     },
     "Respiratory System": {
         "Lung": { "count": 2, "code": "lu"},

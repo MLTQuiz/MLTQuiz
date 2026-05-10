@@ -202,6 +202,8 @@
 
             <button-back id="muteBtn">🔊 Mute</button-back>
             <br><br><br>
+            <button-back onclick="Back()">⬅ Back</button-back>
+            <br><br><br>
             <button-back onclick="Home()">🏠 Home</button-back>
 
 
@@ -212,15 +214,48 @@
         let imageDatabase = [];
         let currentItem = null;
 
-        fetch("histologyImageDatabase.json")
-            .then(res => res.json())
-            .then(data => {
-                imageDatabase = data;
+        let remainingQuestions = [];
+
+        // Load selected questions from choice page
+        const storedQuestions = localStorage.getItem("selectedQuestions");
+
+        if (storedQuestions) {
+
+            imageDatabase = JSON.parse(storedQuestions);
+
+            if (imageDatabase.length > 0) {
+
+                remainingQuestions = shuffleArray(imageDatabase);
+
                 nextStain();
-            })
-            .catch(err => console.error("Error loading JSON:", err));
+            } else {
+                alert("No quiz questions selected.");
+            }
+
+        } else {
+
+            alert("No quiz data found. Please choose stains first.");
+            window.location.href = "choice.html";
+        }
+
+        function shuffleArray(array) {
+
+            const arr = [...array];
+
+            for (let i = arr.length - 1; i > 0; i--) {
+
+                const j = Math.floor(Math.random() * (i + 1));
+
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+
+            return arr;
+        }
+
+
 
         function nextStain() {
+
             clearInputs();
 
             if (imageDatabase.length === 0) {
@@ -228,14 +263,23 @@
                 return;
             }
 
-            const randomIndex = Math.floor(Math.random() * imageDatabase.length);
-            currentItem = imageDatabase[randomIndex];
+            // Refill when empty
+            if (remainingQuestions.length === 0) {
+
+                remainingQuestions = shuffleArray(imageDatabase);
+            }
+
+            // Take next unused question
+            currentItem = remainingQuestions.pop();
 
             console.log("Loaded item:", currentItem);
 
             document.getElementById("quizImage").src = currentItem.image;
 
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         }
 
         function clearInputs() {
@@ -453,6 +497,10 @@
         });
 
         updateSounds();
+
+        function Back() {
+            window.location.href = "histology_stainchoice.html";
+        }
 
         function Home() {
             window.location.href = "index.html";

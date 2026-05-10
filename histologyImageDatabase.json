@@ -162,7 +162,7 @@
   },
   {
     "image": "histo_images/stains/Grocott1.webp",
-    "stain_id": ["Grocott's Methenamine Silver", "Grocott's Methenamine-Silver Nitrate"],
+    "stain_id": "Grocott's Methenamine Silver",
     "demonstrating": "Pneumocystis jirovecii",
     "color": "Black wall and grey interior",
     "principle": "Argentaffin Silver Impregnation",
@@ -170,7 +170,7 @@
   },
   {
     "image": "histo_images/stains/Grocott2.webp",
-    "stain_id": ["Grocott's Methenamine Silver", "Grocott's Methenamine-Silver Nitrate"],
+    "stain_id": "Grocott's Methenamine Silver",
     "demonstrating": ["Fungi", "Fungus"],
     "color": "Black wall and grey interior",
     "principle": "Argentaffin Silver Impregnation",
@@ -178,7 +178,7 @@
   },
   {
     "image": "histo_images/stains/Grocott3.webp",
-    "stain_id": ["Grocott's Methenamine Silver", "Grocott's Methenamine-Silver Nitrate"],
+    "stain_id": "Grocott's Methenamine Silver",
     "demonstrating": "Pneumocystis jirovecii",
     "color": "Black wall and grey interior",
     "principle": "Argentaffin Silver Impregnation",

@@ -9,10 +9,10 @@
   },
   {
     "image": "histo_images/stains/AB2.webp",
-    "stain_id": "Alcian Blue",
-    "demonstrating": "Acid Mucins",
-    "color": ["Turquoise", "Turquoise Blue"],
-    "principle": ["Ionic Bonding", "Salt Bridging"],
+    "stain_id": "Periodic Acid Schiff/Alcian Blue",
+    "demonstrating": "Acid, Neutral, and Mixed Mucins",
+    "color": ["Turquoise, Magenta, Shades of Purple/Violet"],
+    "principle": ["Histochemical and Ionic Bonding", "Histochemical Reaction and Ionic Bonding"],
     "control": "Intestine"
   },
   {
@@ -189,15 +189,16 @@
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
     "color": "Nuclei in purple, at least 3 shades of pink",
-    "principle": ["Histochemical", "Histochemical Reaction"],
+    "principle": ["Ionic Bonding", "Salt Bridges"],
     "control": "Any tissue"
+
   },
   {
     "image": "histo_images/stains/HnE2.webp",
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
     "color": "Nuclei in purple, at least 3 shades of pink",
-    "principle": ["Histochemical", "Histochemical Reaction"],
+    "principle": ["Ionic Bonding", "Salt Bridges"],
     "control": "Any tissue"
   },
   {
@@ -205,7 +206,7 @@
     "stain_id": "Hematoxylin and Eosin",
     "demonstrating": "General relationships of cells and tissues",
     "color": "Nuclei in purple, at least 3 shades of pink",
-    "principle": ["Histochemical", "Histochemical Reaction"],
+    "principle": ["Ionic Bonding", "Salt Bridges"],
     "control": "Any tissue"
   },
   {

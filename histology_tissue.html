@@ -192,8 +192,8 @@
         </div>
     </div>
     <script>
-        let quizPool = [];
-        let remainingQuestions = [];
+        let quizBySubtype = {};
+        let subtypeList = [];
         let currentItem = null;
         let imageDatabase = {};
 
@@ -208,7 +208,8 @@
 
         function buildQuizPool() {
 
-            quizPool = [];
+            quizBySubtype = {};
+            subtypeList = [];
 
             const categoryPrefix = {
                 "Circulatory System": "c1",
@@ -223,57 +224,63 @@
             Object.keys(imageDatabase).forEach(category => {
 
                 const categoryData = imageDatabase[category];
+                const prefix = categoryPrefix[category];
 
                 Object.keys(categoryData).forEach(subtype => {
 
                     const { count, code } = categoryData[subtype];
 
-                    const prefix = categoryPrefix[category];
+                    if (!quizBySubtype[subtype]) {
+                        quizBySubtype[subtype] = [];
+                        subtypeList.push(subtype);
+                    }
 
                     for (let i = 1; i <= count; i++) {
 
                         const num = String(i).padStart(2, "0");
 
-                        quizPool.push({
+                        quizBySubtype[subtype].push({
                             image: `histo_images/tissue/${prefix}${code}${num}.webp`,
-                            subtype: subtype,
-                            category: category
+                            subtype,
+                            category
                         });
                     }
+
+                    shuffleArray(quizBySubtype[subtype]); // shuffle within subtype
                 });
             });
 
-            shuffleArray(quizPool);
+            shuffleArray(subtypeList); // shuffle subtype order
         }
 
         function nextStain() {
 
             clearInputs();
 
-            if (quizPool.length === 0) {
-                console.error("Quiz pool empty");
+            if (subtypeList.length === 0) {
+                console.error("No subtypes available");
                 return;
             }
 
-            // Refill and reshuffle when empty
-            if (remainingQuestions.length === 0) {
+            // pick a random subtype first (fair distribution)
+            const subtypeIndex = Math.floor(Math.random() * subtypeList.length);
+            const subtype = subtypeList[subtypeIndex];
 
-                remainingQuestions = [...quizPool];
+            const pool = quizBySubtype[subtype];
 
-                shuffleArray(remainingQuestions);
+            if (!pool || pool.length === 0) {
+                // remove empty subtype and retry
+                subtypeList.splice(subtypeIndex, 1);
+                nextStain();
+                return;
             }
 
-            // Take one unused question
-            currentItem = remainingQuestions.pop();
-
-            console.log("Loaded item:", currentItem);
+            // take next image from that subtype
+            currentItem = pool.pop();
 
             document.getElementById("quizImage").src = currentItem.image;
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
         function clearInputs() {

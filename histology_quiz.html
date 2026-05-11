@@ -213,7 +213,9 @@
     <script>
         let imageDatabase = [];
         let currentItem = null;
-
+        let stainGroups = {};
+        let remainingStains = [];
+        let currentStainImages = [];
         let remainingQuestions = [];
 
         // Load selected questions from choice page
@@ -225,7 +227,11 @@
 
             if (imageDatabase.length > 0) {
 
-                remainingQuestions = shuffleArray(imageDatabase);
+                buildStainGroups();
+
+                remainingStains = shuffleArray(
+                    Object.keys(stainGroups)
+                );
 
                 nextStain();
             } else {
@@ -252,25 +258,61 @@
             return arr;
         }
 
+        function buildStainGroups() {
 
+            stainGroups = {};
+
+            imageDatabase.forEach(item => {
+
+                let stainName;
+
+                if (Array.isArray(item.stain_id)) {
+
+                    stainName = item.stain_id.flat().join(" / ");
+
+                } else {
+
+                    stainName = item.stain_id;
+                }
+
+                if (!stainGroups[stainName]) {
+
+                    stainGroups[stainName] = [];
+                }
+
+                stainGroups[stainName].push(item);
+            });
+        }
 
         function nextStain() {
 
             clearInputs();
 
             if (imageDatabase.length === 0) {
+
                 console.error("JSON not loaded or empty");
                 return;
             }
 
-            // Refill when empty
-            if (remainingQuestions.length === 0) {
+            // Refill stain list when exhausted
+            if (remainingStains.length === 0) {
 
-                remainingQuestions = shuffleArray(imageDatabase);
+                remainingStains = shuffleArray(
+                    Object.keys(stainGroups)
+                );
             }
 
-            // Take next unused question
-            currentItem = remainingQuestions.pop();
+            // Pick one stain ID
+            const stainName = remainingStains.pop();
+
+            // Pick one random photo from that stain
+            const stainImages = stainGroups[stainName];
+
+            const randomIndex = Math.floor(
+                Math.random() * stainImages.length
+            );
+
+            currentItem = stainImages[randomIndex];
 
             console.log("Loaded item:", currentItem);
 

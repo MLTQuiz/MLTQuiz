@@ -468,6 +468,7 @@
         const correctSound = new Audio();
         const wrongSound = new Audio();
         const muteBtn = document.getElementById("muteBtn");
+        const backBtn = new Audio()
 
         muteBtn.textContent = "🔇 Unmute";
 
@@ -482,8 +483,13 @@
             } else {
                 correctSound.src = "sounds/correct.mp3";
                 wrongSound.src = "";
+                backBtn.src = "sounds/June - Come back.wav";
                 document.body.style.backgroundImage = "none";
                 document.body.style.backgroundColor = "#f5f7fa";
+                if (!muted && correctSound.src) {
+                backBtn.currentTime = 0;
+                backBtn.play().catch(() => { });
+            }
             }
             correctSound.muted = muted;
             wrongSound.muted = muted;

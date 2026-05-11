@@ -198,16 +198,16 @@
 
         const correctSound = new Audio();
         const wrongSound = new Audio();
-
+        const backBtn = new Audio();
         const muteBtn = document.getElementById("muteBtn");
 
         if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 
         function updateSounds() {
+
             if (juneEnabled) {
                 correctSound.src = "sounds/June - I'm eating yogurt.wav";
                 wrongSound.src = "sounds/June - Yell 2 (Short).wav";
-
                 document.body.style.backgroundImage = "url('June.jpg')";
                 document.body.style.backgroundSize = "33.33vw auto";
                 document.body.style.backgroundRepeat = "repeat";
@@ -216,9 +216,13 @@
             } else {
                 correctSound.src = "sounds/correct.mp3";
                 wrongSound.src = "";
-
+                backBtn.src = "sounds/June - Come back.wav";
                 document.body.style.backgroundImage = "none";
                 document.body.style.backgroundColor = "#f5f7fa";
+                if (!muted && correctSound.src) {
+                    backBtn.currentTime = 0;
+                    backBtn.play().catch(() => { });
+                }
             }
 
             correctSound.muted = muted;
@@ -251,7 +255,7 @@
         }
 
         muteBtn?.addEventListener("click", toggleMute);
-        
+
         const keysPressed = {};
 
         let comboActive = false;

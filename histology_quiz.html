@@ -487,9 +487,9 @@
                 document.body.style.backgroundImage = "none";
                 document.body.style.backgroundColor = "#f5f7fa";
                 if (!muted && correctSound.src) {
-                backBtn.currentTime = 0;
-                backBtn.play().catch(() => { });
-            }
+                    backBtn.currentTime = 0;
+                    backBtn.play().catch(() => { });
+                }
             }
             correctSound.muted = muted;
             wrongSound.muted = muted;

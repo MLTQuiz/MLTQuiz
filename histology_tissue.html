@@ -193,6 +193,7 @@
     </div>
     <script>
         let quizPool = [];
+        let remainingQuestions = [];
         let currentItem = null;
         let imageDatabase = {};
 
@@ -254,9 +255,16 @@
                 return;
             }
 
-            const randomIndex = Math.floor(Math.random() * quizPool.length);
+            // Refill and reshuffle when empty
+            if (remainingQuestions.length === 0) {
 
-            currentItem = quizPool[randomIndex];
+                remainingQuestions = [...quizPool];
+
+                shuffleArray(remainingQuestions);
+            }
+
+            // Take one unused question
+            currentItem = remainingQuestions.pop();
 
             console.log("Loaded item:", currentItem);
 

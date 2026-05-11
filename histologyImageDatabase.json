@@ -8,14 +8,6 @@
     "control": "Intestine"
   },
   {
-    "image": "histo_images/stains/AB2.webp",
-    "stain_id": "Periodic Acid Schiff/Alcian Blue",
-    "demonstrating": "Acid, Neutral, and Mixed Mucins",
-    "color": ["Turquoise, Magenta, Shades of Purple/Violet"],
-    "principle": ["Histochemical and Ionic Bonding", "Histochemical Reaction and Ionic Bonding"],
-    "control": "Intestine"
-  },
-  {
     "image": "histo_images/stains/BielschowskyPAS1.webp",
     "stain_id": "Bielschowsky-Periodic Acid Schiff",
     "demonstrating": "Neurofibrillary plaques and tangles",
@@ -339,6 +331,14 @@
   },
   {
     "image": "histo_images/stains/PASAB1.webp",
+    "stain_id": "Periodic Acid Schiff/Alcian Blue",
+    "demonstrating": "Acid, Neutral, and Mixed Mucins",
+    "color": ["Turquoise, Magenta, Shades of Purple/Violet"],
+    "principle": ["Histochemical and Ionic Bonding", "Histochemical Reaction and Ionic Bonding"],
+    "control": "Intestine"
+  },
+  {
+    "image": "histo_images/stains/PASAB2.webp",
     "stain_id": "Periodic Acid Schiff/Alcian Blue",
     "demonstrating": "Acid, Neutral, and Mixed Mucins",
     "color": ["Turquoise, Magenta, Shades of Purple/Violet"],

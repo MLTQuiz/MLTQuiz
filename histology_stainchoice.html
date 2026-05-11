@@ -202,7 +202,6 @@
             const menu = document.getElementById("scrollMenu");
             const allCb = document.getElementById("allStains");
 
-            // Count occurrences of each stain
             const stainCounts = {};
 
             stainData.forEach(item => {
@@ -221,7 +220,6 @@
                 });
             });
 
-            // Get unique stain names
             const uniqueStains = Object.keys(stainCounts).sort();
 
             uniqueStains.forEach(stain => {
@@ -234,7 +232,6 @@
                 cb.value = stain;
                 cb.classList.add("stain-checkbox");
 
-                // Sync All Stains checkbox
                 cb.addEventListener("change", () => {
 
                     const allBoxes = document.querySelectorAll(".stain-checkbox");
@@ -246,13 +243,11 @@
 
                 label.appendChild(cb);
 
-                // Add count beside stain name
                 label.append(` ${stain} (${stainCounts[stain]})`);
 
                 menu.appendChild(label);
             });
 
-            // Master checkbox
             allCb.addEventListener("change", () => {
 
                 const allBoxes = document.querySelectorAll(".stain-checkbox");
@@ -274,7 +269,6 @@
                 return;
             }
 
-            // Get ALL matching entries/images
             const selectedQuestions = stainData.filter(item => {
 
                 const ids = Array.isArray(item.stain_id)
@@ -284,7 +278,6 @@
                 return ids.some(id => selectedStains.includes(id));
             });
 
-            // Save for quiz page
             localStorage.setItem(
                 "selectedQuestions",
                 JSON.stringify(selectedQuestions)

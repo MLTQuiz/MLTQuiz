@@ -246,11 +246,11 @@
                         });
                     }
 
-                    shuffleArray(quizBySubtype[subtype]); // shuffle within subtype
+                    shuffleArray(quizBySubtype[subtype]);
                 });
             });
 
-            shuffleArray(subtypeList); // shuffle subtype order
+            shuffleArray(subtypeList);
         }
 
         function nextStain() {
@@ -262,20 +262,17 @@
                 return;
             }
 
-            // pick a random subtype first (fair distribution)
             const subtypeIndex = Math.floor(Math.random() * subtypeList.length);
             const subtype = subtypeList[subtypeIndex];
 
             const pool = quizBySubtype[subtype];
 
             if (!pool || pool.length === 0) {
-                // remove empty subtype and retry
                 subtypeList.splice(subtypeIndex, 1);
                 nextStain();
                 return;
             }
 
-            // take next image from that subtype
             currentItem = pool.pop();
 
             document.getElementById("quizImage").src = currentItem.image;

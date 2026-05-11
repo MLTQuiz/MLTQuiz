@@ -218,7 +218,6 @@
         let currentStainImages = [];
         let remainingQuestions = [];
 
-        // Load selected questions from choice page
         const storedQuestions = localStorage.getItem("selectedQuestions");
 
         if (storedQuestions) {
@@ -294,7 +293,6 @@
                 return;
             }
 
-            // Refill stain list when exhausted
             if (remainingStains.length === 0) {
 
                 remainingStains = shuffleArray(
@@ -302,10 +300,8 @@
                 );
             }
 
-            // Pick one stain ID
             const stainName = remainingStains.pop();
 
-            // Pick one random photo from that stain
             const stainImages = stainGroups[stainName];
 
             const randomIndex = Math.floor(

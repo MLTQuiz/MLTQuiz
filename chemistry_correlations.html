@@ -325,9 +325,8 @@
 
             if (!a) return null;
 
-            // 1. If explicit value exists → ALWAYS use it (even if string)
             if (a.value !== undefined && a.value !== "Calculate") {
-                return a.value; // <- IMPORTANT: do NOT parseFloat
+                return a.value;
             }
 
             if (a?.low !== undefined && a?.high !== undefined) {
@@ -335,12 +334,11 @@
 
             }
 
-            // 2. Normal physiology from reference range (THIS is your new system)
             const ref = refs["Reference Ranges"][key]?.ref;
             if (ref?.low !== undefined && ref?.high !== undefined) {
 
                 const mean = (parseFloat(ref.low) + parseFloat(ref.high)) / 2;
-                const sd = 2; // fixed as you requested
+                const sd = 2;
 
                 return normalRandom(mean, sd);
             }
@@ -381,7 +379,6 @@
             const disease = chosen.disease;
             const caseData = chosen.data;
 
-            // 🆕 STEP 1: Get analytes from panels (if they exist)
             let analyteKeys = new Set();
 
             if (Array.isArray(caseData.panels)) {
@@ -393,22 +390,18 @@
                 });
             }
 
-            // 🆕 STEP 2: Add explicitly defined analytes (from your existing JSON)
             Object.keys(caseData).forEach(key => {
                 if (key !== "panels") {
                     analyteKeys.add(key);
                 }
             });
 
-            // 🆕 STEP 3: Build analyte definitions
             let analytes = {};
 
             analyteKeys.forEach(key => {
                 if (caseData[key]) {
-                    // Use disease-specific override
                     analytes[key] = caseData[key];
                 } else if (chemRefs["Reference Ranges"][key]) {
-                    // Fallback to normal reference range
                     const ref = chemRefs["Reference Ranges"][key];
 
                     if (ref.ref?.low !== undefined && ref.ref?.high !== undefined) {
@@ -422,7 +415,6 @@
                 }
             });
 
-            // 🆕 STEP 4: Generate results (same as your original logic)
             let resultsByAnalyzer = {};
 
             for (let key of Object.keys(analytes)) {
@@ -447,8 +439,6 @@
                     decimal: refMeta?.decimal ?? 0,
                 };
             }
-
-            // 🧪 KEEP your existing special calculations (unchanged)
 
             if (resultsByAnalyzer["Hemostasis Results"]?.PT && analytes["INR"]) {
                 const pt = parseFloat(
@@ -506,7 +496,6 @@
 
                     const AG = Na - Cl - TCO2;
 
-                    // 🟡 MODE 1: Calculate only → accept immediately
                     if (agDef.value === "Calculate") {
                         chem["AGAP"] = {
                             value: AG.toFixed(decimals),
@@ -517,7 +506,6 @@
                         break;
                     }
 
-                    // 🔵 MODE 2: Must be within reference range
                     if (AG >= refLow && AG <= refHigh) {
                         chem["AGAP"] = {
                             value: AG.toFixed(decimals),
@@ -527,15 +515,13 @@
                         success = true;
                     }
 
-                    // ❗ If not valid, regenerate FULL CASE
                     if (!success) {
                         regenerate = true;
-                        break; // simplest correct reset
+                        break;
                     }
                 }
             }
 
-            // T BILIRUBIN BLOCK (ADD THIS)
             if (analytes["T Bilirubin"]) {
 
                 const chem = resultsByAnalyzer["Serum Chemistry Results"];
@@ -556,7 +542,6 @@
 
                     const T = D + I;
 
-                    // CASE 1: forced calculation
                     if (analytes["T Bilirubin"].value === "Calculate") {
 
                         chem["T Bilirubin"] = {
@@ -569,7 +554,6 @@
                         break;
                     }
 
-                    // CASE 2: must be in range
                     const low = tRef?.ref?.low;
                     const high = tRef?.ref?.high;
 
@@ -599,7 +583,7 @@
 
             const num = Number(value);
 
-            if (!isFinite(num)) return value; // preserves strings like "Decreased ▽"
+            if (!isFinite(num)) return value;
 
             return num.toFixed(decimals ?? 0);
         }

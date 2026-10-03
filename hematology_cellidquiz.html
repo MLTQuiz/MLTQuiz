@@ -538,49 +538,6 @@
             // Send the student's message to Feedback()
             await Feedback(message);
         }
-/*
-        async function Feedback(message) {
-            const formData = new FormData();
-
-            // Student's message
-            formData.append("message", ("Student message:", message));
-
-            // Retrieve the actual image
-            try {
-                const imageResponse = await fetch(currentImagePath);
-
-                if (!imageResponse.ok) {
-                    throw new Error("Could not retrieve image");
-                }
-
-                const imageBlob = await imageResponse.blob();
-
-                const filename = currentImagePath.split("/").pop();
-
-                formData.append("files", imageBlob);
-
-            } catch (error) {
-                console.error("Could not retrieve quiz image:", error);
-                alert("Could not attach the quiz image.");
-                return;
-            }
-
-            const res = await fetch(
-                "https://royal-pine-da5b.oowarshockoo.workers.dev/",
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
-
-            if (!res.ok) {
-                alert("There was a problem sending your feedback.");
-                return;
-            }
-
-            alert("Thank you for your message. I will read it as soon as I can!");
-        }
-
 
         function Back() {
             window.location.href = "hematology_cellidchoices.html";
@@ -589,14 +546,13 @@
         function Home() {
             window.location.href = "index.html";
         }
-*/
+
 
 async function Feedback(message) {
     const formData = new FormData();
 
     // Student's message
-    formData.append("message", message);
-
+    
     try {
         // Get the currently displayed image
         const imageResponse = await fetch(currentImagePath);
@@ -609,9 +565,14 @@ async function Feedback(message) {
 
         // Get filename, e.g. w1neut05.webp
         const filename = currentImagePath.split("/").pop();
+        
+        formData.append(
+            "message",
+            message + "\n\nImage: " + filename
+        );
 
         // Your Worker expects uploaded files under "files"
-        formData.append("files", imageBlob, filename);
+        formData.append("files", imageBlob);
 
     } catch (error) {
         console.error("Could not retrieve quiz image:", error);

@@ -188,40 +188,54 @@
 
     <script>
 
-        let tissueData = [];
+        let tissueData = {};
 
-        fetch("histologyTissueDatabase.json")
-            .then(res => res.json())
-            .then(db => {
-                tissueData = db;
-                buildScrollMenu();
-            });
+fetch("histologyTissueDatabase.json")
+    .then(res => {
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
+        }
+        return res.json();
+    })
+    .then(db => {
+        tissueData = db;
+        buildScrollMenu();
+    })
+    .catch(error => {
+        console.error("Error loading tissue database:", error);
+    });
+
 
 function buildScrollMenu() {
 
     const menu = document.getElementById("scrollMenu");
     const allCb = document.getElementById("allTissues");
 
-    // Loop through each body system
     Object.entries(tissueData).forEach(([system, tissues]) => {
 
-        // System heading
+        // Body-system heading
         const systemTitle = document.createElement("div");
+        systemTitle.textContent = system;
         systemTitle.style.fontWeight = "bold";
         systemTitle.style.marginTop = "10px";
-        systemTitle.textContent = system;
+        systemTitle.style.marginBottom = "5px";
 
         menu.appendChild(systemTitle);
 
-        // Loop through tissues in this system
+        // Tissues within that system
         Object.entries(tissues).forEach(([tissue, data]) => {
 
             const label = document.createElement("label");
-            label.style.display = "block";
 
             const cb = document.createElement("input");
             cb.type = "checkbox";
+
+            // Store the tissue's code
             cb.value = data.code;
+
+            // Also store the tissue's actual name
+            cb.dataset.tissue = tissue;
+
             cb.classList.add("tissue-checkbox");
 
             cb.addEventListener("change", () => {
@@ -237,13 +251,14 @@ function buildScrollMenu() {
 
             label.appendChild(cb);
 
-            label.append(` ${tissue} (${data.count})`);
+            label.append(
+                ` ${tissue} (${data.count})`
+            );
 
             menu.appendChild(label);
         });
     });
 
-    // "All Tissues" checkbox
     allCb.addEventListener("change", () => {
 
         const allBoxes =

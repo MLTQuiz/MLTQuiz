@@ -192,6 +192,7 @@
             <button-back onclick="Back()">⬅ Back</button-back>
             <br><br><br>
             <button-back onclick="Home()">🏠 Home</button-back>
+            <button-back onclick="openFeedback()">💬 Image Feedback</button-back>
         </div>
     </div>
 
@@ -511,19 +512,43 @@
             }
         }
 
-        async function Feedback() {
-            const formData = new FormData();
+        function openFeedback() {
+            const dialog = document.getElementById("feedbackDialog");
 
-            const message = document.querySelector("textarea").value;
+            document.getElementById("feedbackMessage").value = "";
+
+            dialog.showModal();
+        }
+
+        function closeFeedback() {
+            document.getElementById("feedbackDialog").close();
+        }
+
+        async function submitFeedback() {
+            const message = document.getElementById("feedbackMessage").value.trim();
 
             if (!message) {
+                alert("Please enter a message.");
                 return;
             }
 
+            // Close the popup
+            closeFeedback();
+
+            // Send the student's message to Feedback()
+            await Feedback(message);
+        }
+
+        async function Feedback(message) {
+            const formData = new FormData();
+
+            // Student's message
             formData.append("message", message);
 
+            // Currently displayed quiz image
             formData.append("imagePath", currentImagePath);
 
+            // Retrieve the actual image
             try {
                 const imageResponse = await fetch(currentImagePath);
 
@@ -569,6 +594,25 @@
         }
 
     </script>
+    <dialog id="feedbackDialog">
+        <h2>Feedback</h2>
+
+        <p>
+            Is there something wrong with this image, or do you have a comment?
+        </p>
+
+        <textarea
+            id="feedbackMessage"
+            rows="6"
+            cols="40"
+            placeholder="Type your feedback here..."
+        ></textarea>
+
+        <br><br>
+
+        <button onclick="submitFeedback()">Send</button>
+        <button onclick="closeFeedback()">Cancel</button>
+    </dialog>
 
 </body>
 

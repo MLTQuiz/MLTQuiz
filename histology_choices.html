@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLT Quizzes</title>
+    <title>Histology Quiz</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,8 +46,8 @@
         label {
             display: block;
             margin: clamp(calc(6px/3), calc(6vw/7.2), 6px) 0;
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
             cursor: text;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
         }
 
         .category-title {
@@ -86,21 +86,6 @@
 
         button:hover {
             background: #1f55c4;
-        }
-
-        buttonNotReady {
-            line-height: 1.2;
-            font-size: clamp(calc(25px/3), calc(25vw/7.2), 25px);
-            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px) clamp(calc(18px/3), calc(18vw/7.2), 18px);
-            border-radius: clamp(calc(5px/3), calc(5vw/7.2), 5px);
-            border: none;
-            background: #4a4a4a;
-            color: white;
-            cursor: pointer;
-        }
-
-        buttonNotReady:hover {
-            background: #2f2f2f;
         }
 
         button-back {
@@ -171,91 +156,42 @@
         td:nth-child(1) {
             white-space: nowrap;
         }
-
-        #secretLink {
-            cursor: text;
-        }
     </style>
 </head>
 
 <body>
-    <h1>
-        <span id="secretLink">Welcome!</span>
-    </h1>
-    <h2>Select the department you'd like to study</h2>
+
+    <h1>Histology</h1>
+    <h2>Select the area you'd like to study</h2>
 
     <div class="category">
-        <button onclick="Chemistry()">🧪 Chemistry</button>
-        <label>Adding more case studies soon!</label>
+        <button onclick="StainID()">🔬 Stain Identification</button>
         <br><br>
 
-        <button onclick="Hematology()">🩸Hematology</button>
-        <label>Cell ID Quiz in final stages!</label>
-        <br><br>
+        <button onclick="TissueID()">🩹 Tissue Identification</button>
 
-        <button onclick="Histology()">🔬 Histology</button>
-        <label>Final stages!</label>
-        <br><br>
+        <br><br><br><br><br><br><br><br>
+        <hr><br>
 
-        <button style="background-color: #4a4a4a; cursor: default" onclick="Microbiology()">🧫 Microbiology</button>
-        <label>Not started.</label>
-        <br><br>
-
-        <button style="background-color: #4a4a4a; cursor: default" onclick="Transfusions()">🆎 Transfusions</button>
-        <label>Least priority: May not be useful for SIMU.</label>
-        <br><br>
-
-        <hr>
-        <br>
-
-        <label>Have any feedback or suggestions?</label>
-        <button onclick="Feedback()">✉️ Contact Me</button>
-        <br><br>
+        <button-back onclick="Home()">🏠 Home</button-back>
     </div>
 
     <script>
 
-        function Chemistry() {
-            window.location.href = "chemistry_choices.html";
+        function StainID() {
+            window.location.href = "histology_stainchoices.html";
         }
 
-        function Hematology() {
-            window.location.href = "hematology_choices.html";
+        function TissueID() {
+            window.location.href = "histology_tissuechoices.html";
         }
 
-        function Transfusions() {
-            window.location.href = "";
+        function Home() {
+            window.location.href = "index.html";
         }
-
-        function Microbiology() {
-            window.location.href = "";
-        }
-
-        function Histology() {
-            window.location.href = "histology_choices.html";
-        }
-
-        function Feedback() {
-            window.location.href = "feedback.html";
-        }
-
-        document.getElementById("secretLink").addEventListener("click", function () {
-            window.location.href = "histology_tissue.html";
-        });
-
-        const keysPressed = {};
-        let comboActive = false;
-
-        document.addEventListener('keydown', (event) => {
-
-            keysPressed[event.key.toLowerCase()] = true;
-
-            if (keysPressed['t']) {
-                window.location.href = "histology_tissue.html";
-            }
-        });
 
     </script>
+
 </body>
 
 </html>

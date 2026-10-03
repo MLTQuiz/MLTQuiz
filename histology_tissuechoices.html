@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MLT Quizzes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Histology Tissue ID</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,8 +46,8 @@
         label {
             display: block;
             margin: clamp(calc(6px/3), calc(6vw/7.2), 6px) 0;
-            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
             cursor: text;
+            font-size: clamp(calc(18px/3), calc(18vw/7.2), 18px);
         }
 
         .category-title {
@@ -86,21 +86,6 @@
 
         button:hover {
             background: #1f55c4;
-        }
-
-        buttonNotReady {
-            line-height: 1.2;
-            font-size: clamp(calc(25px/3), calc(25vw/7.2), 25px);
-            padding: clamp(calc(10px/3), calc(10vw/7.2), 10px) clamp(calc(18px/3), calc(18vw/7.2), 18px);
-            border-radius: clamp(calc(5px/3), calc(5vw/7.2), 5px);
-            border: none;
-            background: #4a4a4a;
-            color: white;
-            cursor: pointer;
-        }
-
-        buttonNotReady:hover {
-            background: #2f2f2f;
         }
 
         button-back {
@@ -164,6 +149,11 @@
             resize: none;
         }
 
+        .disabled-case {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
         td:nth-child(2) {
             white-space: nowrap;
         }
@@ -171,89 +161,134 @@
         td:nth-child(1) {
             white-space: nowrap;
         }
-
-        #secretLink {
-            cursor: text;
-        }
     </style>
 </head>
 
 <body>
-    <h1>
-        <span id="secretLink">Welcome!</span>
-    </h1>
-    <h2>Select the department you'd like to study</h2>
+    <h1>Histology Tissues Quiz</h1>
+    <h2>Which tissues would you like to be quizzed on?</h2>
 
     <div class="category">
-        <button onclick="Chemistry()">🧪 Chemistry</button>
-        <label>Adding more case studies soon!</label>
-        <br><br>
+        <label style="font-weight:bold; font-size: 26px;">
+            <input type="checkbox" id="allTissues">
+            All Tissues
+        </label>
 
-        <button onclick="Hematology()">🩸Hematology</button>
-        <label>Cell ID Quiz in final stages!</label>
-        <br><br>
+        <div id="scrollMenu"></div>
 
-        <button onclick="Histology()">🔬 Histology</button>
-        <label>Final stages!</label>
-        <br><br>
-
-        <button style="background-color: #4a4a4a; cursor: default" onclick="Microbiology()">🧫 Microbiology</button>
-        <label>Not started.</label>
-        <br><br>
-
-        <button style="background-color: #4a4a4a; cursor: default" onclick="Transfusions()">🆎 Transfusions</button>
-        <label>Least priority: May not be useful for SIMU.</label>
-        <br><br>
-
-        <hr>
         <br>
 
-        <label>Have any feedback or suggestions?</label>
-        <button onclick="Feedback()">✉️ Contact Me</button>
-        <br><br>
-    </div>
+        <button onclick="startQuiz()">Begin Quiz</button>
 
+        <br><br>
+        <hr><br>
+
+
+        <button-back onclick="Home()">🏠 Home</button-back>
+    </div>
     <script>
 
-        function Chemistry() {
-            window.location.href = "chemistry_choices.html";
+        let tissueData = [];
+
+        fetch("histologyTissueDatabase.json")
+            .then(res => res.json())
+            .then(db => {
+                tissueData = db;
+                buildScrollMenu();
+            });
+
+        function buildScrollMenu() {
+
+            const menu = document.getElementById("scrollMenu");
+            const allCb = document.getElementById("allTissues");
+
+            const tissueCounts = {};
+
+            tissueData.forEach(item => {
+
+                const ids = Array.isArray(item.tissue_id)
+                    ? item.tissue_id
+                    : [item.tissue_id];
+
+                ids.forEach(id => {
+
+                    if (!tissueCounts[id]) {
+                        tissueCounts[id] = 0;
+                    }
+
+                    tissueCounts[id]++;
+                });
+            });
+
+            const uniqueTissues = Object.keys(tissueCounts).sort();
+
+            uniqueTissues.forEach(tissue => {
+
+                const label = document.createElement("label");
+                label.style.display = "block";
+
+                const cb = document.createElement("input");
+                cb.type = "checkbox";
+                cb.value = tissue;
+                cb.classList.add("tissue-checkbox");
+
+                cb.addEventListener("change", () => {
+
+                    const allBoxes = document.querySelectorAll(".tissue-checkbox");
+
+                    const allChecked = [...allBoxes].every(box => box.checked);
+
+                    allCb.checked = allChecked;
+                });
+
+                label.appendChild(cb);
+
+                label.append(` ${tissue} (${tissueCounts[tissue]})`);
+
+                menu.appendChild(label);
+            });
+
+            allCb.addEventListener("change", () => {
+
+                const allBoxes = document.querySelectorAll(".tissue-checkbox");
+
+                allBoxes.forEach(box => {
+                    box.checked = allCb.checked;
+                });
+            });
         }
 
-        function Hematology() {
-            window.location.href = "hematology_choices.html";
-        }
+        function startQuiz() {
 
-        function Transfusions() {
-            window.location.href = "";
-        }
+            const selectedTissues = [
+                ...document.querySelectorAll('#scrollMenu input:checked')
+            ].map(cb => cb.value);
 
-        function Microbiology() {
-            window.location.href = "";
-        }
-
-        function Histology() {
-            window.location.href = "histology_choices.html";
-        }
-
-        function Feedback() {
-            window.location.href = "feedback.html";
-        }
-
-        document.getElementById("secretLink").addEventListener("click", function () {
-            window.location.href = "histology_tissue.html";
-        });
-
-        const keysPressed = {};
-        let comboActive = false;
-
-        document.addEventListener('keydown', (event) => {
-
-            keysPressed[event.key.toLowerCase()] = true;
-
-            if (keysPressed['t']) {
-                window.location.href = "histology_tissue.html";
+            if (selectedTissues.length === 0) {
+                alert("Please select at least one tissue.");
+                return;
             }
-        });
+
+            const selectedQuestions = tissueData.filter(item => {
+
+                const ids = Array.isArray(item.tissue_id)
+                    ? item.tissue_id
+                    : [item.tissue_id];
+
+                return ids.some(id => selectedTissues.includes(id));
+            });
+
+            localStorage.setItem(
+                "selectedQuestions",
+                JSON.stringify(selectedQuestions)
+            );
+
+            window.location.href = "histology_quiz.html";
+        }
+
+        function Home() {
+            window.location.href = "index.html";
+        }
 
     </script>
 </body>

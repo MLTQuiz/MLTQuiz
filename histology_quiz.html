@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Histology Stain Quiz 1</title>
+    <title>Histology Stain Quiz</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
     <script type="text/javascript">
@@ -594,19 +594,19 @@
             
             try {
                 // Get the currently displayed image
-//                const imageResponse = await fetch(currentImagePath);
+                const imageResponse = await fetch(currentImagePath);
 
                 // Get filename, e.g. w1neut05.webp
-//                const filename = currentImagePath.split("/").pop();
-                const filenamefull = currentImagePath;
+                const filename = currentImagePath.split("/").pop();
+//                const filenamefull = currentImagePath;
                 
                 formData.append(
                     "message",
                     "<br><b>Feedback regarding a Quiz Question:</b><br><br>" +
                     message.replace(/\r?\n/g, "<br>") +
                     "<br><br><b>Quiz:</b> " + document.title +
-//                    "<br><br><b>Image:</b> " + filename +
-                    "<br><br><b>Image name full:</b> " + filenamefull +
+                    "<br><br><b>Image:</b> " + filename +
+//                    "<br><br><b>Image name full:</b> " + filenamefull +
                     "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/histo_images/" + filename
                 );
 

@@ -538,7 +538,7 @@
             // Send the student's message to Feedback()
             await Feedback(message);
         }
-
+/*
         async function Feedback(message) {
             const formData = new FormData();
 
@@ -589,6 +589,52 @@
         function Home() {
             window.location.href = "index.html";
         }
+*/
+
+async function Feedback(message) {
+    const formData = new FormData();
+
+    // Student's message
+    formData.append("message", message);
+
+    try {
+        // Get the currently displayed image
+        const imageResponse = await fetch(currentImagePath);
+
+        if (!imageResponse.ok) {
+            throw new Error("Could not retrieve image");
+        }
+
+        const imageBlob = await imageResponse.blob();
+
+        // Get filename, e.g. w1neut05.webp
+        const filename = currentImagePath.split("/").pop();
+
+        // Your Worker expects uploaded files under "files"
+        formData.append("files", imageBlob, filename);
+
+    } catch (error) {
+        console.error("Could not retrieve quiz image:", error);
+        alert("Could not attach the quiz image.");
+        return;
+    }
+
+    const res = await fetch(
+        "https://royal-pine-da5b.oowarshockoo.workers.dev/",
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
+    if (!res.ok) {
+        alert("There was a problem sending your feedback.");
+        return;
+    }
+
+    alert("Thank you for your message. I will read it as soon as I can!");
+}
+
 
     </script>
     <dialog id="feedbackDialog">

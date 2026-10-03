@@ -566,13 +566,16 @@ async function Feedback(message) {
         // Get filename, e.g. w1neut05.webp
         const filename = currentImagePath.split("/").pop();
         
-        formData.append(
+formData.append(
     "message",
-    "Feedback regarding a Hematology Cell ID Question:<br><br>" +
-    message.replace(/\n/g, "<br>") +
-    "<br><br>Image: " +
+    "Feedback regarding a Hematology Cell ID Question:<br>" +
+    "<br>" +
+    message.replace(/\r?\n/g, "<br>") +
+    "<br>" +
+    "<br>Image: " +
     filename
 );
+
 
 
         // Your Worker expects uploaded files under "files"

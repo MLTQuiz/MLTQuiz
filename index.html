@@ -223,16 +223,16 @@
             window.location.href = "hematology_choices.html";
         }
 
-        function Transfusions() {
-            window.location.href = "";
+        function Histology() {
+            window.location.href = "histology_choices.html";
         }
 
         function Microbiology() {
             window.location.href = "";
         }
 
-        function Histology() {
-            window.location.href = "histology_choices.html";
+        function Transfusions() {
+            window.location.href = "";
         }
 
         function Feedback() {
@@ -240,7 +240,7 @@
         }
 
         document.getElementById("secretLink").addEventListener("click", function () {
-            window.location.href = "histology_tissue.html";
+            window.location.href = "histology_tissuequiz.html";
         });
 
         const keysPressed = {};
@@ -251,7 +251,7 @@
             keysPressed[event.key.toLowerCase()] = true;
 
             if (keysPressed['t']) {
-                window.location.href = "histology_tissue.html";
+                window.location.href = "histology_tissuequiz.html";
             }
         });
 

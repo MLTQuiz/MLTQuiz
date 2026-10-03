@@ -165,7 +165,7 @@
 </head>
 
 <body>
-    <h1>Histology Tissues Quiz</h1>
+    <h1>Histology Tissue Identification</h1>
     <h2>Which tissues would you like to be quizzed on?</h2>
 
     <div class="category">
@@ -183,9 +183,9 @@
         <br><br>
         <hr><br>
 
-
         <button-back onclick="Home()">🏠 Home</button-back>
     </div>
+
     <script>
 
         let tissueData = [];
@@ -222,7 +222,7 @@
 
             const uniqueTissues = Object.keys(tissueCounts).sort();
 
-            uniqueTissues.forEach(tissue => {
+            uniqueTissues.forEach(stain => {
 
                 const label = document.createElement("label");
                 label.style.display = "block";
@@ -283,7 +283,7 @@
                 JSON.stringify(selectedQuestions)
             );
 
-            window.location.href = "histology_quiz.html";
+            window.location.href = "histology_tissuequiz.html";
         }
 
         function Home() {

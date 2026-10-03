@@ -165,7 +165,7 @@
 </head>
 
 <body>
-    <h1>Histology Stains Quiz</h1>
+    <h1>Histology Stains Identification</h1>
     <h2>Which stains would you like to be quizzed on?</h2>
 
     <div class="category">
@@ -183,9 +183,9 @@
         <br><br>
         <hr><br>
 
-
         <button-back onclick="Home()">🏠 Home</button-back>
     </div>
+
     <script>
 
         let stainData = [];
@@ -283,7 +283,7 @@
                 JSON.stringify(selectedQuestions)
             );
 
-            window.location.href = "histology_quiz.html";
+            window.location.href = "histology_stainquiz.html";
         }
 
         function Home() {

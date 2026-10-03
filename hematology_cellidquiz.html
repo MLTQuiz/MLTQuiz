@@ -567,9 +567,13 @@ async function Feedback(message) {
         const filename = currentImagePath.split("/").pop();
         
         formData.append(
-            "message",
-            message + "\n\nImage: " + filename
-        );
+    "message",
+    "Feedback regarding a Hematology Cell ID Question:<br><br>" +
+    message.replace(/\n/g, "<br>") +
+    "<br><br>Image: " +
+    filename
+);
+
 
         // Your Worker expects uploaded files under "files"
         formData.append("files", imageBlob);

@@ -187,115 +187,222 @@
             <button-back id="muteBtn">🔊 Mute</button-back>
             <br><br><br>
             <button-back onclick="Home()">🏠 Home</button-back>
-
-
         </div>
+
     </div>
     <script>
-        let quizBySubtype = {};
-        let subtypeList = [];
-        let currentItem = null;
-        let imageDatabase = {};
-        let selectedTissues = [];
+let quizBySubtype = {};
+let subtypeList = [];
+let currentItem = null;
+let imageDatabase = {};
+let selectedTissues = [];
 
-        const savedTissues = localStorage.getItem("selectedTissues");
+// Get the tissues selected on the previous page
+const savedTissues = localStorage.getItem("selectedTissues");
 
-        if (savedTissues) {
-            selectedTissues = JSON.parse(savedTissues);
+if (savedTissues) {
+    try {
+        selectedTissues = JSON.parse(savedTissues);
+    } catch (error) {
+        console.error("Could not read selectedTissues:", error);
+        selectedTissues = [];
+    }
+}
+
+console.log("Selected tissues:", selectedTissues);
+
+
+// Load the tissue database
+fetch("histologyTissueDatabase.json")
+    .then(res => {
+        if (!res.ok) {
+            throw new Error(`HTTP error: ${res.status}`);
         }
 
-        fetch("histologyTissueDatabase.json")
-            .then(res => res.json())
-            .then(db => {
-                imageDatabase = db;
-                buildQuizPool();
-                nextStain();
-            })
-            .catch(err => console.error("Error loading JSON:", err));
+        return res.json();
+    })
+    .then(db => {
 
-        function buildQuizPool() {
+        imageDatabase = db;
 
-            quizBySubtype = {};
-            subtypeList = [];
+        buildQuizPool();
 
-            const categoryPrefix = {
-                "Circulatory System": "c1",
-                "Digestive System": "d1",
-                "Integumentary (Skin) and Connective Tissue": "i1",
-                "Endocrine System": "e1",
-                "Lymphatic System": "l1",
-                "Nervous System": "n1",
-                "Respiratory System": "r1"
-            };
+        nextStain();
+    })
+    .catch(err => {
+        console.error("Error loading JSON:", err);
+    });
 
-            const selectedCodes = selectedTissues.map(tissue => tissue.code);
 
-            Object.keys(imageDatabase).forEach(category => {
+function buildQuizPool() {
 
-                const categoryData = imageDatabase[category];
-                const prefix = categoryPrefix[category];
+    quizBySubtype = {};
+    subtypeList = [];
 
-                Object.keys(categoryData).forEach(subtype => {
+    const categoryPrefix = {
+        "Circulatory System": "c1",
+        "Digestive System": "d1",
+        "Integumentary (Skin) and Connective Tissue": "i1",
+        "Endocrine System": "e1",
+        "Lymphatic System": "l1",
+        "Nervous System": "n1",
+        "Respiratory System": "r1"
+    };
 
-                    const { count, code } = categoryData[subtype];
+    // Get only the codes selected by the user
+    const selectedCodes = selectedTissues.map(tissue => tissue.code);
 
-                    if (!selectedCodes.includes(code)) {
-                        return;
-                    }
+    console.log("Selected codes:", selectedCodes);
 
-                    if (!quizBySubtype[subtype]) {
-                        quizBySubtype[subtype] = [];
-                        subtypeList.push(subtype);
-                    }
 
-                    for (let i = 1; i <= count; i++) {
+    // Go through every system in the JSON
+    Object.keys(imageDatabase).forEach(category => {
 
-                        const num = String(i).padStart(2, "0");
+        const categoryData = imageDatabase[category];
+        const prefix = categoryPrefix[category];
 
-                        quizBySubtype[subtype].push({
-                            image: `histo_images/tissue/${prefix}${code}${num}.webp`,
-                            subtype,
-                            code,
-                            category
-                        });
-                    }
+        // Go through every tissue in that system
+        Object.keys(categoryData).forEach(subtype => {
 
-                    shuffleArray(quizBySubtype[subtype]);
+            const tissueData = categoryData[subtype];
+
+            const count = tissueData.count;
+            const code = tissueData.code;
+
+
+            // IMPORTANT:
+            // Skip this tissue if the user did not select it
+            if (!selectedCodes.includes(code)) {
+                return;
+            }
+
+
+            // Create a pool for this selected tissue
+            if (!quizBySubtype[subtype]) {
+
+                quizBySubtype[subtype] = [];
+
+                subtypeList.push(subtype);
+            }
+
+
+            // Add all images for this tissue
+            for (let i = 1; i <= count; i++) {
+
+                const num = String(i).padStart(2, "0");
+
+                quizBySubtype[subtype].push({
+
+                    image:
+                        `histo_images/tissue/${prefix}${code}${num}.webp`,
+
+                    subtype: subtype,
+
+                    code: code,
+
+                    category: category
                 });
-            });
-
-            shuffleArray(subtypeList);
-
-            console.log("Selected tissues:", selectedTissues);
-            console.log("Quiz pool:", quizBySubtype);
-        }
-
-        function nextStain() {
-
-            clearInputs();
-
-            if (subtypeList.length === 0) {
-                console.error("No subtypes available");
-                return;
             }
 
-            const subtypeIndex = Math.floor(Math.random() * subtypeList.length);
-            const subtype = subtypeList[subtypeIndex];
 
-            const pool = quizBySubtype[subtype];
+            shuffleArray(quizBySubtype[subtype]);
+        });
+    });
 
-            if (!pool || pool.length === 0) {
-                subtypeList.splice(subtypeIndex, 1);
-                nextStain();
-                return;
-            }
 
-            currentItem = pool.pop();
+    shuffleArray(subtypeList);
 
-            document.getElementById("quizImage").src = currentItem.image;
 
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+    console.log("Quiz tissues:", subtypeList);
+    console.log("Quiz pool:", quizBySubtype);
+}
+
+
+function nextStain() {
+
+    clearInputs();
+
+    if (subtypeList.length === 0) {
+
+        console.error("No selected tissues available.");
+
+        document.getElementById("quizImage").src = "";
+
+        return;
+    }
+
+
+    // Pick a random selected tissue
+    const subtypeIndex =
+        Math.floor(Math.random() * subtypeList.length);
+
+    const subtype =
+        subtypeList[subtypeIndex];
+
+    const pool =
+        quizBySubtype[subtype];
+
+
+    // If all images for this tissue have been used,
+    // remove it from the available tissue list.
+    if (!pool || pool.length === 0) {
+
+        subtypeList.splice(subtypeIndex, 1);
+
+        nextStain();
+
+        return;
+    }
+
+
+    // Pick one image
+    currentItem = pool.pop();
+
+
+    // Display the image
+    document.getElementById("quizImage").src =
+        currentItem.image;
+
+
+    console.log(
+        "Current question:",
+        currentItem.subtype,
+        currentItem.code,
+        currentItem.image
+    );
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+        function buildAnswerOptions() {
+
+    const optionsContainer = document.getElementById("answerOptions");
+
+    // Clear old options
+    optionsContainer.innerHTML = "";
+
+    // Create one radio button for each selected tissue
+    selectedTissues.forEach(tissue => {
+
+        const label = document.createElement("label");
+
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "tissueAnswer";
+        radio.value = tissue.name;
+
+        label.appendChild(radio);
+        label.append(` ${tissue.name}`);
+
+        optionsContainer.appendChild(label);
+    });
+}
+
 
         function clearInputs() {
 

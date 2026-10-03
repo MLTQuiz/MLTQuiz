@@ -419,6 +419,32 @@
             window.location.href = "index.html";
         }
 
+
+        function openFeedback() {
+            const dialog = document.getElementById("feedbackDialog");
+
+            document.getElementById("feedbackMessage").value = "";
+
+            dialog.showModal();
+        }
+
+        function closeFeedback() {
+            document.getElementById("feedbackDialog").close();
+        }
+
+        async function submitFeedback() {
+            const message = document.getElementById("feedbackMessage").value.trim();
+
+            if (!message) {
+                alert("Please enter a message.");
+                return;
+            }
+
+            closeFeedback();
+
+            await Feedback(message);
+        }
+
         async function Feedback(message) {
             const formData = new FormData();
             

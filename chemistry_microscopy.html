@@ -342,7 +342,7 @@
 
             const item = quizPool[currentQuestion % quizPool.length];
 
-            const currentImagePath = item.path;
+            currentImagePath = item.path;
             document.getElementById("quizImage").src = item.path;
 
             const optionsEl = document.getElementById("answerOptions");

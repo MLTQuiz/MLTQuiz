@@ -543,10 +543,7 @@
             const formData = new FormData();
 
             // Student's message
-            formData.append("message", message);
-
-            // Currently displayed quiz image
-            formData.append("imagePath", currentImagePath);
+            formData.append("message", ("Student message:", message));
 
             // Retrieve the actual image
             try {
@@ -560,7 +557,7 @@
 
                 const filename = currentImagePath.split("/").pop();
 
-                formData.append("image", imageBlob, filename);
+                formData.append("files", imageBlob);
 
             } catch (error) {
                 console.error("Could not retrieve quiz image:", error);

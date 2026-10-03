@@ -79,6 +79,9 @@
             height: auto;
             border: clamp(calc(2px/3), calc(2vw/7.2), 2px) solid #ccc;
             border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
         }
 
         button {
@@ -203,7 +206,6 @@
         let quizPool = [];
         let currentQuestion = 0;
         let imageDatabase = {};
-
         let muted = true;
         let juneEnabled = false;
 
@@ -211,6 +213,10 @@
         const wrongSound = new Audio();
         const backBtn = new Audio();
         const muteBtn = document.getElementById("muteBtn");
+        const quizImage = document.getElementById("quizImage");
+        quizImage.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+            });
 
         if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 

@@ -5,6 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Urine Microscopy Quiz</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "a1O4Q5Ocdzs7gbd4R",
+            });
+        })();
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -184,11 +193,13 @@
             <button-back onclick="Back()">⬅ Back</button-back>
             <br><br><br>
             <button-back onclick="Home()">🏠 Home</button-back>
+            <br><br><br>
+            <button-back onclick="openFeedback()">💬 Question Feedback</button-back>
         </div>
     </div>
 
     <script>
-
+        let currentImagePath = "";
         let quizPool = [];
         let currentQuestion = 0;
         let imageDatabase = {};
@@ -331,6 +342,7 @@
 
             const item = quizPool[currentQuestion % quizPool.length];
 
+            const currentImagePath = item.path;
             document.getElementById("quizImage").src = item.path;
 
             const optionsEl = document.getElementById("answerOptions");
@@ -407,7 +419,65 @@
             window.location.href = "index.html";
         }
 
+        async function Feedback(message) {
+            const formData = new FormData();
+            
+            try {
+                const filename = currentImagePath.split("/").pop();
+                
+                formData.append(
+                    "message",
+                    "<br><b>Feedback regarding a Quiz Question:</b><br><br>" +
+                    message.replace(/\r?\n/g, "<br>") +
+                    "<br><br><b>Quiz:</b> " + document.title +
+                    "<br><br><b>Image:</b> " + filename +
+                    "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/" + currentImagePath
+                );
+
+            } catch (error) {
+                console.error("Could not retrieve quiz image:", error);
+                alert("Could not attach the quiz image.");
+                return;
+            }
+
+            const res = await fetch(
+                "https://royal-pine-da5b.oowarshockoo.workers.dev/",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            if (!res.ok) {
+                alert("There was a problem sending your feedback.");
+                return;
+            }
+
+            alert("Thank you for your message. I will read it as soon as I can!");
+        }
+    
     </script>
+    
+    <dialog id="feedbackDialog" style="text-align: center;">
+        <h2>Feedback</h2>
+
+        <p>
+            Is there something wrong with this image, or do you have a comment?
+        </p>
+
+        <textarea
+            class="large-textarea"
+            id="feedbackMessage"
+            rows="6"
+            cols="40"
+            placeholder="Type your feedback here..."
+        ></textarea>
+
+        <br><br>
+
+        <button-back onclick="submitFeedback()">✉️ Send</button-back>
+        <button-back onclick="closeFeedback()">🚫 Cancel</button-back>
+    </dialog>
 
 </body>
 

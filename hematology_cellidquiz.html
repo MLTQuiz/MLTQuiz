@@ -5,6 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hematology Cell Quiz</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "a1O4Q5Ocdzs7gbd4R",
+            });
+        })();
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -187,7 +196,7 @@
     </div>
 
     <script>
-
+        let currentImagePath = "";
         let quizMode = localStorage.getItem("quizMode");
 
         let selectedCategories = JSON.parse(localStorage.getItem("quizCells") || "[]");
@@ -426,7 +435,9 @@
 
             const item = quizPool[currentQuestion % quizPool.length];
 
+            currentImagePath = item.path;
             document.getElementById("quizImage").src = item.path;
+
 
             const optionsEl = document.getElementById("answerOptions");
             const feedbackEl = document.getElementById("feedback");
@@ -499,6 +510,55 @@
                 [arr[i], arr[j]] = [arr[j], arr[i]];
             }
         }
+
+        async function Feedback() {
+            const formData = new FormData();
+
+            const message = document.querySelector("textarea").value;
+
+            if (!message) {
+                return;
+            }
+
+            formData.append("message", message);
+
+            formData.append("imagePath", currentImagePath);
+
+            try {
+                const imageResponse = await fetch(currentImagePath);
+
+                if (!imageResponse.ok) {
+                    throw new Error("Could not retrieve image");
+                }
+
+                const imageBlob = await imageResponse.blob();
+
+                const filename = currentImagePath.split("/").pop();
+
+                formData.append("image", imageBlob, filename);
+
+            } catch (error) {
+                console.error("Could not retrieve quiz image:", error);
+                alert("Could not attach the quiz image.");
+                return;
+            }
+
+            const res = await fetch(
+                "https://royal-pine-da5b.oowarshockoo.workers.dev/",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            if (!res.ok) {
+                alert("There was a problem sending your feedback.");
+                return;
+            }
+
+            alert("Thank you for your message. I will read it as soon as I can!");
+        }
+
 
         function Back() {
             window.location.href = "hematology_cellidchoices.html";

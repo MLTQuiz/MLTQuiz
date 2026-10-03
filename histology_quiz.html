@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Histology Stain Quiz 1</title>
+    <title>Histology Stain Quiz</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
     <script type="text/javascript">
@@ -580,20 +580,15 @@
                 return;
             }
 
-            // Close the popup
             closeFeedback();
 
-            // Send the student's message to Feedback()
             await Feedback(message);
         }
 
-            async function Feedback(message) {
+        async function Feedback(message) {
             const formData = new FormData();
 
-            // Student's message
-            
             try {
-                // Get filename, e.g. w1neut05.webp
                 const filename = currentImagePath.split("/").pop();
                 
                 formData.append(
@@ -602,8 +597,7 @@
                     message.replace(/\r?\n/g, "<br>") +
                     "<br><br><b>Quiz:</b> " + document.title +
                     "<br><br><b>Image:</b> " + filename +
-                    "<br><br><b>Image name full:</b> " + currentImagePath +
-                    "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/histo_images/" + filename
+                    "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/" + currentImagePath
                 );
 
             } catch (error) {

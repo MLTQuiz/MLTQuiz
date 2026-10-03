@@ -550,8 +550,6 @@
             const formData = new FormData();
             
             try {
-                const imageResponse = await fetch(currentImagePath);
-
                 const filename = currentImagePath.split("/").pop();
                 
                 formData.append(
@@ -560,7 +558,7 @@
                     message.replace(/\r?\n/g, "<br>") +
                     "<br><br><b>Quiz:</b> " + document.title +
                     "<br><br><b>Image:</b> " + filename +
-                    "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/hema_images/" + filename
+                    "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/" + currentImagePath
                 );
 
             } catch (error) {

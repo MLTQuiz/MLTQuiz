@@ -73,8 +73,15 @@
             font-weight: bold;
         }
 
-        #quizImage {
+        .image-protection {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
             margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+        }
+
+        #quizImage {
+            display: block;
             max-width: 100%;
             height: auto;
             border: clamp(calc(2px/3), calc(2vw/7.2), 2px) solid #ccc;
@@ -82,7 +89,9 @@
             user-select: none;
             -webkit-user-select: none;
             -webkit-user-drag: none;
+            pointer-events: none;
         }
+
 
         button {
             line-height: 1.2;
@@ -179,7 +188,10 @@
 
         <div class="category">
             <div class="question">What is shown in the photo?</div>
-            <img id="quizImage" src="" />
+            <div class="image-protection">
+                <img id="quizImage" src="" draggable="false" />
+            </div>
+
 
             <div id="answerOptions"></div>
             <div id="feedback"></div>
@@ -213,10 +225,16 @@
         const wrongSound = new Audio();
         const backBtn = new Audio();
         const muteBtn = document.getElementById("muteBtn");
-        const quizImage = document.getElementById("quizImage");
-        quizImage.addEventListener("contextmenu", function (event) {
+        const imageProtection = document.querySelector(".image-protection");
+
+        imageProtection.addEventListener("contextmenu", function (event) {
             event.preventDefault();
-            });
+        });
+
+        imageProtection.addEventListener("dragstart", function (event) {
+            event.preventDefault();
+        });
+
 
         if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 

@@ -73,12 +73,23 @@
             font-weight: bold;
         }
 
+        .image-protection {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+        }
+
         #quizImage {
             margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
             max-width: 100%;
             height: auto;
             border: clamp(calc(2px/3), calc(2vw/7.2), 2px) solid #ccc;
             border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
         }
 
         button {
@@ -176,7 +187,9 @@
 
         <div class="category">
             <span class="question">Answer the following questions. Spelling counts!</span><br>
-            <img id="quizImage" src="" alt="Good luck!" /><br>
+            <div class="image-protection">
+                <img id="quizImage" src="" draggable="false" />
+            </div><br>
 
             <br><span>What stain is this?</span><br>
             <input type="text" autocomplete="off" class="large-textbox" id="stain_id"></input><br>
@@ -226,6 +239,16 @@
         let remainingStains = [];
         let currentStainImages = [];
         let remainingQuestions = [];
+
+        const imageProtection = document.querySelector(".image-protection");
+        
+        imageProtection.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+        });
+
+        imageProtection.addEventListener("dragstart", function (event) {
+            event.preventDefault();
+        });
 
         const storedQuestions = localStorage.getItem("selectedQuestions");
 

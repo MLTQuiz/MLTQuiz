@@ -73,12 +73,23 @@
             font-weight: bold;
         }
 
+        .image-protection {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
+        }
+
         #quizImage {
             margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
             max-width: 100%;
             height: auto;
             border: clamp(calc(2px/3), calc(2vw/7.2), 2px) solid #ccc;
             border-radius: clamp(calc(6px/3), calc(6vw/7.2), 6px);
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
         }
 
         button {
@@ -176,7 +187,9 @@
 
         <div class="category">
             <div class="question">What cell is this?</div>
-            <img id="quizImage" src="" />
+            <div class="image-protection">
+                <img id="quizImage" src="" draggable="false" />
+            </div>
 
             <div id="answerOptions"></div>
             <div id="feedback"></div>
@@ -204,6 +217,16 @@
         let selectedCategories = JSON.parse(localStorage.getItem("quizCells") || "[]");
         let selectedSubtypes = JSON.parse(localStorage.getItem("quizSubtypes") || "[]");
         let hardMode = JSON.parse(localStorage.getItem("hardMode") || "false");
+
+        const imageProtection = document.querySelector(".image-protection");
+        
+        imageProtection.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+        });
+
+        imageProtection.addEventListener("dragstart", function (event) {
+            event.preventDefault();
+        });
 
         if (
             (quizMode === "categories" && selectedCategories.length === 0 && !hardMode) ||

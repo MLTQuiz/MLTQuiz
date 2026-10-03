@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Urine Microscopy Quiz 2</title>
+    <title>Urine Microscopy Quiz</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
     <script type="text/javascript">
@@ -78,7 +78,6 @@
             display: inline-block;
             max-width: 100%;
             margin-top: clamp(calc(20px/3), calc(20vw/7.2), 20px);
-            background-color: #1f55c4;
         }
 
         #quizImage {
@@ -92,7 +91,6 @@
             -webkit-user-drag: none;
             pointer-events: none;
         }
-
 
         button {
             line-height: 1.2;
@@ -226,6 +224,9 @@
         const wrongSound = new Audio();
         const backBtn = new Audio();
         const muteBtn = document.getElementById("muteBtn");
+        
+        if (muteBtn) muteBtn.textContent = "🔇 Unmute";
+
         const imageProtection = document.querySelector(".image-protection");
 
         imageProtection.addEventListener("contextmenu", function (event) {
@@ -235,9 +236,6 @@
         imageProtection.addEventListener("dragstart", function (event) {
             event.preventDefault();
         });
-
-
-        if (muteBtn) muteBtn.textContent = "🔇 Unmute";
 
         function updateSounds() {
 

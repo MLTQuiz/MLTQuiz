@@ -192,6 +192,7 @@
             <button-back onclick="Back()">⬅ Back</button-back>
             <br><br><br>
             <button-back onclick="Home()">🏠 Home</button-back>
+            <br><br><br>
             <button-back onclick="openFeedback()">💬 Image Feedback</button-back>
         </div>
     </div>
@@ -556,28 +557,25 @@ async function Feedback(message) {
     try {
         // Get the currently displayed image
         const imageResponse = await fetch(currentImagePath);
-
+/*
         if (!imageResponse.ok) {
             throw new Error("Could not retrieve image");
         }
 
         const imageBlob = await imageResponse.blob();
-
+*/
         // Get filename, e.g. w1neut05.webp
         const filename = currentImagePath.split("/").pop();
         
         formData.append(
             "message",
-            "Feedback regarding a Hematology Cell ID Question:<br><br>" +
+            "<br><b>Feedback regarding a Hematology Cell ID Question:</b><br><br>" +
             message.replace(/\r?\n/g, "<br>") +
-            "<br><br>Image: " +
+            "<br><br><b>Image:</b> " +
             filename +
-            "<br><br>Image link: https://mltquiz.github.io/MLTQuiz/hema_images/"+filename
+            "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/hema_images/"+filename
         );
 
-/*        // Your Worker expects uploaded files under "files"
-        formData.append("files", imageBlob);
-*/
     } catch (error) {
         console.error("Could not retrieve quiz image:", error);
         alert("Could not attach the quiz image.");
@@ -610,6 +608,7 @@ async function Feedback(message) {
         </p>
 
         <textarea
+            class="large-textarea"
             id="feedbackMessage"
             rows="6"
             cols="40"
@@ -618,8 +617,8 @@ async function Feedback(message) {
 
         <br><br>
 
-        <button onclick="submitFeedback()">Send</button>
-        <button onclick="closeFeedback()">Cancel</button>
+        <button-back onclick="submitFeedback()">✉️ Send</button-back>
+        <button-back onclick="closeFeedback()">🚫 Cancel</button-back>
     </dialog>
 
 </body>

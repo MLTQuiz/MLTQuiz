@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Histology Stain Quiz</title>
+    <title>Histology Stain Quiz 1</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
     </script>
     <script type="text/javascript">
@@ -322,7 +322,7 @@
             console.log("Loaded item:", currentItem);
 
             document.getElementById("quizImage").src = currentItem.image;
-            currentImagePath = currentItem;
+            currentImagePath = currentItem.image;
 
             window.scrollTo({
                 top: 0,
@@ -593,12 +593,8 @@
             // Student's message
             
             try {
-                // Get the currently displayed image
-                const imageResponse = await fetch(currentImagePath);
-
                 // Get filename, e.g. w1neut05.webp
                 const filename = currentImagePath.split("/").pop();
-//                const filenamefull = currentImagePath;
                 
                 formData.append(
                     "message",
@@ -606,7 +602,7 @@
                     message.replace(/\r?\n/g, "<br>") +
                     "<br><br><b>Quiz:</b> " + document.title +
                     "<br><br><b>Image:</b> " + filename +
-//                    "<br><br><b>Image name full:</b> " + filenamefull +
+                    "<br><br><b>Image name full:</b> " + currentImagePath +
                     "<br><br><b>Image link:</b> https://mltquiz.github.io/MLTQuiz/histo_images/" + filename
                 );
 

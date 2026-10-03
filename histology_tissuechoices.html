@@ -197,95 +197,93 @@
                 buildScrollMenu();
             });
 
-        function buildScrollMenu() {
+function buildScrollMenu() {
 
-            const menu = document.getElementById("scrollMenu");
-            const allCb = document.getElementById("allTissues");
+    const menu = document.getElementById("scrollMenu");
+    const allCb = document.getElementById("allTissues");
 
-            const tissueCounts = {};
+    // Loop through each body system
+    Object.entries(tissueData).forEach(([system, tissues]) => {
 
-            tissueData.forEach(item => {
+        // System heading
+        const systemTitle = document.createElement("div");
+        systemTitle.style.fontWeight = "bold";
+        systemTitle.style.marginTop = "10px";
+        systemTitle.textContent = system;
 
-                const ids = Array.isArray(item.tissue_id)
-                    ? item.tissue_id
-                    : [item.tissue_id];
+        menu.appendChild(systemTitle);
 
-                ids.forEach(id => {
+        // Loop through tissues in this system
+        Object.entries(tissues).forEach(([tissue, data]) => {
 
-                    if (!tissueCounts[id]) {
-                        tissueCounts[id] = 0;
-                    }
+            const label = document.createElement("label");
+            label.style.display = "block";
 
-                    tissueCounts[id]++;
-                });
+            const cb = document.createElement("input");
+            cb.type = "checkbox";
+            cb.value = data.code;
+            cb.classList.add("tissue-checkbox");
+
+            cb.addEventListener("change", () => {
+
+                const allBoxes =
+                    document.querySelectorAll(".tissue-checkbox");
+
+                const allChecked =
+                    [...allBoxes].every(box => box.checked);
+
+                allCb.checked = allChecked;
             });
 
-            const uniqueTissues = Object.keys(tissueCounts).sort();
+            label.appendChild(cb);
 
-            uniqueTissues.forEach(stain => {
+            label.append(` ${tissue} (${data.count})`);
 
-                const label = document.createElement("label");
-                label.style.display = "block";
+            menu.appendChild(label);
+        });
+    });
 
-                const cb = document.createElement("input");
-                cb.type = "checkbox";
-                cb.value = tissue;
-                cb.classList.add("tissue-checkbox");
+    // "All Tissues" checkbox
+    allCb.addEventListener("change", () => {
 
-                cb.addEventListener("change", () => {
+        const allBoxes =
+            document.querySelectorAll(".tissue-checkbox");
 
-                    const allBoxes = document.querySelectorAll(".tissue-checkbox");
+        allBoxes.forEach(box => {
+            box.checked = allCb.checked;
+        });
+    });
+}
 
-                    const allChecked = [...allBoxes].every(box => box.checked);
+function startQuiz() {
 
-                    allCb.checked = allChecked;
-                });
+    const selectedTissues = [
+        ...document.querySelectorAll('#scrollMenu input:checked')
+    ].map(cb => cb.value);
 
-                label.appendChild(cb);
+    if (selectedTissues.length === 0) {
+        alert("Please select at least one tissue.");
+        return;
+    }
 
-                label.append(` ${tissue} (${tissueCounts[tissue]})`);
+    const selectedQuestions = tissueData.filter(item => {
 
-                menu.appendChild(label);
-            });
+        const ids = Array.isArray(item.tissue_id)
+            ? item.tissue_id
+            : [item.tissue_id];
 
-            allCb.addEventListener("change", () => {
+        return ids.some(id => selectedTissues.includes(id));
+    });
 
-                const allBoxes = document.querySelectorAll(".tissue-checkbox");
+    localStorage.setItem(
+        "selectedQuestions",
+        JSON.stringify(selectedQuestions)
+    );
 
-                allBoxes.forEach(box => {
-                    box.checked = allCb.checked;
-                });
-            });
-        }
+    window.location.href = "histology_tissuequiz.html";
+}
 
-        function startQuiz() {
-
-            const selectedTissues = [
-                ...document.querySelectorAll('#scrollMenu input:checked')
-            ].map(cb => cb.value);
-
-            if (selectedTissues.length === 0) {
-                alert("Please select at least one tissue.");
-                return;
-            }
-
-            const selectedQuestions = tissueData.filter(item => {
-
-                const ids = Array.isArray(item.tissue_id)
-                    ? item.tissue_id
-                    : [item.tissue_id];
-
-                return ids.some(id => selectedTissues.includes(id));
-            });
-
-            localStorage.setItem(
-                "selectedQuestions",
-                JSON.stringify(selectedQuestions)
-            );
-
-            window.location.href = "histology_tissuequiz.html";
-        }
-
+        
         function Home() {
             window.location.href = "index.html";
         }

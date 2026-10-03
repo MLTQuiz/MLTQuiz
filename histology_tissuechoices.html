@@ -273,26 +273,20 @@ function buildScrollMenu() {
 function startQuiz() {
 
     const selectedTissues = [
-        ...document.querySelectorAll('#scrollMenu input:checked')
-    ].map(cb => cb.value);
+        ...document.querySelectorAll("#scrollMenu input:checked")
+    ].map(cb => ({
+        name: cb.dataset.tissue,
+        code: cb.value
+    }));
 
     if (selectedTissues.length === 0) {
         alert("Please select at least one tissue.");
         return;
     }
 
-    const selectedQuestions = tissueData.filter(item => {
-
-        const ids = Array.isArray(item.tissue_id)
-            ? item.tissue_id
-            : [item.tissue_id];
-
-        return ids.some(id => selectedTissues.includes(id));
-    });
-
     localStorage.setItem(
-        "selectedQuestions",
-        JSON.stringify(selectedQuestions)
+        "selectedTissues",
+        JSON.stringify(selectedTissues)
     );
 
     window.location.href = "histology_tissuequiz.html";

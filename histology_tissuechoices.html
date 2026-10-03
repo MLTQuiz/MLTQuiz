@@ -190,109 +190,103 @@
 
         let tissueData = {};
 
-fetch("histologyTissueDatabase.json")
-    .then(res => {
-        if (!res.ok) {
-            throw new Error(`HTTP error: ${res.status}`);
-        }
-        return res.json();
-    })
-    .then(db => {
-        tissueData = db;
-        buildScrollMenu();
-    })
-    .catch(error => {
-        console.error("Error loading tissue database:", error);
-    });
+        fetch("histologyTissueDatabase.json")
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error: ${res.status}`);
+                }
+                return res.json();
+            })
+            .then(db => {
+                tissueData = db;
+                buildScrollMenu();
+            })
+            .catch(error => {
+                console.error("Error loading tissue database:", error);
+            });
 
+        function buildScrollMenu() {
 
-function buildScrollMenu() {
+            const menu = document.getElementById("scrollMenu");
+            const allCb = document.getElementById("allTissues");
 
-    const menu = document.getElementById("scrollMenu");
-    const allCb = document.getElementById("allTissues");
+            Object.entries(tissueData).forEach(([system, tissues]) => {
 
-    Object.entries(tissueData).forEach(([system, tissues]) => {
+                const systemTitle = document.createElement("div");
+                systemTitle.textContent = system;
+                systemTitle.style.fontWeight = "bold";
+                systemTitle.style.marginTop = "10px";
+                systemTitle.style.marginBottom = "5px";
 
-        // Body-system heading
-        const systemTitle = document.createElement("div");
-        systemTitle.textContent = system;
-        systemTitle.style.fontWeight = "bold";
-        systemTitle.style.marginTop = "10px";
-        systemTitle.style.marginBottom = "5px";
+                menu.appendChild(systemTitle);
 
-        menu.appendChild(systemTitle);
+                Object.entries(tissues).forEach(([tissue, data]) => {
 
-        // Tissues within that system
-        Object.entries(tissues).forEach(([tissue, data]) => {
+                    const label = document.createElement("label");
 
-            const label = document.createElement("label");
+                    const cb = document.createElement("input");
+                    cb.type = "checkbox";
 
-            const cb = document.createElement("input");
-            cb.type = "checkbox";
+                    cb.value = data.code;
 
-            // Store the tissue's code
-            cb.value = data.code;
+                    cb.dataset.tissue = tissue;
 
-            // Also store the tissue's actual name
-            cb.dataset.tissue = tissue;
+                    cb.classList.add("tissue-checkbox");
 
-            cb.classList.add("tissue-checkbox");
+                    cb.addEventListener("change", () => {
 
-            cb.addEventListener("change", () => {
+                        const allBoxes =
+                            document.querySelectorAll(".tissue-checkbox");
+
+                        const allChecked =
+                            [...allBoxes].every(box => box.checked);
+
+                        allCb.checked = allChecked;
+                    });
+
+                    label.appendChild(cb);
+
+                    label.append(
+                        ` ${tissue} (${data.count})`
+                    );
+
+                    menu.appendChild(label);
+                });
+            });
+
+            allCb.addEventListener("change", () => {
 
                 const allBoxes =
                     document.querySelectorAll(".tissue-checkbox");
 
-                const allChecked =
-                    [...allBoxes].every(box => box.checked);
-
-                allCb.checked = allChecked;
+                allBoxes.forEach(box => {
+                    box.checked = allCb.checked;
+                });
             });
+        }
 
-            label.appendChild(cb);
+        function startQuiz() {
 
-            label.append(
-                ` ${tissue} (${data.count})`
+            const selectedTissues = [
+                ...document.querySelectorAll("#scrollMenu input:checked")
+            ].map(cb => ({
+                name: cb.dataset.tissue,
+                code: cb.value
+            }));
+
+            if (selectedTissues.length === 0) {
+                alert("Please select at least one tissue.");
+                return;
+            }
+
+            localStorage.setItem(
+                "selectedTissues",
+                JSON.stringify(selectedTissues)
             );
 
-            menu.appendChild(label);
-        });
-    });
+            window.location.href = "histology_tissuequiz.html";
+        }
 
-    allCb.addEventListener("change", () => {
-
-        const allBoxes =
-            document.querySelectorAll(".tissue-checkbox");
-
-        allBoxes.forEach(box => {
-            box.checked = allCb.checked;
-        });
-    });
-}
-
-function startQuiz() {
-
-    const selectedTissues = [
-        ...document.querySelectorAll("#scrollMenu input:checked")
-    ].map(cb => ({
-        name: cb.dataset.tissue,
-        code: cb.value
-    }));
-
-    if (selectedTissues.length === 0) {
-        alert("Please select at least one tissue.");
-        return;
-    }
-
-    localStorage.setItem(
-        "selectedTissues",
-        JSON.stringify(selectedTissues)
-    );
-
-    window.location.href = "histology_tissuequiz.html";
-}
-
-        
         function Home() {
             window.location.href = "index.html";
         }

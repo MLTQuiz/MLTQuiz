@@ -196,6 +196,13 @@
         let subtypeList = [];
         let currentItem = null;
         let imageDatabase = {};
+        let selectedTissues = [];
+
+        const savedTissues = localStorage.getItem("selectedTissues");
+
+        if (savedTissues) {
+            selectedTissues = JSON.parse(savedTissues);
+        }
 
         fetch("histologyTissueDatabase.json")
             .then(res => res.json())
@@ -221,6 +228,8 @@
                 "Respiratory System": "r1"
             };
 
+            const selectedCodes = selectedTissues.map(tissue => tissue.code);
+
             Object.keys(imageDatabase).forEach(category => {
 
                 const categoryData = imageDatabase[category];
@@ -229,6 +238,10 @@
                 Object.keys(categoryData).forEach(subtype => {
 
                     const { count, code } = categoryData[subtype];
+
+                    if (!selectedCodes.includes(code)) {
+                        return;
+                    }
 
                     if (!quizBySubtype[subtype]) {
                         quizBySubtype[subtype] = [];
@@ -242,6 +255,7 @@
                         quizBySubtype[subtype].push({
                             image: `histo_images/tissue/${prefix}${code}${num}.webp`,
                             subtype,
+                            code,
                             category
                         });
                     }
@@ -251,6 +265,9 @@
             });
 
             shuffleArray(subtypeList);
+
+            console.log("Selected tissues:", selectedTissues);
+            console.log("Quiz pool:", quizBySubtype);
         }
 
         function nextStain() {
